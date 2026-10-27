@@ -228,6 +228,12 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 
 
 
+/* 404 — reuses the hero column so the rhythm matches the index */
+.nf-page { min-height: 64vh; align-items: center; }
+.nf { display: grid; gap: var(--space-md); justify-items: start; align-content: start; }
+.nf h1 { font-size: var(--text-2xl); max-width: 22ch; }
+.nf .cta-outline { margin-top: var(--space-sm); }
+
 /* riso overprint decoration — two flat washes, off-register, multiplying on overlap */
 .deco {
   position: absolute;
@@ -246,11 +252,13 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 .deco--hero  { top: 50%; left: 0; translate: -22% -52%; width: min(34rem, 42vw); }
 .deco--mid   { top: 2%;      left: -7%;   width: min(18rem, 19vw); }
 .deco--foot  { bottom: -30%; right: 4%; width: min(26rem, 30vw); }
+.deco--nf    { top: 32%; left: 0; translate: -36% -50%; width: min(20rem, 26vw); }
 
 @media (max-width: 56rem) {
   .deco--hero { top: 46%; left: 0; translate: -30% -50%; width: 74vw; }
   .deco--mid  { top: -4%;     left: -16%;  width: 34vw; }
   .deco--foot { bottom: -26%; right: -22%; width: 54vw; }
+  .deco--nf   { translate: -42% -52%; width: 52vw; }
 }
 
 /* motion — load stagger + reveal-once */
