@@ -10,6 +10,10 @@
   --color-focus:    oklch(50% 0.185 30);
   --color-shadow:   oklch(20% 0.01 60 / 0.06);
 
+  /* riso overprint washes — pale enough that ink keeps its contrast on top */
+  --color-riso-warm: oklch(93% 0.055 30);
+  --color-riso-cool: oklch(93.5% 0.030 80);
+
   /* type — 2+1 */
   --font-display: "Newsreader", ui-serif, Georgia, serif;
   --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
