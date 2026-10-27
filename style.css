@@ -244,14 +244,12 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 .foot-letter > :not(.deco) { position: relative; z-index: 1; }
 
 .deco--hero  { top: 50%; left: 0; translate: -22% -52%; width: min(34rem, 42vw); }
-.deco--mid   { top: -26%;    left: -20%;  width: min(30rem, 32vw); }
-.deco--low   { bottom: -26%; right: -14%; width: min(32rem, 36vw); }
+.deco--mid   { top: 2%;      left: -7%;   width: min(18rem, 19vw); }
 .deco--foot  { bottom: -30%; right: 4%; width: min(26rem, 30vw); }
 
 @media (max-width: 56rem) {
   .deco--hero { top: 46%; left: 0; translate: -30% -50%; width: 74vw; }
-  .deco--mid  { top: -12%;    left: -30%;  width: 56vw; }
-  .deco--low  { bottom: -18%; right: -28%; width: 56vw; }
+  .deco--mid  { top: -4%;     left: -16%;  width: 34vw; }
   .deco--foot { bottom: -26%; right: -22%; width: 54vw; }
 }
 
