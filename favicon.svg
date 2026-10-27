@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Tom Yang">
+  <title>Tom Yang</title>
+  <!-- riso overprint, same two washes as the site; overlap colour is pre-multiplied
+       because favicon renderers do not honour mix-blend-mode -->
+  <clipPath id="warm"><circle cx="12.5" cy="15" r="10.5"/></clipPath>
+  <rect width="32" height="32" fill="#f9f4ee"/>
+  <circle cx="12.5" cy="15" r="10.5" fill="#ffdbd2"/>
+  <circle cx="19.5" cy="17" r="10.5" fill="#f4e8d4"/>
+  <circle cx="19.5" cy="17" r="10.5" fill="#f4c7ae" clip-path="url(#warm)"/>
+  <g fill="#1a1511">
+    <rect x="6.5" y="6.8" width="19" height="3.4"/>
+    <rect x="6.5" y="6.8" width="2.3" height="5.4"/>
+    <rect x="23.2" y="6.8" width="2.3" height="5.4"/>
+    <rect x="14.3" y="10.2" width="3.4" height="12.3"/>
+    <rect x="10.6" y="22.5" width="10.8" height="2.8"/>
+  </g>
+</svg>

@@ -228,6 +228,12 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 
 
 
+/* 404 — reuses the hero column so the rhythm matches the index */
+.nf-page { min-height: 64vh; align-items: center; }
+.nf { display: grid; gap: var(--space-md); justify-items: start; align-content: start; }
+.nf h1 { font-size: var(--text-2xl); max-width: 22ch; }
+.nf .cta-outline { margin-top: var(--space-sm); }
+
 /* riso overprint decoration — two flat washes, off-register, multiplying on overlap */
 .deco {
   position: absolute;
