@@ -151,15 +151,6 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
 }
 .fig--phone { max-width: 22rem; justify-self: center; }
 .fig figcaption { margin-top: var(--space-xs); }
-.fig--pending .fig__box {
-  aspect-ratio: 16 / 10;
-  border: var(--rule-hair) dashed var(--color-rule);
-  background: var(--color-paper-2);
-  display: grid;
-  place-items: center;
-  padding: var(--space-md);
-  text-align: center;
-}
 
 /* footer — Ft6 letter close */
 .foot-letter {

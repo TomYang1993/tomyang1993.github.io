@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tom Yang — software engineer</title>
-  <meta name="description" content="Tom Yang builds full-stack web products and native macOS tools: Whack The Fullstack Interview, liuzi.win, JobDesk, Orbit.">
+  <meta name="description" content="Tom Yang builds full-stack web products and native Apple apps: Whack The Fullstack Interview, liuzi.win, AI Front Desk, Orbit.">
   <link rel="canonical" href="https://tomyang1993.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tom Yang — software engineer">
@@ -47,7 +47,7 @@
     <ol class="hero-index reveal" style="--i: 2" aria-label="Selected work">
       <li><a href="#wtf">Whack The Fullstack Interview <small>Interview practice, solved in the browser on a clock</small></a><span class="mono">live</span></li>
       <li><a href="#liuzi">留子情报 · liuzi.win <small>US student &amp; work visa policy watch</small></a><span class="mono">live</span></li>
-      <li><a href="#jobdesk">JobDesk <small>Local-first job desk for macOS</small></a><span class="mono">in dev</span></li>
+      <li><a href="#frontdesk">AI Front Desk <small>Maple, a front-desk assistant for early education centers</small></a><span class="mono">demo</span></li>
       <li><a href="#orbit">Orbit <small>A music disk you spin</small></a><span class="mono">prototype</span></li>
     </ol>
   </section>
@@ -82,16 +82,17 @@
       </figure>
     </article>
 
-    <article class="dip" id="jobdesk">
+    <article class="dip" id="frontdesk">
       <div class="dip__text">
-        <h2>JobDesk</h2>
-        <p class="dip__what">A native macOS app for the boring half of a job search: review new postings, compare them against cached résumé profiles, tailor, track.</p>
-        <p class="dip__body">Local-first: everything lives in SQLite on the machine. Rich-text résumé tailoring keeps Google Docs formatting through DOCX export; each application carries an editable event timeline.</p>
-        <p class="dip__stack mono">Swift 6 · SwiftUI · Observation · SQLite</p>
-        <span class="mono">Private, in development</span>
+        <h2>AI Front Desk</h2>
+        <p class="dip__what">Parents ask Maple, a friendly bear clerk, about closures, menus and fees. Maple answers from each center&rsquo;s own handbook, shows its sources, and hands off to staff when it should.</p>
+        <p class="dip__body">Built as a brightwheel take-home. Directors get a control center: see what families are asking, answer a handoff once, keep the source of truth current. Two providers back the model calls, so the demo keeps answering when a daily quota runs out. Centers, families and staff are fictional.</p>
+        <p class="dip__stack mono">Next.js 16 &middot; React 19 &middot; TypeScript &middot; Tailwind v4 &middot; Gemini + Groq &middot; Upstash Redis &middot; Vercel</p>
+        <a class="cta-outline" href="https://ai-front-desk-xi.vercel.app/">Open the demo &rarr;</a>
       </div>
-      <figure class="fig fig--pending">
-        <div class="fig__box"><span class="mono">Screenshot to come (app in development)</span></div>
+      <figure class="fig">
+        <img src="img/ai-front-desk.png" width="800" height="555" alt="AI Front Desk: a parent&rsquo;s home screen with today&rsquo;s food, closures and notices, beside a chat where Maple answers a question about late pickup fees and cites its source" loading="lazy">
+        <figcaption class="mono">ai-front-desk-xi.vercel.app &middot; October 2026</figcaption>
       </figure>
     </article>
 
