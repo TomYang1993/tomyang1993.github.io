@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Career Path Map</title>
-<meta name="description" content="Five AI role archetypes (agent builder, RAG, ML platform, DevOps/full-stack, ML research) mapped as a skill graph, with the university courses and tools for each step.">
+<meta name="description" content="Five AI role archetypes mapped as a skill graph, with university courses, free hands-on projects and foundational papers for every step.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -201,6 +201,39 @@ figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-si
 @media (max-width: 560px) { .two { grid-template-columns: 1fr; } }
 .two > div { display: grid; gap: 8px; align-content: start; }
 
+.node.spot .box { stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 6 3; fill: color-mix(in srgb, var(--ink) 7%, var(--surface)); }
+.spotbar { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 7px 10px; border-radius: 8px; background: var(--surface-2); color: var(--ink); }
+.spotbar[hidden] { display: none; }
+.legend .counts { color: var(--ink-3); }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); }
+.tab { padding: 8px 12px; border: 0; background: none; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; font-size: 14px; color: var(--ink-2); }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+.tab .k { margin-left: 6px; font: 400 12px var(--font-mono); color: var(--ink-3); }
+.empty { color: var(--ink-3); font-size: 14px; }
+.papers { margin: 0; padding-left: 20px; display: grid; gap: 9px; }
+.paper a { font-weight: 600; font-size: 14.5px; text-decoration: none; }
+.paper a:hover { text-decoration: underline; }
+.pm { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 12.5px; color: var(--ink-3); }
+.tag.star { background: color-mix(in srgb, var(--ink) 14%, var(--surface)); color: var(--ink); }
+.tag.part { background: transparent; border: 1px solid var(--line); }
+.also { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 2px; }
+.also-l { font-size: 12.5px; color: var(--ink-3); }
+.mini { padding: 2px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-size: 12.5px; }
+.mini:hover { border-color: var(--ink-3); }
+.spotbtn { border-style: dashed; }
+.spotbtn[aria-pressed="true"] { border-style: solid; border-color: var(--ink); }
+.plan { margin: 0; padding-left: 20px; display: grid; gap: 10px; }
+.planrow { display: grid; gap: 6px; }
+.planhead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 10px; }
+.planhead a { text-decoration: none; }
+.planhead a:hover .cn { text-decoration: underline; }
+.planhead .cc { font: 500 12.5px var(--font-mono); }
+.planhead .cn { font-weight: 600; font-size: 14px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.small { font-size: 13.5px; color: var(--ink-2); }
+.small.muted { color: var(--ink-3); }
+
 footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -212,7 +245,7 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 <div class="wrap">
   <header>
     <h1>AI Career Path Map</h1>
-    <p>Five 2026 AI role archetypes, the skills each one needs, and the university courses that teach them. Pick a role to trace its path through the graph, then click any box for courses, tools and prerequisites.</p>
+    <p>Five 2026 AI role archetypes and the skills each one needs. Every box carries three layers: university courses, free hands-on projects you can ship, and the foundational papers behind it. Pick a role to trace its path, click any box for details, and use “Show its boxes” to see everything one course or project covers.</p>
   </header>
 
   <nav class="roles" id="roles" aria-label="Choose a role path"></nav>
@@ -221,6 +254,7 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
     <div class="graph-head">
       <span>Read left to right: each line runs from a prerequisite to what it unlocks.</span>
       <span class="legend" id="legend"></span>
+      <div class="spotbar" id="spotbar" hidden></div>
     </div>
     <div class="scroller">
       <figure>
@@ -235,7 +269,7 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
-  <footer>Role shares and defining stacks come from the archetype breakdown this map starts from. Courses were checked against their live course pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Tools are the common choices in postings, not endorsements.</footer>
+  <footer>Role shares and defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements.</footer>
 </div>
 
 <script>
@@ -336,7 +370,6 @@ const NODES = [
     tools: ["pgvector", "Pinecone", "Weaviate", "Qdrant", "Milvus", "Chroma", "FAISS"],
     courses: [
       { s: "CMU", c: "15-445/645", n: "Intro to Database Systems", u: "https://15445.courses.cs.cmu.edu/", f: "Videos", note: "Storage, indexes, query execution and concurrency. All 26 lectures are on YouTube." },
-      { s: "Tutorial", c: "BusTub", n: "Write You a Vector Database", u: "https://skyzh.github.io/write-you-a-vector-db/", f: "Self-paced", note: "Adds vector indexes to CMU's teaching database. Not a course, but the natural follow-on to 15-445." }
     ] },
   { id: "frontend", tier: 1, lane: 1.95, label: ["AI product", "frontend"], title: "AI product frontend",
     why: "The DevOps/full-stack cluster's distinctive skill: chat and streaming UIs, generative UI, and the glue between model output and the product.",
@@ -503,6 +536,205 @@ const NODES = [
     ] }
 ];
 
+// ---------- Layers 2 and 3: free hands-on projects and foundational papers ----------
+const ax = id => "https://arxiv.org/abs/" + id;
+const P = (n, by, u, effort, ship) => ({ n, by, u, effort, ship });
+const RP = (t, a, y, u, star) => ({ t, a, y, u, star: !!star });
+const EXTRA = {
+  "python": {
+    projects: [P("Build Your Own X", "codecrafters-io · GitHub", "https://github.com/codecrafters-io/build-your-own-x", "A weekend per tool", "Rebuild a tool you use every day (Git, Redis, an HTTP server, a shell) from scratch. Pick the Python tutorials.")],
+    papers: [] },
+  "web": {
+    projects: [P("Full Stack FastAPI Template", "FastAPI · GitHub", "https://github.com/fastapi/full-stack-fastapi-template", "1–2 weeks", "FastAPI, Postgres, React, Docker and CI already wired. Deploy it, then add one feature end to end with tests.")],
+    papers: [
+      RP("Architectural Styles and the Design of Network-based Software Architectures (REST)", "Fielding", 2000, "https://ics.uci.edu/~fielding/pubs/dissertation/top.htm", true),
+      RP("Dynamo: Amazon's Highly Available Key-value Store", "DeCandia et al.", 2007, "https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf")] },
+  "systems": {
+    projects: [P("Linux Upskill Challenge", "Community · free", "https://linuxupskillchallenge.org/", "20 days", "Run and harden a real Linux server in the cloud, one task a day.")],
+    papers: [
+      RP("MapReduce: Simplified Data Processing on Large Clusters", "Dean & Ghemawat", 2004, "https://www.usenix.org/legacy/events/osdi04/tech/full_papers/dean/dean.pdf", true),
+      RP("The Google File System", "Ghemawat, Gobioff & Leung", 2003, "https://doi.org/10.1145/945445.945450")] },
+  "math": {
+    projects: [],
+    papers: [
+      RP("The Matrix Calculus You Need For Deep Learning", "Parr & Howard", 2018, ax("1802.01528"), true),
+      RP("Automatic Differentiation in Machine Learning: a Survey", "Baydin et al.", 2015, ax("1502.05767"))] },
+  "llm-apis": {
+    projects: [
+      P("Anthropic courses (notebooks)", "Anthropic · GitHub", "https://github.com/anthropics/courses", "1–2 weeks", "API fundamentals, an interactive prompt-engineering tutorial, real-world prompting and tool use, as runnable notebooks."),
+      P("Building with the Claude API", "Anthropic Academy", "https://anthropic.skilljar.com/claude-with-the-anthropic-api", "A few days", "Tool calling, RAG pipelines and production patterns. Free certificate.")],
+    papers: [
+      RP("Chain-of-Thought Prompting Elicits Reasoning in Large Language Models", "Wei et al.", 2022, ax("2201.11903"), true),
+      RP("Large Language Models are Zero-Shot Reasoners", "Kojima et al.", 2022, ax("2205.11916")),
+      RP("Self-Consistency Improves Chain of Thought Reasoning in Language Models", "Wang et al.", 2022, ax("2203.11171")),
+      RP("Lost in the Middle: How Language Models Use Long Contexts", "Liu et al.", 2023, ax("2307.03172"))] },
+  "vectordb": {
+    projects: [P("Write You a Vector Database", "skyzh · tutorial", "https://skyzh.github.io/write-you-a-vector-db/", "1–2 weeks", "Implement vector indexes, including HNSW, inside CMU's BusTub teaching database (C++).")],
+    papers: [
+      RP("Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs (HNSW)", "Malkov & Yashunin", 2016, ax("1603.09320"), true),
+      RP("Billion-scale Similarity Search with GPUs (FAISS)", "Johnson, Douze & Jégou", 2017, ax("1702.08734"))] },
+  "frontend": {
+    projects: [P("Next.js Learn: Dashboard App", "Vercel", "https://nextjs.org/learn", "About a week", "Build and deploy a full dashboard app with routing, a Postgres database, auth and streaming.")],
+    papers: [] },
+  "containers": {
+    projects: [P("DevOps with Docker", "University of Helsinki MOOC", "https://devopswithdocker.com/", "2–4 weeks", "Containerize a frontend, backend and database, then wire up Compose and a CI deploy. Free, with graded exercises.")],
+    papers: [
+      RP("Borg, Omega, and Kubernetes", "Burns et al.", 2016, "https://queue.acm.org/detail.cfm?id=2898444", true),
+      RP("The Twelve-Factor App (essay)", "Wiggins", 2011, "https://12factor.net/")] },
+  "ml": {
+    projects: [
+      P("Machine Learning Zoomcamp", "DataTalks.Club", "https://github.com/DataTalksClub/machine-learning-zoomcamp", "Cohort or self-paced", "From regression to deploying models with Docker, serverless and Kubernetes, plus peer-reviewed projects."),
+      P("micrograd", "Karpathy · GitHub", "https://github.com/karpathy/micrograd", "A weekend", "A tiny autograd engine and neural-net library that makes backprop concrete.")],
+    papers: [
+      RP("A Few Useful Things to Know About Machine Learning", "Domingos", 2012, "https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf", true),
+      RP("Deep Learning (Nature review)", "LeCun, Bengio & Hinton", 2015, "https://www.nature.com/articles/nature14539")] },
+  "orchestration": {
+    projects: [P("Introduction to LangGraph", "LangChain Academy", "https://academy.langchain.com/courses/intro-to-langgraph", "About 6 hours + notebooks", "State, memory, human-in-the-loop and deployment, building a personal assistant along the way.")],
+    papers: [
+      RP("DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines", "Khattab et al.", 2023, ax("2310.03714"), true),
+      RP("Tree of Thoughts: Deliberate Problem Solving with Large Language Models", "Yao et al.", 2023, ax("2305.10601")),
+      RP("Self-Refine: Iterative Refinement with Self-Feedback", "Madaan et al.", 2023, ax("2303.17651"))] },
+  "evals": {
+    projects: [
+      P("Prompt Evaluations course", "Anthropic · GitHub", "https://github.com/anthropics/courses", "A few days", "Write code-graded and model-graded evals and run them at scale."),
+      P("Introduction to LangSmith", "LangChain Academy", "https://academy.langchain.com/courses/intro-to-langsmith", "About 3.5 hours", "Tracing, datasets, experiments and online evaluation.")],
+    papers: [
+      RP("Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena", "Zheng et al.", 2023, ax("2306.05685"), true),
+      RP("Holistic Evaluation of Language Models (HELM)", "Liang et al.", 2022, ax("2211.09110")),
+      RP("Beyond Accuracy: Behavioral Testing of NLP Models with CheckList", "Ribeiro et al.", 2020, ax("2005.04118")),
+      RP("Who Validates the Validators? Aligning LLM-Assisted Evaluation with Human Preferences", "Shankar et al.", 2024, ax("2404.12272"))] },
+  "llm": {
+    projects: [
+      P("Neural Networks: Zero to Hero", "Karpathy", "https://karpathy.ai/zero-to-hero.html", "2–4 weeks", "A video series that ends with you writing a GPT and its tokenizer from scratch."),
+      P("Hugging Face LLM Course", "Hugging Face", "https://huggingface.co/learn/llm-course", "Self-paced", "Transformers, tokenizers, datasets and fine-tuning with the libraries teams actually use.")],
+    papers: [
+      RP("Attention Is All You Need", "Vaswani et al.", 2017, ax("1706.03762"), true),
+      RP("Language Models are Few-Shot Learners (GPT-3)", "Brown et al.", 2020, ax("2005.14165"), true),
+      RP("BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding", "Devlin et al.", 2018, ax("1810.04805")),
+      RP("Neural Machine Translation by Jointly Learning to Align and Translate", "Bahdanau, Cho & Bengio", 2014, ax("1409.0473")),
+      RP("Efficient Estimation of Word Representations in Vector Space (word2vec)", "Mikolov et al.", 2013, ax("1301.3781"))] },
+  "coding-agents": {
+    projects: [
+      P("AI Dev Tools Zoomcamp", "DataTalks.Club", "https://github.com/DataTalksClub/ai-dev-tools-zoomcamp", "Several weeks", "Coding assistants, agents, MCP and automation, with a final project. Materials are open for self-paced study."),
+      P("Claude Code in Action", "Anthropic Academy", "https://anthropic.skilljar.com/claude-code-in-action", "A few hours", "Context, tools, hooks and GitHub workflows with a coding agent. Free certificate.")],
+    papers: [
+      RP("Evaluating Large Language Models Trained on Code (Codex, HumanEval)", "Chen et al.", 2021, ax("2107.03374"), true),
+      RP("SWE-bench: Can Language Models Resolve Real-World GitHub Issues?", "Jimenez et al.", 2023, ax("2310.06770")),
+      RP("SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering", "Yang et al.", 2024, ax("2405.15793"))] },
+  "k8s": {
+    projects: [
+      P("DevOps with Kubernetes", "University of Helsinki MOOC", "https://devopswithkubernetes.com/", "4–6 weeks", "Build a microservice app on K3s and GKE with autoscaling, GitOps and monitoring."),
+      P("Kubernetes the Hard Way", "Kelsey Hightower · GitHub", "https://github.com/kelseyhightower/kubernetes-the-hard-way", "A weekend", "Bootstrap a cluster by hand so nothing in managed Kubernetes is magic.")],
+    papers: [
+      RP("Large-scale Cluster Management at Google with Borg", "Verma et al.", 2015, "https://doi.org/10.1145/2741948.2741964", true)] },
+  "dl": {
+    projects: [P("Practical Deep Learning for Coders", "fast.ai", "https://course.fast.ai/", "About 2 months", "Train real models and deploy them as web apps from the second lesson on.")],
+    papers: [
+      RP("Deep Residual Learning for Image Recognition (ResNet)", "He et al.", 2015, ax("1512.03385"), true),
+      RP("Adam: A Method for Stochastic Optimization", "Kingma & Ba", 2014, ax("1412.6980")),
+      RP("Batch Normalization: Accelerating Deep Network Training", "Ioffe & Szegedy", 2015, ax("1502.03167")),
+      RP("Dropout: A Simple Way to Prevent Neural Networks from Overfitting", "Srivastava et al.", 2014, "https://jmlr.org/papers/v15/srivastava14a.html")] },
+  "agents": {
+    projects: [
+      P("Hugging Face Agents Course", "Hugging Face", "https://huggingface.co/learn/agents-course", "20–30 hours", "smolagents, LlamaIndex and LangGraph units, ending in a benchmarked final agent. Free certificate."),
+      P("5-Day AI Agents Intensive", "Google × Kaggle", "https://www.kaggle.com/learn-guide/5-day-agents", "5 days, self-paced", "Tools and MCP, memory, evaluation and deployment, with codelabs and a capstone."),
+      P("AI Agents for Beginners", "Microsoft · GitHub", "https://github.com/microsoft/ai-agents-for-beginners", "Self-paced", "Lessons with runnable code on agent design patterns, tool use, planning and multi-agent systems.")],
+    papers: [
+      RP("ReAct: Synergizing Reasoning and Acting in Language Models", "Yao et al.", 2022, ax("2210.03629"), true),
+      RP("Toolformer: Language Models Can Teach Themselves to Use Tools", "Schick et al.", 2023, ax("2302.04761")),
+      RP("Reflexion: Language Agents with Verbal Reinforcement Learning", "Shinn et al.", 2023, ax("2303.11366")),
+      RP("Generative Agents: Interactive Simulacra of Human Behavior", "Park et al.", 2023, ax("2304.03442")),
+      RP("Voyager: An Open-Ended Embodied Agent with Large Language Models", "Wang et al.", 2023, ax("2305.16291"))] },
+  "retrieval": {
+    projects: [P("LLM Zoomcamp: search modules", "DataTalks.Club", "https://github.com/DataTalksClub/llm-zoomcamp", "2–3 weeks of the course", "Keyword search, vector search, hybrid search and reranking, each with graded homework.")],
+    papers: [
+      RP("Dense Passage Retrieval for Open-Domain Question Answering", "Karpukhin et al.", 2020, ax("2004.04906"), true),
+      RP("ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT", "Khattab & Zaharia", 2020, ax("2004.12832")),
+      RP("Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks", "Reimers & Gurevych", 2019, ax("1908.10084")),
+      RP("BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models", "Thakur et al.", 2021, ax("2104.08663")),
+      RP("The Probabilistic Relevance Framework: BM25 and Beyond", "Robertson & Zaragoza", 2009, "https://doi.org/10.1561/1500000019")] },
+  "mlops": {
+    projects: [
+      P("MLOps Zoomcamp", "DataTalks.Club", "https://github.com/DataTalksClub/mlops-zoomcamp", "About 9 weeks", "Experiment tracking, orchestration, deployment and monitoring, ending in a peer-reviewed project."),
+      P("Made With ML: MLOps course", "Goku Mohandas", "https://madewithml.com/courses/mlops/", "Several weeks", "Design, develop, deploy and iterate on a production ML app with Ray, MLflow and CI/CD.")],
+    papers: [
+      RP("Hidden Technical Debt in Machine Learning Systems", "Sculley et al.", 2015, "https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf", true),
+      RP("Challenges in Deploying Machine Learning: a Survey of Case Studies", "Paleyes, Urma & Lawrence", 2020, ax("2011.09926"))] },
+  "gpu": {
+    projects: [
+      P("GPU Puzzles", "Sasha Rush · GitHub", "https://github.com/srush/GPU-Puzzles", "A weekend", "Learn CUDA by solving small kernel puzzles in Python (Numba)."),
+      P("Triton Puzzles", "Sasha Rush · GitHub", "https://github.com/srush/Triton-Puzzles", "A weekend", "The same idea in Triton, building up to an attention kernel."),
+      P("GPU MODE lectures", "GPU MODE community", "https://github.com/gpu-mode/lectures", "Ongoing", "Community lectures and code on CUDA, Triton, profiling and kernel competitions.")],
+    papers: [
+      RP("FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness", "Dao et al.", 2022, ax("2205.14135"), true),
+      RP("FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning", "Dao", 2023, ax("2307.08691")),
+      RP("Roofline: An Insightful Visual Performance Model for Multicore Architectures", "Williams, Waterman & Patterson", 2009, "https://doi.org/10.1145/1498765.1498785"),
+      RP("Triton: An Intermediate Language and Compiler for Tiled Neural Network Computations", "Tillet, Kung & Cox", 2019, "https://doi.org/10.1145/3315508.3329973")] },
+  "pretrain": {
+    projects: [
+      P("nanochat", "Karpathy · GitHub", "https://github.com/karpathy/nanochat", "About 4 hours on 8×H100 (~$100)", "Tokenizer, pretraining, SFT, evaluation and a chat web UI in one small repo: your own ChatGPT clone."),
+      P("LLMs from Scratch", "Sebastian Raschka · GitHub", "https://github.com/rasbt/LLMs-from-scratch", "Several weeks", "Notebooks that build, pretrain and fine-tune a GPT-style model step by step.")],
+    papers: [
+      RP("Scaling Laws for Neural Language Models", "Kaplan et al.", 2020, ax("2001.08361"), true),
+      RP("Training Compute-Optimal Large Language Models (Chinchilla)", "Hoffmann et al.", 2022, ax("2203.15556"), true),
+      RP("Language Models are Unsupervised Multitask Learners (GPT-2)", "Radford et al.", 2019, "https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf"),
+      RP("LLaMA: Open and Efficient Foundation Language Models", "Touvron et al.", 2023, ax("2302.13971")),
+      RP("Neural Machine Translation of Rare Words with Subword Units (BPE)", "Sennrich, Haddow & Birch", 2015, ax("1508.07909")),
+      RP("The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale", "Penedo et al.", 2024, ax("2406.17557"))] },
+  "agent-prod": {
+    projects: [
+      P("Hugging Face MCP Course", "Hugging Face × Anthropic", "https://huggingface.co/learn/mcp-course", "10–15 hours", "Build and deploy MCP servers and clients end to end. Free certificate."),
+      P("mini-swe-agent", "SWE-agent team · GitHub", "https://github.com/SWE-agent/mini-swe-agent", "A weekend + eval runs", "Read a roughly 100-line coding agent, run it on SWE-bench, then change one thing and measure the effect.")],
+    papers: [
+      RP("Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection", "Greshake et al.", 2023, ax("2302.12173"), true),
+      RP("AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents", "Debenedetti et al.", 2024, ax("2406.13352")),
+      RP("τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains", "Yao et al.", 2024, ax("2406.12045")),
+      RP("Let's Verify Step by Step", "Lightman et al.", 2023, ax("2305.20050")),
+      RP("Scaling LLM Test-Time Compute Optimally Can Be More Effective than Scaling Model Parameters", "Snell et al.", 2024, ax("2408.03314"))] },
+  "rag": {
+    projects: [P("LLM Zoomcamp capstone", "DataTalks.Club", "https://github.com/DataTalksClub/llm-zoomcamp", "About 10 weeks incl. a 3-week project", "Ship an original RAG app with a knowledge base, retrieval, evaluation, a UI and monitoring; peer-reviewed for a certificate.")],
+    papers: [
+      RP("Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "Lewis et al.", 2020, ax("2005.11401"), true),
+      RP("REALM: Retrieval-Augmented Language Model Pre-Training", "Guu et al.", 2020, ax("2002.08909")),
+      RP("Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "Asai et al.", 2023, ax("2310.11511")),
+      RP("From Local to Global: A Graph RAG Approach to Query-Focused Summarization", "Edge et al.", 2024, ax("2404.16130")),
+      RP("RAGAS: Automated Evaluation of Retrieval Augmented Generation", "Es et al.", 2023, ax("2309.15217"))] },
+  "serving": {
+    projects: [P("vLLM Production Stack", "vLLM project · GitHub", "https://github.com/vllm-project/production-stack", "1–2 weeks + GPU time", "Deploy vLLM on Kubernetes with Helm, a KV-cache-aware router and Prometheus/Grafana dashboards, then benchmark it.")],
+    papers: [
+      RP("Efficient Memory Management for Large Language Model Serving with PagedAttention (vLLM)", "Kwon et al.", 2023, ax("2309.06180"), true),
+      RP("Orca: A Distributed Serving System for Transformer-Based Generative Models", "Yu et al.", 2022, "https://www.usenix.org/conference/osdi22/presentation/yu"),
+      RP("Fast Inference from Transformers via Speculative Decoding", "Leviathan, Kalman & Matias", 2022, ax("2211.17192")),
+      RP("SGLang: Efficient Execution of Structured Language Model Programs", "Zheng et al.", 2023, ax("2312.07104")),
+      RP("GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers", "Frantar et al.", 2022, ax("2210.17323")),
+      RP("Distilling the Knowledge in a Neural Network", "Hinton, Vinyals & Dean", 2015, ax("1503.02531"))] },
+  "dlsys": {
+    projects: [
+      P("MiniTorch", "Sasha Rush · Cornell Tech", "https://minitorch.github.io/", "Several weeks", "Rebuild a Torch-like library (autodiff, tensors, fast CPU and GPU ops), then train models on it."),
+      P("Picotron", "Hugging Face · GitHub", "https://github.com/huggingface/picotron", "1–2 weeks + multi-GPU", "Minimal 4D-parallel pretraining (data, tensor, pipeline, context) in a few hundred lines, with a step-by-step video tutorial.")],
+    papers: [
+      RP("Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism", "Shoeybi et al.", 2019, ax("1909.08053"), true),
+      RP("ZeRO: Memory Optimizations Toward Training Trillion Parameter Models", "Rajbhandari et al.", 2019, ax("1910.02054"), true),
+      RP("GPipe: Efficient Training of Giant Neural Networks using Pipeline Parallelism", "Huang et al.", 2018, ax("1811.06965")),
+      RP("PyTorch: An Imperative Style, High-Performance Deep Learning Library", "Paszke et al.", 2019, ax("1912.01703")),
+      RP("Mixed Precision Training", "Micikevicius et al.", 2017, ax("1710.03740")),
+      RP("PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel", "Zhao et al.", 2023, ax("2304.11277"))] },
+  "posttrain": {
+    projects: [
+      P("smol-course", "Hugging Face · GitHub", "https://github.com/huggingface/smol-course", "About 7 units", "SFT, evaluation, DPO, RL and synthetic data on small models that run on your own hardware."),
+      P("Unsloth notebooks", "Unsloth · GitHub", "https://github.com/unslothai/notebooks", "Hours per notebook", "Free Colab notebooks for LoRA fine-tuning and GRPO reasoning RL on open models."),
+      P("Deep RL Course", "Hugging Face", "https://huggingface.co/learn/deep-rl-course", "Self-paced", "Hands-on RL from Q-learning to PPO, with leaderboard-graded agents.")],
+    papers: [
+      RP("Training Language Models to Follow Instructions with Human Feedback (InstructGPT)", "Ouyang et al.", 2022, ax("2203.02155"), true),
+      RP("Direct Preference Optimization: Your Language Model is Secretly a Reward Model", "Rafailov et al.", 2023, ax("2305.18290"), true),
+      RP("LoRA: Low-Rank Adaptation of Large Language Models", "Hu et al.", 2021, ax("2106.09685")),
+      RP("Proximal Policy Optimization Algorithms", "Schulman et al.", 2017, ax("1707.06347")),
+      RP("Deep Reinforcement Learning from Human Preferences", "Christiano et al.", 2017, ax("1706.03741")),
+      RP("Constitutional AI: Harmlessness from AI Feedback", "Bai et al.", 2022, ax("2212.08073")),
+      RP("DeepSeekMath (introduces GRPO)", "Shao et al.", 2024, ax("2402.03300")),
+      RP("DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning", "DeepSeek-AI", 2025, ax("2501.12948"))] }
+};
+
 const EDGES = [
   ["python", "ml"], ["math", "ml"],
   ["python", "llm-apis"], ["web", "llm-apis"],
@@ -531,13 +763,118 @@ const EDGES = [
 // Role nodes live in the last column.
 ROLES.forEach(r => NODES.push({ id: "role-" + r.id, tier: 5, lane: LANE[r.id], label: r.short, title: r.name, role: r.id }));
 
+// Merge layers 2-3 into skill nodes
+NODES.forEach(n => { if (!n.role) { const x = EXTRA[n.id] || {}; n.projects = x.projects || []; n.papers = x.papers || []; } });
+
+// ---------- One catalog entry per course / project, listing every box it covers ----------
+const RES = {};
+let resOrder = 0;
+const baseCode = c => c.split(",")[0].split(" / ")[0].trim();
+const partOf = c => (c.includes(",") ? c.split(",").slice(1).join(",").trim() : "");
+const courseKey = (s, code, t) => "c:" + [s, code, t].filter(Boolean).join(" ");
+const PROJECT_CANON = {
+  "https://github.com/DataTalksClub/llm-zoomcamp": { n: "LLM Zoomcamp", effort: "About 10 weeks, cohort or self-paced" },
+  "https://github.com/anthropics/courses": { n: "Anthropic courses (notebooks)", effort: "Self-paced" }
+};
+function addCover(key, node, part, note, primary) {
+  const r = RES[key];
+  if (!r) { console.error("Unknown resource key " + key); return; }
+  if (!NODES.some(n => n.id === node)) { console.error("Unknown node " + node + " for " + key); return; }
+  if (!r.covers.some(c => c.node === node)) r.covers.push({ node, part, note, primary });
+}
+NODES.filter(n => !n.role).forEach(n => {
+  n.courses.forEach(c => {
+    const key = courseKey(c.s, baseCode(c.c), c.t);
+    const partial = c.c.includes(",");
+    if (!RES[key] || (RES[key].partial && !partial)) {
+      const prev = RES[key];
+      RES[key] = { key, kind: "course", s: c.s, code: baseCode(c.c), n: c.n, t: c.t, u: c.u, f: c.f, partial, order: prev ? prev.order : resOrder++, covers: prev ? prev.covers : [] };
+      if (prev) RES[key].f = c.f;
+    }
+    addCover(key, n.id, partOf(c.c), c.note, true);
+  });
+  n.projects.forEach(p => {
+    const key = "p:" + p.u;
+    const canon = PROJECT_CANON[p.u];
+    if (!RES[key]) RES[key] = { key, kind: "project", n: canon ? canon.n : p.n, by: p.by, u: p.u, effort: canon ? canon.effort : p.effort, order: resOrder++, covers: [] };
+    const part = canon ? p.n.replace(canon.n + ": ", "").replace(canon.n, "").trim() : "";
+    addCover(key, n.id, part, p.ship, true);
+  });
+});
+
+// Coverage the per-box lists leave implicit: the same course or project also teaches these boxes.
+const ALSO = [
+  ["c:Stanford CS336 Spring 2026", "llm", "Lectures 1–4", "Tokenization, architectures and attention variants, implemented yourself."],
+  ["c:Stanford CS336 Spring 2026", "serving", "Lecture 10", "Inference: what makes generation fast or slow."],
+  ["c:CMU 11-711 Fall 2025", "agents", "Agents lecture", "Agents and RL, seen from the model side."],
+  ["c:CMU 11-711 Fall 2025", "posttrain", "RL lectures", "RL fundamentals and RL for LLMs."],
+  ["c:CMU 11-768 Fall 2026", "evals", "Evaluation lectures", "How agents are evaluated: benchmarks, harnesses and metrics."],
+  ["c:CMU 11-766 Spring 2026", "agents", "Agents unit", "Multi-agent systems and code-writing assistants."],
+  ["c:CMU 11-766 Spring 2026", "evals", "Evaluation unit", "Evaluating LLM applications."],
+  ["c:Berkeley CS294/194-196 Fall 2024", "agents", "", "The original LLM-agents lecture series: reasoning, planning and tool use."],
+  ["c:Berkeley CS294/194-196 Fall 2025", "agent-prod", "Safety lecture", "Agentic AI safety and security."],
+  ["c:CMU 11-868 Fall 2026", "gpu", "GPU programming units", "GPU programming and transformer acceleration."],
+  ["c:CMU 15-442/642", "gpu", "CUDA assignments", "Writing GPU kernels for ML workloads."],
+  ["c:CMU 10-414/714", "gpu", "GPU backend", "Implement the GPU backend of your own framework."],
+  ["c:Stanford CS149 Fall 2025", "serving", "Serving lecture", "How modern AI applications are served at datacenter scale."],
+  ["c:CMU 10-202 Spring 2026", "llm", "Second half", "Builds up to training your own small LLM, with KV caching and chat tuning."],
+  ["c:CMU 10-423/623", "posttrain", "PEFT and RLHF lectures", "Parameter-efficient fine-tuning and RLHF."],
+  ["c:U. Helsinki Full Stack Open", "web", "Backend parts", "Node.js, Express, databases and API testing."],
+  ["c:CMU 11-442/642 Fall 2025", "rag", "RAG lecture", "Neural ranking applied to retrieval-augmented generation."],
+  ["p:https://github.com/DataTalksClub/llm-zoomcamp", "vectordb", "Vector search module", "Index and query embeddings, then compare with keyword search."],
+  ["p:https://github.com/DataTalksClub/llm-zoomcamp", "llm-apis", "Module 1", "Agentic RAG with function calling against an LLM API."],
+  ["p:https://github.com/DataTalksClub/llm-zoomcamp", "evals", "Evaluation and monitoring", "Offline retrieval and answer evaluation, then monitoring in production."],
+  ["p:https://github.com/DataTalksClub/machine-learning-zoomcamp", "containers", "Deployment modules", "Package and serve models with Docker."],
+  ["p:https://github.com/DataTalksClub/machine-learning-zoomcamp", "k8s", "Kubernetes module", "Serve a model on Kubernetes."],
+  ["p:https://huggingface.co/learn/agents-course", "orchestration", "Framework units", "LangGraph and LlamaIndex units."],
+  ["p:https://huggingface.co/learn/agents-course", "evals", "Bonus unit", "Observability and evaluation for agents."],
+  ["p:https://www.kaggle.com/learn-guide/5-day-agents", "agent-prod", "Day 5", "From prototype to production deployment."],
+  ["p:https://www.kaggle.com/learn-guide/5-day-agents", "evals", "Evaluation day", "Agent quality and evaluation."],
+  ["p:https://github.com/karpathy/nanochat", "posttrain", "SFT stage", "Midtraining and supervised fine-tuning of your own base model."],
+  ["p:https://github.com/karpathy/nanochat", "serving", "Inference and web UI", "A KV-cached inference engine behind a chat UI."],
+  ["p:https://github.com/huggingface/smol-course", "evals", "Evaluation unit", "Benchmarks and custom evals for fine-tuned models."],
+  ["p:https://github.com/vllm-project/production-stack", "k8s", "Helm deployment", "GPU workloads on Kubernetes with Helm."],
+  ["p:https://github.com/SWE-agent/mini-swe-agent", "coding-agents", "", "See how a coding agent works inside, in about 100 lines."],
+  ["p:https://minitorch.github.io/", "gpu", "CUDA module", "Write the GPU kernels for your own tensor library."],
+  ["p:https://github.com/DataTalksClub/llm-zoomcamp", "agents", "Agentic RAG module", "Turn the RAG pipeline into an agent that decides when and what to search."],
+  ["p:https://github.com/DataTalksClub/mlops-zoomcamp", "containers", "Deployment module", "Containerize and deploy the model service."],
+  ["p:https://madewithml.com/courses/mlops/", "serving", "Serving lesson", "Serve the model with Ray Serve behind an API."],
+  ["p:https://github.com/fastapi/full-stack-fastapi-template", "containers", "Docker + CI", "Docker Compose and GitHub Actions are part of the template."],
+  ["p:https://github.com/fastapi/full-stack-fastapi-template", "frontend", "React frontend", "A typed React client generated from the API."],
+  ["p:https://nextjs.org/learn", "web", "Data and auth chapters", "Server-side data fetching, Postgres and authentication."],
+  ["p:https://github.com/vllm-project/production-stack", "mlops", "Observability stack", "Prometheus and Grafana dashboards for latency, throughput and cache hits."],
+  ["p:https://github.com/kelseyhightower/kubernetes-the-hard-way", "systems", "", "Certificates, networking and systemd units on real Linux machines."],
+  ["p:https://github.com/karpathy/nanochat", "llm", "Tokenizer + model", "Train a BPE tokenizer and read a compact modern transformer."],
+  ["p:https://github.com/rasbt/LLMs-from-scratch", "llm", "Early chapters", "Tokenization, embeddings and attention coded from scratch."],
+  ["p:https://github.com/rasbt/LLMs-from-scratch", "posttrain", "Fine-tuning chapters", "Classification and instruction fine-tuning of your own model."],
+  ["p:https://karpathy.ai/zero-to-hero.html", "ml", "micrograd lecture", "Backpropagation built by hand."],
+  ["p:https://karpathy.ai/zero-to-hero.html", "pretrain", "GPT-2 reproduction", "Reproduce GPT-2 (124M) end to end."],
+  ["p:https://github.com/huggingface/picotron", "pretrain", "", "Pretrain Llama-style models across GPUs."],
+  ["p:https://huggingface.co/learn/llm-course", "posttrain", "Fine-tuning chapters", "Fine-tune and align models with the Hugging Face stack."],
+  ["p:https://huggingface.co/learn/mcp-course", "coding-agents", "MCP servers", "Expose your own tools to coding agents over MCP."],
+  ["p:https://github.com/DataTalksClub/ai-dev-tools-zoomcamp", "containers", "CI/CD module", "Automate testing and deployment with AI-assisted pipelines."],
+  ["p:https://github.com/SWE-agent/mini-swe-agent", "evals", "SWE-bench runs", "Evaluate an agent on a real benchmark and read its trajectories."],
+  ["p:https://course.fast.ai/", "ml", "Early lessons", "Practical training, validation and error analysis."]
+];
+ALSO.forEach(([key, node, part, note]) => addCover(key, node, part, note, false));
+
+function resFor(nodeId, kind) {
+  return Object.values(RES)
+    .filter(r => r.kind === kind && r.covers.some(c => c.node === nodeId))
+    .sort((a, b) => {
+      const pa = a.covers.find(c => c.node === nodeId).primary, pb = b.covers.find(c => c.node === nodeId).primary;
+      return (pb - pa) || (a.order - b.order);
+    });
+}
+
+
 const N = Object.fromEntries(NODES.map(n => [n.id, n]));
 const R = Object.fromEntries(ROLES.map(r => [r.id, r]));
 const roleSet = id => new Set([...R[id].nodes, "role-" + id]);
 const rolesUsing = nodeId => ROLES.filter(r => r.nodes.includes(nodeId));
 const parents = id => EDGES.filter(e => e[1] === id).map(e => e[0]);
 const children = id => EDGES.filter(e => e[0] === id).map(e => e[1]);
-window.DATA = { TIERS, ROLES, NODES, EDGES };
+window.DATA = { TIERS, ROLES, NODES, EDGES, RES: Object.values(RES) };
 
 // ---------- Layout ----------
 const G = { padX: 24, top: 60, colW: 178, gap: 54, nodeH: 58, laneGap: 100, minGap: 70 };
@@ -588,7 +925,7 @@ const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)")
 
 // ---------- State ----------
 const VALID = new Set(["all", ...ROLES.map(r => r.id)]);
-const state = { role: "agent", node: "agents" };
+const state = { role: "agent", node: "agents", tab: "projects", spot: null };
 function readHash() {
   const h = (location.hash || "").slice(1);
   return VALID.has(h) ? h : "agent";
@@ -615,6 +952,7 @@ function buildChips() {
   const legend = document.getElementById("legend");
   legend.append(h("span", null, "Dots under each box:"));
   ROLES.forEach(r => legend.append(h("span", { class: "item", style: `--role:${roleVar(r.id)}` }, h("span", { class: "dot", "aria-hidden": "true" }), r.tag)));
+  legend.append(h("span", { class: "item counts" }, "Numbers: courses · projects · papers"));
 }
 
 // ---------- Graph ----------
@@ -677,7 +1015,7 @@ function buildGraph() {
         if (on) c.style.fill = roleVar(r.id);
       });
       const t = el("text", { x: n.x + G.colW - 10, y: n.y + G.nodeH - 8.5, class: "sub", "text-anchor": "end" }, g);
-      t.textContent = `${n.courses.length} course${n.courses.length === 1 ? "" : "s"}`;
+      t.textContent = `${resFor(n.id, "course").length} · ${resFor(n.id, "project").length} · ${n.papers.length}`;
     }
     nodeEls[n.id] = g;
     const activate = () => {
@@ -695,20 +1033,23 @@ function buildGraph() {
 
 function paintGraph() {
   const set = state.role === "all" ? null : roleSet(state.role);
+  const spot = state.spot ? new Set(RES[state.spot].covers.map(c => c.node)) : null;
   svg.style.setProperty("--active", state.role === "all" ? "var(--ink)" : roleVar(state.role));
   NODES.forEach(n => {
     const g = nodeEls[n.id];
-    g.classList.toggle("on", !!set && set.has(n.id));
-    g.classList.toggle("dim", !!set && !set.has(n.id));
+    g.classList.toggle("on", !spot && !!set && set.has(n.id));
+    g.classList.toggle("spot", !!spot && spot.has(n.id));
+    g.classList.toggle("dim", spot ? !spot.has(n.id) : (!!set && !set.has(n.id)));
     g.classList.toggle("selected", n.id === state.node);
   });
   edgeEls.forEach(e => {
-    const on = !!set && set.has(e.from) && set.has(e.to);
+    const on = !spot && !!set && set.has(e.from) && set.has(e.to);
     e.el.classList.remove("hl");
     e.el.classList.toggle("on", on);
-    e.el.classList.toggle("dim", !!set && !on);
+    e.el.classList.toggle("dim", spot ? true : (!!set && !on));
     e.el.setAttribute("marker-end", on ? `url(#arr-${state.role})` : "url(#arr-base)");
   });
+  updateSpotBanner();
 }
 function hover(id) {
   paintGraph();
@@ -722,25 +1063,76 @@ function hover(id) {
 }
 
 // ---------- Panes ----------
+const appendAll = (el, ...kids) => kids.forEach(k => { if (k != null && k !== false) el.append(k); });
 const rolePane = document.getElementById("rolePane");
 const nodePane = document.getElementById("nodePane");
 const tierLabel = t => `${String(t + 1).padStart(2, "0")} · ${TIERS[t]}`;
+const byPath = (a, b) => N[a].tier - N[b].tier || N[a].y - N[b].y;
+const resTitle = r => (r.kind === "course" ? `${r.s} ${r.code}` : r.by);
+
+// Greedy set cover: the fewest courses (or projects) that touch every box on a path.
+function plan(nodeIds, kind) {
+  const left = new Set(nodeIds);
+  const picks = [];
+  const pool = Object.values(RES).filter(r => r.kind === kind).sort((a, b) => a.order - b.order);
+  while (left.size) {
+    let best = null, bestHits = 0;
+    pool.forEach(r => {
+      const hits = r.covers.filter(c => left.has(c.node)).length;
+      if (hits > bestHits) { best = r; bestHits = hits; }
+    });
+    if (!best) break;
+    picks.push(best);
+    best.covers.forEach(c => left.delete(c.node));
+  }
+  const first = r => Math.min(...r.covers.filter(c => nodeIds.includes(c.node)).map(c => N[c.node].tier * 1000 + N[c.node].y));
+  picks.sort((a, b) => first(a) - first(b));
+  return { picks, missing: [...left].sort(byPath) };
+}
+
+function spotButton(r) {
+  if (r.covers.length < 2) return null;
+  const on = state.spot === r.key;
+  return h("button", { type: "button", class: "mini spotbtn", "aria-pressed": on ? "true" : "false", onclick: () => spotlight(r.key) },
+    on ? "Clear highlight" : `Show its ${r.covers.length} boxes`);
+}
+
+function planItem(r, scope) {
+  const ids = r.covers.map(c => c.node).filter(id => !scope || scope.has(id)).sort(byPath);
+  return h("li", { class: "planrow" },
+    h("div", { class: "planhead" },
+      h("a", { href: r.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, resTitle(r)), " ", h("span", { class: "cn" }, r.n)),
+      spotButton(r)),
+    h("div", { class: "chips" }, ids.map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, true) }, N[id].title))));
+}
+
+const paperItem = p => h("li", { class: "paper" },
+  h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
+  h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`), p.star ? h("span", { class: "tag star" }, "Must-read") : null));
 
 function renderRolePane() {
   rolePane.replaceChildren();
   rolePane.style.removeProperty("--role");
+  const all = Object.values(RES);
   if (state.role === "all") {
     const counts = NODES.filter(n => !n.role).map(n => [n, rolesUsing(n.id).length]).filter(([, c]) => c >= 4).sort((a, b) => b[1] - a[1]);
-    rolePane.append(
+    const spanP = all.filter(r => r.kind === "project").sort((a, b) => b.covers.length - a.covers.length || a.order - b.order).slice(0, 6);
+    const spanC = all.filter(r => r.kind === "course").sort((a, b) => b.covers.length - a.covers.length || a.order - b.order).slice(0, 6);
+    const nPapers = NODES.reduce((s, n) => s + (n.papers ? n.papers.length : 0), 0);
+    appendAll(rolePane, 
       h("div", { class: "eyebrow" }, "All roles"),
       h("h2", null, "Five archetypes, one shared trunk"),
-      h("p", { class: "lead" }, "Shares are each archetype's slice of the breakdown. Pick one to light up its path."),
+      h("p", { class: "lead" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers across ${NODES.length - ROLES.length} boxes. Pick a role to light up its path.`),
       h("ul", { class: "rolelist" }, ROLES.map(r =>
         h("li", null, h("button", { class: "rolerow", type: "button", style: `--role:${roleVar(r.id)}`, onclick: () => go(r.id), title: `${r.name}: ${r.share}%` },
           h("span", { class: "n" }, h("span", { class: "swatch", "aria-hidden": "true" }), r.name),
           h("span", { class: "barline" }, h("span", { class: "bar", style: `width:${(r.share / maxShare) * 78}%` }), h("span", { class: "val" }, `${r.share.toFixed(1)}%`)),
           h("span", { class: "s" }, r.stack.join(" · "))))
       )),
+      h("h3", null, "Projects that span the most boxes"),
+      h("ol", { class: "plan" }, spanP.map(r => planItem(r, null))),
+      h("h3", null, "Courses that span the most boxes"),
+      h("ol", { class: "plan" }, spanC.map(r => planItem(r, null))),
       h("h3", null, "Shared by four or more paths"),
       h("p", null, counts.map(([n, c]) => `${n.title} (${c} of 5)`).join("; ") + ". Start here if you have not picked a direction yet.")
     );
@@ -751,23 +1143,39 @@ function renderRolePane() {
   const nodes = r.nodes.map(id => N[id]).sort((a, b) => a.tier - b.tier || a.lane - b.lane);
   const byTier = {};
   nodes.forEach(n => (byTier[n.tier] = byTier[n.tier] || []).push(n));
-  rolePane.append(
+  const scope = new Set(r.nodes);
+  const bp = plan(r.nodes, "project");
+  const cp = plan(r.nodes, "course");
+  const reads = nodes.flatMap(n => n.papers.filter(p => p.star));
+  const missingNote = m => m.length ? h("p", { class: "small muted" }, "Nothing listed yet for: " + m.map(id => N[id].title).join(", ") + ".") : null;
+  appendAll(rolePane, 
     h("div", { class: "eyebrow" }, h("span", { class: "swatch", "aria-hidden": "true" }), `Role path · ${r.share.toFixed(1)}% share`),
     h("h2", null, r.name),
     h("p", { class: "lead" }, r.job),
     h("h3", null, "Defining stack in postings"),
     h("ul", { class: "stack" }, r.stack.map(s => h("li", null, s))),
     r.note ? h("p", { class: "note" }, r.note) : null,
-    h("h3", null, `Path · ${nodes.length} nodes`),
+    h("h3", null, `Path · ${nodes.length} boxes`),
     h("ol", { class: "tiers" }, Object.keys(byTier).map(t =>
       h("li", null,
         h("span", { class: "tier-name" }, tierLabel(+t)),
         h("ul", { class: "steps" }, byTier[t].map(n =>
-          h("li", null, h("button", { class: "step", type: "button", "aria-current": n.id === state.node ? "true" : "false", onclick: () => selectNode(n.id, true) },
+          h("li", null, h("button", { class: "step", type: "button", "data-node": n.id, "aria-current": n.id === state.node ? "true" : "false", onclick: () => selectNode(n.id, true) },
             h("span", { class: "t" }, n.title),
-            h("span", { class: "c" }, n.courses.slice(0, 2).map(c => c.c.split(",")[0]).join(" · "))))
+            h("span", { class: "c" }, `${resFor(n.id, "course").length} · ${resFor(n.id, "project").length} · ${n.papers.length}`)))
         ))
       ))),
+    h("p", { class: "small muted" }, "Counts per box: courses · projects · papers."),
+    h("h3", null, "Build plan"),
+    h("p", { class: "small" }, `${bp.picks.length} free projects touch ${r.nodes.length - bp.missing.length} of ${r.nodes.length} boxes. Several projects span more than one box, listed under each.`),
+    h("ol", { class: "plan" }, bp.picks.map(x => planItem(x, scope))),
+    missingNote(bp.missing),
+    h("h3", null, "Course plan"),
+    h("p", { class: "small" }, `${cp.picks.length} courses cover ${r.nodes.length - cp.missing.length} of ${r.nodes.length} boxes.`),
+    h("ol", { class: "plan" }, cp.picks.map(x => planItem(x, scope))),
+    missingNote(cp.missing),
+    h("h3", null, `Must-read papers · ${reads.length}`),
+    h("ol", { class: "papers" }, reads.map(paperItem)),
     h("h3", null, "Capstone to prove it"),
     h("p", null, r.capstone)
   );
@@ -781,22 +1189,51 @@ function linkButtons(ids) {
   });
 }
 
+function resCard(r, nodeId) {
+  const here = r.covers.find(c => c.node === nodeId);
+  const others = r.covers.map(c => c.node).filter(id => id !== nodeId).sort(byPath);
+  const isCourse = r.kind === "course";
+  return h("li", { class: "course" },
+    h("a", { href: r.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, resTitle(r)), h("span", { class: "cn" }, r.n)),
+    h("div", { class: "m" },
+      isCourse && r.t ? h("span", { class: "tag" }, r.t) : null,
+      h("span", { class: "tag" }, isCourse ? r.f : "Free"),
+      !isCourse ? h("span", { class: "tag" }, r.effort) : null,
+      here && here.part ? h("span", { class: "tag part" }, "Here: " + here.part) : null),
+    here ? h("p", null, here.note) : null,
+    others.length ? h("div", { class: "also" },
+      h("span", { class: "also-l" }, `Also covers ${others.length} more:`),
+      others.map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, false) }, N[id].title)),
+      spotButton(r)) : null);
+}
+
 function renderNodePane() {
   const n = N[state.node];
   nodePane.replaceChildren();
   const used = rolesUsing(n.id);
-  nodePane.append(
+  const lists = { courses: resFor(n.id, "course"), projects: resFor(n.id, "project"), papers: n.papers };
+  const tabs = h("div", { class: "tabs", role: "tablist", "aria-label": "Resources for this box" },
+    [["courses", "Courses"], ["projects", "Projects"], ["papers", "Papers"]].map(([k, label]) =>
+      h("button", {
+        type: "button", role: "tab", class: "tab", id: "tab-" + k, "aria-selected": state.tab === k ? "true" : "false", "aria-controls": "tabpanel",
+        onclick: () => { state.tab = k; renderNodePane(); const t = document.getElementById("tab-" + k); if (t) t.focus(); }
+      }, label, h("span", { class: "k" }, String(lists[k].length)))));
+  let panel;
+  if (state.tab === "papers") {
+    panel = n.papers.length ? h("ol", { class: "papers" }, n.papers.map(paperItem)) : h("p", { class: "empty" }, "No landmark paper for this box; it is learned by building.");
+  } else {
+    const list = lists[state.tab];
+    panel = list.length ? h("ul", { class: "courses" }, list.map(r => resCard(r, n.id)))
+      : h("p", { class: "empty" }, "No free project listed for this box yet. The projects on the boxes it unlocks exercise it.");
+  }
+  appendAll(nodePane, 
     h("div", { class: "eyebrow" }, tierLabel(n.tier)),
     h("h2", null, n.title),
     h("p", { class: "lead" }, n.why),
     h("div", { class: "usedby" }, h("span", { style: "color:var(--ink-3)" }, "On the path for:"),
       used.length ? used.map(r => h("span", { style: `--role:${roleVar(r.id)}` }, h("span", { class: "swatch", "aria-hidden": "true" }), r.name)) : h("span", null, "none")),
-    h("h3", null, `Courses · ${n.courses.length}`),
-    h("ul", { class: "courses" }, n.courses.map(c =>
-      h("li", { class: "course" },
-        h("a", { href: c.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, `${c.s} ${c.c}`), h("span", { class: "cn" }, c.n)),
-        h("div", { class: "m" }, c.t ? h("span", { class: "tag" }, c.t) : null, h("span", { class: "tag" }, c.f)),
-        h("p", null, c.note)))),
+    tabs,
+    h("div", { role: "tabpanel", id: "tabpanel", "aria-labelledby": "tab-" + state.tab }, panel),
     h("div", { class: "two" },
       h("div", null, h("h3", null, "Skills"), h("ul", { class: "skills" }, n.skills.map(s => h("li", null, s)))),
       h("div", null, h("h3", null, "Tools"), h("ul", { class: "tools" }, n.tools.map(t => h("li", null, t))))),
@@ -804,6 +1241,27 @@ function renderNodePane() {
       h("div", null, h("h3", null, "Requires"), h("div", { class: "links" }, linkButtons(parents(n.id)))),
       h("div", null, h("h3", null, "Unlocks"), h("div", { class: "links" }, linkButtons(children(n.id)))))
   );
+}
+
+function spotlight(key) {
+  state.spot = state.spot === key ? null : key;
+  paintGraph();
+  renderNodePane();
+  renderRolePane();
+  if (state.spot) {
+    const card = document.querySelector(".graph-card");
+    const rc = card.getBoundingClientRect();
+    if (rc.bottom < 160 || rc.top > window.innerHeight - 160) card.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
+  }
+}
+function updateSpotBanner() {
+  const bar = document.getElementById("spotbar");
+  if (!state.spot) { bar.hidden = true; bar.replaceChildren(); return; }
+  const r = RES[state.spot];
+  bar.hidden = false;
+  bar.replaceChildren(
+    h("span", null, h("strong", null, `${resTitle(r)} ${r.n}`), ` covers ${r.covers.length} box${r.covers.length === 1 ? "" : "es"} (dashed outline).`),
+    h("button", { type: "button", class: "mini", onclick: () => spotlight(state.spot) }, "Clear"));
 }
 
 function updateChips() {
@@ -841,8 +1299,7 @@ function selectNode(id, scroll) {
 function renderRolePaneCurrent() {
   // refresh the aria-current marker on the path list without rebuilding it
   rolePane.querySelectorAll(".step").forEach(b => {
-    const t = b.querySelector(".t").textContent;
-    b.setAttribute("aria-current", t === N[state.node].title ? "true" : "false");
+    b.setAttribute("aria-current", b.dataset.node === state.node ? "true" : "false");
   });
 }
 
@@ -852,6 +1309,7 @@ function go(role) {
 }
 function applyRole(role) {
   state.role = role;
+  state.spot = null;
   if (role === "all") {
     if (!N[state.node] || N[state.node].role) state.node = "llm";
   } else if (!R[role].nodes.includes(state.node)) {
