@@ -355,7 +355,31 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 .morelink { font: 500 11px var(--font-mono); fill: var(--ink-2); cursor: pointer; text-decoration: underline; }
 .morelink:hover { fill: var(--ink); }
 .morelink:focus-visible { outline: 2px solid var(--focus); }
-#buildplan, #capstone { scroll-margin-top: 16px; }
+
+/* ---------- tool licensing ---------- */
+.toolgroups { display: grid; gap: 10px; }
+.toolgroup .tg-head { display: flex; align-items: center; gap: 8px; font: 500 12px var(--font-mono); color: var(--ink-2); margin-bottom: 5px; }
+.lic { display: inline-block; padding: 1px 6px; border-radius: 4px; font: 600 10px var(--font-mono); letter-spacing: 0.06em; }
+.lic.oss { background: color-mix(in srgb, var(--r-platform) 20%, var(--surface)); color: var(--ink); border: 1px solid color-mix(in srgb, var(--r-platform) 60%, var(--line)); }
+.lic.ent { background: color-mix(in srgb, var(--r-research) 18%, var(--surface)); color: var(--ink); border: 1px solid color-mix(in srgb, var(--r-research) 60%, var(--line)); }
+ul.tools li.oss { border-color: color-mix(in srgb, var(--r-platform) 55%, var(--line)); }
+ul.tools li.ent { border-color: color-mix(in srgb, var(--r-research) 55%, var(--line)); border-style: dashed; }
+ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
+.toolnotes { margin: 2px 0 0; padding: 0; list-style: none; display: grid; gap: 3px; font-size: 12.5px; color: var(--ink-2); }
+.toolnotes strong { font-weight: 600; color: var(--ink); }
+
+/* ---------- popularity ---------- */
+.tag.hot { border: 1px solid; background: color-mix(in srgb, #f97316 18%, var(--surface)); border-color: color-mix(in srgb, #f97316 55%, var(--line)); color: var(--ink); font-weight: 600; }
+.tag.stars { font-variant-numeric: tabular-nums; }
+.hotnote { margin: 8px 0 4px; font-size: 12.5px; color: var(--ink-3); }
+
+/* ---------- plan: reading list ---------- */
+.readlist { display: grid; gap: 14px; }
+.readgroup .readhead { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+.readgroup .tierlbl { font: 500 10.5px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.readbox { padding: 0; border: 0; background: none; cursor: pointer; font: 600 14.5px var(--font-body); color: var(--ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--role, var(--ink-3)) 70%, transparent); text-underline-offset: 3px; }
+.readbox:hover { text-decoration-thickness: 2px; }
+.readgroup ol.papers { margin: 0; }
 
 </style>
 </head>
@@ -390,7 +414,7 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
-  <footer>Role shares and defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Transition graphs assume a typical skill set for each starting job; if you lack a box marked as covered, treat it as part of the bridge. Tools are the common choices in postings, not endorsements.</footer>
+  <footer>Role shares and defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Transition graphs assume a typical skill set for each starting job; if you lack a box marked as covered, treat it as part of the bridge. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
 </div>
 <script>
 const TIERS = ["Foundations", "Core", "Building blocks", "Applied", "Specialization", "Role"];
@@ -666,7 +690,7 @@ const NODES = [
   { id: "agent-prod", tier: 4, lane: 0, label: ["Production &", "self-improving agents"], title: "Production & self-improving agents",
     why: "Shipping agents safely, then making them better: sandboxes, credentials, guardrails and observability, with RL and test-time compute as the stretch goal.",
     skills: ["Sandboxing and credential management", "Prompt-injection and tool-misuse defenses", "Human approval gates", "Long-running and background agents", "RL and test-time compute for agents (stretch)"],
-    tools: ["E2B / Daytona / Docker sandboxes", "Llama Guard", "NeMo Guardrails / Guardrails AI", "Langfuse / LangSmith", "MCP auth (OAuth)", "Temporal"],
+    tools: ["E2B / Daytona / Docker sandboxes", "Llama Guard", "NeMo Guardrails / Guardrails AI", "Langfuse", "LangSmith", "MCP auth (OAuth)", "Temporal"],
     courses: [
       { s: "CMU", c: "11-768", n: "AI Agents: safety and training units", t: "Fall 2026", u: "https://www.cmu-agents.com/", f: "Videos", note: "Sandboxing, credential management, observability, and four lectures on RL training for agents." },
       { s: "Berkeley", c: "CS294/194-280", n: "Advanced LLM Agents MOOC", t: "Spring 2025", u: "https://rdi.berkeley.edu/adv-llm-agents/", f: "Videos", note: "Reasoning, code agents, and a closing unit on safe and secure agentic AI." },
@@ -742,7 +766,7 @@ const EXTRA = {
       RP("Self-Consistency Improves Chain of Thought Reasoning in Language Models", "Wang et al.", 2022, ax("2203.11171")),
       RP("Lost in the Middle: How Language Models Use Long Contexts", "Liu et al.", 2023, ax("2307.03172"))] },
   "vectordb": {
-    projects: [P("Write You a Vector Database", "skyzh · tutorial", "https://skyzh.github.io/write-you-a-vector-db/", "1–2 weeks", "Implement vector indexes, including HNSW, inside CMU's BusTub teaching database (C++).")],
+    projects: [P("Vector Database from Scratch", "skyzh · tutorial", "https://skyzh.github.io/vector-db-from-scratch/", "1–2 weeks", "Implement vector indexes, including HNSW, inside CMU's BusTub teaching database (C++).")],
     papers: [
       RP("Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs (HNSW)", "Malkov & Yashunin", 2016, ax("1603.09320"), true),
       RP("Billion-scale Similarity Search with GPUs (FAISS)", "Johnson, Douze & Jégou", 2017, ax("1702.08734"))] },
@@ -836,7 +860,7 @@ const EXTRA = {
   "gpu": {
     projects: [
       P("GPU Puzzles", "Sasha Rush · GitHub", "https://github.com/srush/GPU-Puzzles", "A weekend", "Learn CUDA by solving small kernel puzzles in Python (Numba)."),
-      P("Triton Puzzles", "Sasha Rush · GitHub", "https://github.com/srush/Triton-Puzzles", "A weekend", "The same idea in Triton, building up to an attention kernel."),
+      P("Triton Puzzles", "GPU MODE · GitHub", "https://github.com/gpu-mode/Triton-Puzzles", "A weekend", "The same idea in Triton, building up to an attention kernel."),
       P("GPU MODE lectures", "GPU MODE community", "https://github.com/gpu-mode/lectures", "Ongoing", "Community lectures and code on CUDA, Triton, profiling and kernel competitions.")],
     papers: [
       RP("FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness", "Dao et al.", 2022, ax("2205.14135"), true),
@@ -914,7 +938,7 @@ NODES.push(
   { id: "memory", tier: 2, lane: 0.35, label: ["Memory & context", "engineering"], title: "Memory & context engineering",
     why: "Agents fail when the right facts are not in the window at the right step. Context engineering decides what goes in: memory, retrieved notes, skills and tool results, inside a token budget.",
     skills: ["Short-term vs. long-term memory stores", "Context budgets, summarization and compaction", "Skills, subagents and progressive disclosure", "Prompt caching and KV reuse", "Long-context failure modes"],
-    tools: ["LangGraph memory store", "Letta (MemGPT)", "Mem0", "Zep / Graphiti", "LangMem", "Redis", "Prompt caching"],
+    tools: ["LangGraph memory store", "Letta (MemGPT)", "Mem0", "Graphiti", "Zep", "LangMem", "Redis", "Provider prompt caching"],
     courses: [] },
   { id: "embeddings", tier: 2, lane: 1.0, label: ["Embeddings &", "chunking"], title: "Embeddings & chunking",
     why: "How text becomes searchable. Chunk size, overlap and the embedding model decide what retrieval can ever find, long before the vector database matters.",
@@ -929,7 +953,7 @@ NODES.push(
   { id: "observability", tier: 3, lane: 2.9, label: ["Observability &", "cost (FinOps)"], title: "Observability & cost (FinOps)",
     why: "Platform teams own the bill and the pager: traces, GPU utilization, tail latency and cost per request decide whether a model ships.",
     skills: ["Metrics, logs and traces with OpenTelemetry", "GPU utilization and saturation", "Tail latency and SLOs", "Cost allocation per team, model or request", "Right-sizing, spot capacity and autoscaling for cost"],
-    tools: ["Prometheus", "Grafana", "OpenTelemetry", "Loki / Tempo / Jaeger", "Datadog", "NVIDIA DCGM exporter", "OpenCost / Kubecost", "Cloud cost explorers (AWS, GCP, Azure)"],
+    tools: ["Prometheus", "Grafana", "OpenTelemetry", "Loki / Tempo / Jaeger", "Datadog", "NVIDIA DCGM exporter", "OpenCost", "Kubecost", "Cloud cost explorers (AWS, GCP, Azure)"],
     courses: [
       { s: "Linux Foundation", c: "FinOps", n: "Introduction to FinOps", u: "https://www.edx.org/course/introduction-to-finops", f: "Self-paced", note: "How engineering and finance manage cloud spend together. Free to audit on edX." }
     ] }
@@ -1051,6 +1075,131 @@ const EDGES = [
 // Role nodes live in the last column.
 ROLES.forEach(r => NODES.push({ id: "role-" + r.id, tier: 5, lane: LANE[r.id], label: r.short, title: r.name, role: r.id }));
 
+// ---------- v5: more courses and projects per box, and popularity for the hot badge ----------
+(function () {
+  const node = id => NODES.find(n => n.id === id);
+  const addCourse = (id, c) => node(id).courses.push(c);
+  const addProject = (id, p) => { (EXTRA[id] = EXTRA[id] || { projects: [], papers: [] }).projects.push(p); };
+  const DL = slug => "https://www.deeplearning.ai/short-courses/" + slug + "/";
+
+  // Courses
+  addCourse("python", { s: "MIT", c: "6.100L", n: "Introduction to CS and Programming using Python", t: "Fall 2022", u: "https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/", f: "Videos", note: "A full MIT intro with problem sets: algorithms, testing and debugging alongside the language." });
+  addCourse("web", { s: "Harvard", c: "CS50 SQL", n: "Introduction to Databases with SQL", u: "https://cs50.harvard.edu/sql/", f: "Videos", note: "Schema design, joins, indexes and scaling: the database half of backend work." });
+  addCourse("systems", { s: "MIT", c: "6.1810", n: "Operating System Engineering", u: "https://pdos.csail.mit.edu/6.1810/", f: "Notes + labs", note: "Extend the xv6 kernel: system calls, virtual memory, scheduling and networking." });
+  addCourse("math", { s: "MIT", c: "18.05", n: "Introduction to Probability and Statistics", t: "Spring 2022", u: "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/", f: "Notes + problem sets", note: "Probability, Bayesian inference and the statistics behind evals and experiments." });
+  addCourse("ml", { s: "Caltech", c: "CS156", n: "Learning From Data (Abu-Mostafa)", u: "https://work.caltech.edu/telecourse", f: "Videos", note: "Why learning works at all: generalization, overfitting, bias and variance, with homework sets." });
+  addCourse("llm-apis", { s: "DeepLearning.AI", c: "Prompt Eng", n: "ChatGPT Prompt Engineering for Developers", u: DL("chatgpt-prompt-engineering-for-developers"), f: "Videos + notebooks", note: "Prompting through the API: summarize, infer, transform, then build a small chatbot." });
+  addCourse("llm-apis", { s: "FSDL", c: "LLM Bootcamp", n: "Full Stack LLM Bootcamp", t: "Spring 2023", u: "https://fullstackdeeplearning.com/llm-bootcamp/", f: "Videos", note: "Prompt engineering, LLMOps and augmented models; some APIs are dated, the patterns hold." });
+  addCourse("memory", { s: "DeepLearning.AI", c: "Agent Memory", n: "LLMs as Operating Systems: Agent Memory", u: DL("llms-as-operating-systems-agent-memory"), f: "Videos + notebooks", note: "Taught by the MemGPT authors: build self-editing memory, then share memory across agents with Letta." });
+  addCourse("memory", { s: "DeepLearning.AI", c: "LangGraph Memory", n: "Long-Term Agentic Memory with LangGraph", u: DL("long-term-agentic-memory-with-langgraph"), f: "Videos + notebooks", note: "Semantic, episodic and procedural memory in an email agent built with LangGraph and LangMem." });
+  addCourse("embeddings", { s: "DeepLearning.AI", c: "Embedding Models", n: "Embedding Models: from Architecture to Implementation", u: DL("embedding-models-from-architecture-to-implementation"), f: "Videos + notebooks", note: "From word2vec to BERT to dual encoders trained with contrastive loss." });
+  addCourse("coding-agents", { s: "DeepLearning.AI", c: "Claude Code", n: "Claude Code: A Highly Agentic Coding Assistant", u: DL("claude-code-a-highly-agentic-coding-assistant"), f: "Videos", note: "Explore, refactor, test and debug real codebases with a coding agent, taught by Anthropic." });
+  addCourse("coding-agents", { s: "DeepLearning.AI", c: "MCP", n: "MCP: Build Rich-Context AI Apps with Anthropic", u: DL("mcp-build-rich-context-ai-apps-with-anthropic"), f: "Videos + notebooks", note: "Build an MCP server and client, connect them to Claude Desktop, then deploy the server remotely." });
+  addCourse("vectordb", { s: "DeepLearning.AI", c: "Vector DBs", n: "Vector Databases: from Embeddings to Applications", u: DL("vector-databases-embeddings-applications"), f: "Videos + notebooks", note: "ANN search, HNSW, and sparse, dense and hybrid search in a real vector database." });
+  addCourse("retrieval", { s: "Stanford", c: "CS276", n: "Information Retrieval and Web Search", u: "https://web.stanford.edu/class/cs276/", f: "Slides", note: "Indexing, scoring, evaluation and learning to rank, with the free IIR textbook." });
+  addCourse("mlops", { s: "Stanford", c: "CS329S", n: "Machine Learning Systems Design (Chip Huyen)", u: "https://stanford-cs329s.github.io/", f: "Slides + notes", note: "Data, features, deployment, monitoring and continual learning for production ML." });
+  addCourse("rag", { s: "DeepLearning.AI", c: "Advanced RAG", n: "Building and Evaluating Advanced RAG", u: DL("building-evaluating-advanced-rag"), f: "Videos + notebooks", note: "Sentence-window and auto-merging retrieval, scored with the RAG triad." });
+
+  // Projects
+  addProject("python", P("Exercism Python track", "Exercism · free", "https://exercism.org/tracks/python", "Ongoing", "Short exercises with tests and free mentor feedback on idiomatic Python."));
+  addProject("python", P("Advent of Code", "Eric Wastl · free", "https://adventofcode.com/", "25 puzzles a year", "Daily puzzles that build fluency with parsing, data structures and algorithms; past years stay open."));
+  addProject("web", P("RealWorld", "RealWorld · GitHub", "https://github.com/realworld-apps/realworld", "1–2 weeks", "Build a Medium-style app against a shared API spec, then compare with the many reference backends and frontends."));
+  addProject("systems", P("OSTEP projects", "OSTEP · GitHub", "https://github.com/remzi-arpacidusseau/ostep-projects", "A few weeks", "Write a shell, a key-value store and concurrency projects that go with the free OSTEP textbook."));
+  addProject("math", P("Computational Linear Algebra", "fast.ai · GitHub", "https://github.com/fastai/numerical-linear-algebra", "A few weeks", "Linear algebra as NumPy notebooks: SVD, PCA and how the math runs on real hardware."));
+  addProject("llm-apis", P("OpenAI Cookbook", "OpenAI · GitHub", "https://github.com/openai/openai-cookbook", "Pick a recipe", "Runnable examples for structured outputs, function calling, embeddings and evals."));
+  addProject("llm-apis", P("Claude Cookbooks", "Anthropic · GitHub", "https://github.com/anthropics/claude-cookbooks", "Pick a recipe", "Notebooks for tool use, RAG, prompt caching, sub-agents and more."));
+  addProject("frontend", P("Vercel Chatbot", "Vercel · GitHub", "https://github.com/vercel/chatbot", "1 week", "A production Next.js chat app on the AI SDK with streaming, auth and persistence. Fork it and swap the model."));
+  addProject("orchestration", P("DSPy tutorials", "Stanford NLP · GitHub", "https://github.com/stanfordnlp/dspy", "1 week", "Write LM programs as modules and let DSPy's optimizers tune the prompts."));
+  addProject("orchestration", P("GenAI Agents", "Nir Diamant · GitHub", "https://github.com/NirDiamant/GenAI_Agents", "Pick a tutorial", "Dozens of agent implementations as runnable notebooks, many in LangGraph."));
+  addProject("embeddings", P("Train an embedding model", "Sentence Transformers · GitHub", "https://github.com/huggingface/sentence-transformers", "A few days", "Fine-tune an embedding model on your own pairs, then compare it with the base model."));
+  addProject("embeddings", P("MTEB", "MTEB · GitHub", "https://github.com/embeddings-benchmark/mteb", "A day", "Benchmark candidate embedding models on tasks like yours before you pick one."));
+  addProject("dl", P("Dive into Deep Learning", "d2l.ai · free book", "https://github.com/d2l-ai/d2l-en", "Weeks", "An interactive book with runnable PyTorch code for every chapter, from MLPs to transformers."));
+  addProject("retrieval", P("Pyserini", "Castorini · GitHub", "https://github.com/castorini/pyserini", "A few days", "Reproduce BM25 and dense-retrieval baselines on MS MARCO, then try to beat them."));
+  addProject("retrieval", P("BEIR", "BEIR · GitHub", "https://github.com/beir-cellar/beir", "A few days", "Evaluate your retriever zero-shot across a suite of datasets with nDCG@10."));
+  addProject("vectordb", P("VectorDBBench", "Zilliz · GitHub", "https://github.com/zilliztech/VectorDBBench", "A few days", "Benchmark pgvector, Qdrant, Milvus and others on recall, throughput and cost."));
+  addProject("vectordb", P("ANN-Benchmarks", "Erik Bernhardsson · GitHub", "https://github.com/erikbern/ann-benchmarks", "A day", "Plot recall against queries per second for HNSW, IVF and other index types."));
+  addProject("rag", P("RAG Techniques", "Nir Diamant · GitHub", "https://github.com/NirDiamant/RAG_Techniques", "Pick a technique", "Runnable notebooks for chunking, reranking, query rewriting, graph RAG and more."));
+  addProject("rag", P("RAG from Scratch", "LangChain · GitHub", "https://github.com/langchain-ai/rag-from-scratch", "A weekend", "Short videos and notebooks that build indexing, retrieval and generation step by step."));
+  addProject("serving", P("Tiny LLM", "skyzh · GitHub", "https://github.com/skyzh/tiny-llm", "A few weeks", "Build a tiny vLLM on Apple silicon with MLX: KV cache, batching and serving Qwen from scratch."));
+  addProject("dlsys", P("The Ultra-Scale Playbook", "Hugging Face · free book", "https://huggingface.co/spaces/nanotron/ultrascale-playbook", "A few weeks", "Data, tensor, pipeline and context parallelism explained with thousands of scaling experiments. Pair it with Picotron."));
+})();
+
+// Extra coverage for the new entries (applied with the others in catalog.js).
+const ALSO_V5 = [
+  ["c:MIT Missing Semester", "systems", "Shell and command line", "Shell scripting, editors, data wrangling and remote machines."],
+  ["c:FSDL LLM Bootcamp Spring 2023", "evals", "LLMOps lecture", "Testing, monitoring and improving LLM apps in production."],
+  ["c:FSDL LLM Bootcamp Spring 2023", "rag", "Augmented language models", "Retrieval augmentation and its failure modes."],
+  ["c:DeepLearning.AI MCP", "agents", "MCP clients and servers", "Give an agent tools and resources over MCP."],
+  ["c:DeepLearning.AI Vector DBs", "embeddings", "Embedding lessons", "Where embeddings come from and how similarity is measured."],
+  ["c:DeepLearning.AI Advanced RAG", "evals", "RAG triad", "Context relevance, groundedness and answer relevance."],
+  ["c:Stanford CS329S", "observability", "Monitoring lectures", "Data distribution shifts and monitoring in production."],
+  ["c:DeepLearning.AI Agent Memory", "agents", "Multi-agent memory", "Agents that share memory blocks to collaborate."],
+  ["p:https://github.com/karpathy/micrograd", "math", "", "The chain rule as code: build autograd from scalars."],
+  ["p:https://github.com/karpathy/micrograd", "dl", "", "Backpropagation and a tiny neural-net library you wrote yourself."],
+  ["p:https://karpathy.ai/zero-to-hero.html", "dl", "makemore lectures", "MLPs, BatchNorm and initialization, built up to a GPT."],
+  ["p:https://github.com/realworld-apps/realworld", "frontend", "Frontend side", "Build a frontend against the same API and compare implementations."],
+  ["p:https://github.com/openai/openai-cookbook", "embeddings", "Embeddings recipes", "Search, clustering and classification with embeddings."],
+  ["p:https://github.com/anthropics/claude-cookbooks", "agents", "Tool use and agents", "Tool use, sub-agents and agent patterns."],
+  ["p:https://github.com/NirDiamant/GenAI_Agents", "agents", "", "Agent patterns from simple tool use to multi-agent systems."],
+  ["p:https://github.com/NirDiamant/RAG_Techniques", "retrieval", "Retrieval techniques", "Hybrid search, reranking and query transformations."],
+  ["p:https://github.com/beir-cellar/beir", "rag", "Retriever evaluation", "Measure the retrieval half of a RAG system on its own."],
+  ["p:https://huggingface.co/spaces/nanotron/ultrascale-playbook", "pretrain", "", "How large training runs are laid out across GPUs."],
+  ["p:https://github.com/vercel/chatbot", "llm-apis", "AI SDK", "Provider calls, streaming and tool calls through the AI SDK."]
+];
+
+// Popularity behind the 🔥 badge. Projects: GitHub stars (search API, November 2026) for repos;
+// for non-GitHub projects and courses, a reach tier (5 = very widely followed … 3 = solid niche),
+// used only for ranking within a box, never shown as a number.
+const STARS = {
+  "https://github.com/codecrafters-io/build-your-own-x": 558982, "https://github.com/rasbt/LLMs-from-scratch": 107728,
+  "https://github.com/microsoft/ai-agents-for-beginners": 78748, "https://github.com/openai/openai-cookbook": 76928,
+  "https://github.com/karpathy/nanochat": 60028, "https://github.com/anthropics/claude-cookbooks": 54129,
+  "https://github.com/kelseyhightower/kubernetes-the-hard-way": 50586, "https://madewithml.com/courses/mlops/": 49906,
+  "https://github.com/fastapi/full-stack-fastapi-template": 46147, "https://github.com/stanfordnlp/dspy": 38896,
+  "https://huggingface.co/learn/agents-course": 34387, "https://github.com/NirDiamant/RAG_Techniques": 30201,
+  "https://github.com/d2l-ai/d2l-en": 29989, "https://course.fast.ai/": 25448, "https://karpathy.ai/zero-to-hero.html": 25248,
+  "https://github.com/NirDiamant/GenAI_Agents": 24806, "https://github.com/anthropics/courses": 22968,
+  "https://github.com/huggingface/sentence-transformers": 19251, "https://github.com/karpathy/micrograd": 18635,
+  "https://github.com/DataTalksClub/mlops-zoomcamp": 15518, "https://github.com/DataTalksClub/machine-learning-zoomcamp": 14906,
+  "https://github.com/srush/GPU-Puzzles": 12557, "https://github.com/fastai/numerical-linear-algebra": 11015,
+  "https://github.com/langchain-ai/rag-from-scratch": 9589, "https://github.com/SWE-agent/mini-swe-agent": 9044,
+  "https://github.com/DataTalksClub/llm-zoomcamp": 7561, "https://github.com/gpu-mode/lectures": 6944,
+  "https://www.opencost.io/": 6802, "https://github.com/huggingface/smol-course": 6788,
+  "https://github.com/remzi-arpacidusseau/ostep-projects": 6162, "https://github.com/unslothai/notebooks": 5781,
+  "https://github.com/erikbern/ann-benchmarks": 5748, "https://github.com/skyzh/tiny-llm": 5528,
+  "https://huggingface.co/learn/deep-rl-course": 5086, "https://nextjs.org/learn": 4796, "https://huggingface.co/learn/llm-course": 4344,
+  "https://github.com/embeddings-benchmark/mteb": 3490, "https://github.com/gpu-mode/Triton-Puzzles": 2656,
+  "https://github.com/vllm-project/production-stack": 2705, "https://minitorch.github.io/": 2440, "https://github.com/huggingface/picotron": 2336,
+  "https://github.com/beir-cellar/beir": 2328, "https://github.com/castorini/pyserini": 2177,
+  "https://github.com/DataTalksClub/ai-dev-tools-zoomcamp": 1731, "https://github.com/zilliztech/VectorDBBench": 1199,
+  "https://huggingface.co/learn/mcp-course": 924, "https://huggingface.co/learn/context-course": 117,
+  "https://github.com/realworld-apps/realworld": 84362, "https://github.com/vercel/chatbot": 21029
+};
+// Which star counts belong to a different URL than the project link (shown as "on GitHub").
+const STARS_REPO = {
+  "https://madewithml.com/courses/mlops/": "GokuMohandas/Made-With-ML", "https://huggingface.co/learn/agents-course": "huggingface/agents-course",
+  "https://course.fast.ai/": "fastai/fastbook", "https://karpathy.ai/zero-to-hero.html": "karpathy/nn-zero-to-hero",
+  "https://www.opencost.io/": "opencost/opencost", "https://huggingface.co/learn/deep-rl-course": "huggingface/deep-rl-class",
+  "https://nextjs.org/learn": "vercel/next-learn", "https://huggingface.co/learn/llm-course": "huggingface/course",
+  "https://minitorch.github.io/": "minitorch/minitorch", "https://huggingface.co/learn/mcp-course": "huggingface/mcp-course",
+  "https://huggingface.co/learn/context-course": "huggingface/context-course"
+};
+const REACH_PROJECT = {
+  "https://adventofcode.com/": 5, "https://exercism.org/tracks/python": 4, "https://www.kaggle.com/learn-guide/5-day-agents": 4,
+  "https://huggingface.co/spaces/nanotron/ultrascale-playbook": 4
+};
+const REACH_COURSE = {
+  "Harvard CS50P": 5.5, "Harvard CS50W": 5.3, "Harvard CS50 SQL": 5.1, "MIT 6.100L": 5.2, "MIT 18.06SC": 5.5, "Stanford CS229": 5.5,
+  "Stanford CS231n": 5.5, "Stanford CS224N": 5.4, "MIT 6.S191": 5.2, "Caltech CS156": 5.1, "DeepLearning.AI Prompt Eng": 5.3,
+  "MIT Missing Semester": 4.4, "U. Helsinki Full Stack Open": 4.3, "CMU 15-445/645": 4.5, "Stanford CS336": 4.6, "Stanford CS25": 4.2,
+  "Berkeley CS294/194-196 Fall 2024": 4.6, "Berkeley CS294/194-196 Fall 2025": 4.3, "CMU 11-785": 4.3, "MIT 18.05": 4.2,
+  "CMU 15-213": 4.5, "MIT 6.1810": 4.3, "DeepLearning.AI Claude Code": 4.2, "DeepLearning.AI MCP": 4.1, "DeepLearning.AI Advanced RAG": 4.2,
+  "FSDL LLM Bootcamp": 4.1, "Stanford CS149": 4.2, "Stanford CS329S": 4.2, "DeepLearning.AI Vector DBs": 4.0,
+  "DeepLearning.AI Agent Memory": 4.0, "CMU 11-711": 4.0, "Berkeley CS185/285": 4.4, "Linux Foundation LFS158": 4.2, "Stanford CS276": 4.1
+};
+// Projects whose repo is archived keep their star count but are never marked hot.
+const ARCHIVED = new Set(["https://github.com/anthropics/courses"]);
+
 // Merge layers 2-3 into skill nodes
 NODES.forEach(n => { if (!n.role) { const x = EXTRA[n.id] || {}; n.projects = x.projects || []; n.papers = x.papers || []; } });
 
@@ -1062,7 +1211,7 @@ const partOf = c => (c.includes(",") ? c.split(",").slice(1).join(",").trim() : 
 const courseKey = (s, code, t) => "c:" + [s, code, t].filter(Boolean).join(" ");
 const PROJECT_CANON = {
   "https://github.com/DataTalksClub/llm-zoomcamp": { n: "LLM Zoomcamp", effort: "About 10 weeks, cohort or self-paced" },
-  "https://github.com/anthropics/courses": { n: "Anthropic courses (notebooks)", effort: "Self-paced" }
+  "https://github.com/anthropics/courses": { n: "Anthropic courses (notebooks, archived)", effort: "Self-paced" }
 };
 function addCover(key, node, part, note, primary) {
   const r = RES[key];
@@ -1144,7 +1293,7 @@ const ALSO = [
   ["p:https://github.com/SWE-agent/mini-swe-agent", "evals", "SWE-bench runs", "Evaluate an agent on a real benchmark and read its trajectories."],
   ["p:https://course.fast.ai/", "ml", "Early lessons", "Practical training, validation and error analysis."]
 ];
-ALSO.concat(typeof ALSO_MORE !== "undefined" ? ALSO_MORE : []).forEach(([key, node, part, note]) => addCover(key, node, part, note, false));
+ALSO.concat(typeof ALSO_MORE !== "undefined" ? ALSO_MORE : [], typeof ALSO_V5 !== "undefined" ? ALSO_V5 : []).forEach(([key, node, part, note]) => addCover(key, node, part, note, false));
 
 function resFor(nodeId, kind) {
   return Object.values(RES)
@@ -1154,6 +1303,74 @@ function resFor(nodeId, kind) {
       return (pb - pa) || (a.order - b.order);
     });
 }
+
+// Tool licensing: "oss" = open source or free to use (open source wins when a paid cloud also exists);
+// "ent" = enterprise / specialized: proprietary products, paid APIs and managed cloud services, even with a free tier.
+const TOOL_ENT = [
+  "AWS (EKS, SageMaker, Bedrock)", "Anthropic API", "Azure (AKS, Azure OpenAI)", "Braintrust", "Claude Agent SDK", "Claude Code",
+  "Cloud cost explorers (AWS, GCP, Azure)", "Cohere Rerank", "Cursor", "Datadog", "GCP (GKE, Vertex AI)", "Gemini API", "GitHub Copilot",
+  "Groq / Together / Fireworks (hosted open models)", "Kubecost", "LangSmith", "LlamaParse", "Managed RAG (Bedrock, Azure AI Search, Vertex)",
+  "Modal / RunPod / Lambda (rented GPUs)", "MongoDB Atlas Vector Search", "OpenAI / Voyage / Cohere embeddings", "OpenAI API",
+  "OpenAI fine-tuning API", "OpenRouter", "Pinecone", "Provider prompt caching", "Tinker", "Voyage / OpenAI embeddings", "W&B Weave",
+  "Weights & Biases", "Zep", "turbopuffer"
+];
+const TOOL_OSS = [
+  "A2A protocol", "Aider", "Airflow / Dagster / Prefect", "Argo CD", "Arize Phoenix", "Axolotl", "BGE / Jina rerankers (open)", "BentoML",
+  "CUDA", "CUTLASS", "Celery / BullMQ", "Chonkie", "Chroma", "Cline", "ColBERT (PyLate)", "ColPali", "CrewAI", "DSPy", "DVC", "DeepEval",
+  "DeepSpeed", "Django", "Docker", "Docker Compose", "Docling", "E2B / Daytona / Docker sandboxes", "Elasticsearch / OpenSearch", "FAISS",
+  "FastAPI", "Feast", "Gemini CLI", "Git", "GitHub Actions", "GitLab CI", "Google ADK", "Google Colab / Kaggle (free GPUs)", "Grafana",
+  "GraphRAG / LightRAG", "Graphiti", "Haystack", "Helm", "Hugging Face", "Hugging Face Accelerate", "Hugging Face Datasets",
+  "Hugging Face Hub", "Hugging Face Transformers", "Hypothesis", "Inspect AI", "Instructor", "JAX", "JAX / MaxText", "Jupyter", "KEDA",
+  "KServe", "Kafka", "Kaggle", "Karpenter", "Kubeflow", "Kubernetes", "LLaMA-Factory", "LM Studio", "LanceDB", "LangChain",
+  "LangChain / LangGraph", "LangChain text splitters", "LangGraph", "LangGraph memory store", "LangMem", "Langfuse", "Letta (MemGPT)",
+  "Linux", "LitGPT", "LiteLLM", "LiteLLM proxy / Portkey (LLM gateways)", "Llama Guard", "LlamaIndex", "Loki / Tempo / Jaeger", "MCP",
+  "MCP SDKs", "MCP auth (OAuth)", "MLX (Apple silicon)", "MLflow", "MTEB leaderboard", "Mastra (TypeScript)", "Megatron-LM", "Mem0",
+  "Microsoft Agent Framework", "Milvus", "NCCL", "NVIDIA DCGM exporter", "NVIDIA Dynamo", "NVIDIA GPU Operator",
+  "NeMo Guardrails / Guardrails AI", "Next.js", "Nginx", "Node.js / TypeScript", "Nsight Systems / Compute", "NumPy", "Ollama",
+  "Ollama (local models)", "Open models (BGE, Nomic, Qwen3-Embedding)", "OpenAI Agents SDK", "OpenAI Codex", "OpenCost", "OpenHands",
+  "OpenTelemetry", "PEFT", "Playwright", "Polars", "PostgreSQL", "Prometheus", "Prometheus + Grafana", "Pulumi", "PyTorch",
+  "PyTorch FSDP", "PyTorch Lightning", "PyTorch Profiler", "Pydantic", "Pydantic AI", "Python 3.12+", "Qdrant", "ROCm (AMD)", "Ragas",
+  "Ray", "Ray Serve", "Ray Train", "React", "Redis", "Ruff", "SGLang", "SQLAlchemy", "SSE / WebSockets", "SSH / tmux", "SciPy", "Sentry",
+  "Slurm", "Streamlit / Gradio (Python demos)", "SymPy", "TRL", "Tailwind CSS", "TanStack Query", "Temporal", "TensorBoard",
+  "TensorFlow / Keras", "TensorRT-LLM", "Terraform / OpenTofu", "Testcontainers", "TransformerLens", "Triton", "Triton Inference Server",
+  "TypeScript", "Unsloth", "Unstructured", "Unstructured / Docling", "Vercel AI SDK", "Vespa", "Vite", "Vitest / Jest",
+  "Weaviate", "XGBoost / LightGBM", "assistant-ui / CopilotKit", "bash", "bm25s / Tantivy", "browser-use / Playwright MCP", "datatrove",
+  "htop / perf / strace", "httpx / asyncio", "k6 / Locust (load tests)", "k9s", "kind / minikube (local clusters)", "llama.cpp",
+  "lm-evaluation-harness", "matplotlib", "matplotlib / seaborn", "mergekit", "mypy / Pyright", "n8n (low-code)", "nanoGPT / nanochat",
+  "nvidia-smi / nvtop", "pandas", "pgvector", "pgvector / Qdrant", "promptfoo", "pytest", "scikit-learn", "sentence-transformers",
+  "shadcn/ui", "smolagents", "systemd", "tcpdump", "tiktoken", "torchtitan", "uv", "vLLM", "verl / OpenRLHF"
+];
+// Edge cases worth one line in the box panel.
+const TOOL_NOTE = {
+  "Arize Phoenix": "source-available (Elastic License), free to self-host",
+  "BGE / Jina rerankers (open)": "open weights; some Jina models are non-commercial",
+  "CUDA": "free from NVIDIA, not open source",
+  "Claude Agent SDK": "the SDK code is MIT, but it runs Claude Code and paid Claude models",
+  "Docker": "Docker Engine is open source; Docker Desktop is paid for larger companies",
+  "E2B / Daytona / Docker sandboxes": "open source to self-host; E2B and Daytona also sell managed clouds",
+  "Elasticsearch / OpenSearch": "OpenSearch is Apache-2.0; Elasticsearch added an AGPL option in 2024",
+  "Gemini CLI": "Apache-2.0 client; uses Gemini's free tier or a paid key",
+  "GitHub Actions": "free for public repos and a monthly allowance; not open source",
+  "Google Colab / Kaggle (free GPUs)": "free GPU tiers; not open source",
+  "Hugging Face Hub": "free hosting; the client libraries are open source",
+  "Kaggle": "free; not open source",
+  "LM Studio": "free app, closed source",
+  "Langfuse": "MIT; a managed cloud also exists",
+  "Llama Guard": "open weights under the Llama license",
+  "Mastra (TypeScript)": "Apache-2.0 core; enterprise add-ons are separate",
+  "Nsight Systems / Compute": "free from NVIDIA, not open source",
+  "OpenAI Codex": "the Codex CLI is Apache-2.0 and can run local models",
+  "Redis": "AGPL since Redis 8",
+  "Sentry": "source-available, free to self-host",
+  "Terraform / OpenTofu": "OpenTofu is open source; Terraform is source-available (BSL)",
+  "W&B Weave": "the Weave SDK is open source but needs the W&B platform",
+  "Weights & Biases": "free personal tier on a proprietary platform",
+  "mergekit": "back to LGPL-3.0 since October 2025",
+  "n8n (low-code)": "fair-code: free to self-host, not OSI open source",
+  "nvidia-smi / nvtop": "nvidia-smi ships free with the driver; nvtop is open source"
+};
+const TOOL_LIC = Object.fromEntries([...TOOL_OSS.map(t => [t, "oss"]), ...TOOL_ENT.map(t => [t, "ent"])]);
+NODES.forEach(n => (n.tools || []).forEach(t => { if (!TOOL_LIC[t]) console.error("Unclassified tool: " + t); }));
 
 // ---------- Lookups ----------
 const N = Object.fromEntries(NODES.map(n => [n.id, n]));
@@ -1290,6 +1507,34 @@ function plan(nodeIds, kind) {
   picks.sort((a, b) => first(a) - first(b));
   return { picks, missing: [...left].sort(byPath) };
 }
+
+
+// ---------- Popularity: 🔥 on the one or two most-followed courses and projects in each box ----------
+const fmtK = n => (n >= 1000 ? (n >= 100000 ? String(Math.round(n / 1000)) : (n / 1000).toFixed(1).replace(/\.0$/, "")) + "k" : String(n));
+const popScore = r => r.kind === "course"
+  ? (REACH_COURSE[`${r.s} ${r.code} ${r.t || ""}`.trim()] || REACH_COURSE[`${r.s} ${r.code}`] || 3)
+  : ARCHIVED.has(r.u) ? 0 : (STARS[r.u] || ({ 5: 50000, 4: 15000 }[REACH_PROJECT[r.u]] || 3000));
+const HOT = {};
+function hotKeys(nodeId, kind) {
+  const k = nodeId + "|" + kind;
+  if (HOT[k]) return HOT[k];
+  const list = resFor(nodeId, kind).slice().sort((a, b) => popScore(b) - popScore(a) || a.order - b.order);
+  const set = new Set();
+  const floor = kind === "course" ? 4 : 5000;
+  const n = list.length, max = n >= 4 ? 2 : 1;
+  if (n >= 2 && popScore(list[0]) >= floor) {
+    const a = popScore(list[0]), b = popScore(list[1]);
+    if (a > b) set.add(list[0].key);
+    else if (max === 2) { set.add(list[0].key); set.add(list[1].key); }
+    if (max === 2 && set.size === 1 && (kind === "course" ? b >= 4.5 : (b >= 10000 && b >= 0.4 * a))) set.add(list[1].key);
+  }
+  return (HOT[k] = set);
+}
+const starTag = r => {
+  if (r.kind !== "project" || !STARS[r.u]) return null;
+  const repo = STARS_REPO[r.u];
+  return h("span", { class: "tag stars", title: `${STARS[r.u].toLocaleString("en-US")} GitHub stars${repo ? " on " + repo : ""}, November 2026` }, `★ ${fmtK(STARS[r.u])}`);
+};
 
 // ---------- State ----------
 const VALID = new Set(["all", ...ROLES.map(r => r.id), ...STARTS.map(s => "from-" + s.id)]);
@@ -1549,29 +1794,14 @@ function buildFocus(rid) {
     })
   }));
   const set = new Set(r.nodes);
-  const bp = plan(r.nodes, "project").picks;
-  const MAXP = 5;
-  const projCards = bp.slice(0, MAXP).map((p, i) => {
-    const inPath = p.covers.filter(cv => set.has(cv.node)).length;
-    return { id: "p|" + p.key, kind: "proj", cls: [], rc: roleVar(rid), eb: `FREE PROJECT · ${plural(inPath, "BOX", "BOXES")}`, title: wrap(p.n, F.t, INNER, 2), desc: [], tools: [],
-      labelAbove: i === 0 ? "BUILD PLAN · FEWEST FREE PROJECTS" : null,
-      aria: `${p.n}, free project covering ${plural(inPath, "box", "boxes")} on this path. Outline them.`, act: () => spotlight(p.key) };
-  });
-  cols.push({
-    label: "Build & ship",
-    more: bp.length > MAXP ? { text: `+${bp.length - MAXP} more in the build plan below`, act: scrollTo("buildplan") } : null,
-    cards: [{ id: "cap", kind: "cap", cls: [], rc: roleVar(rid), eb: "CAPSTONE", title: wrap(r.capTitle, F.t, INNER, 2), desc: wrap(r.capLine, F.d, INNER, 3), tools: [],
-      aria: `Capstone: ${r.capTitle}. ${r.capLine}`, act: scrollTo("capstone") }, ...projCards]
-  });
   cols.push({ label: "The role", cards: [{ id: "role-" + rid, kind: "role", cls: [], rc: roleVar(rid), eb: "THE ROLE", lh: 21,
     title: wrap(r.name, F.rt, INNER, 3), desc: wrap(`${r.share.toFixed(1)}% share · ${r.nodes.length} boxes`, F.d, INNER, 2), tools: [],
     aria: `${r.name}, ${r.share}% share.`, act: null }] });
   const soft = (a, b) => r.soft.some(([x, y]) => x === a && y === b) || r.optional.includes(a) || r.optional.includes(b);
   const E = [];
   EDGES.forEach(([a, b]) => { if (set.has(a) && set.has(b)) E.push({ a, b, soft: soft(a, b) }); });
-  EDGES.forEach(([a, b]) => { if (b === "role-" + rid) E.push({ a, b: "cap", soft: soft(a, b) }); });
-  E.push({ a: "cap", b: "role-" + rid, soft: false });
-  drawColumns(cols, E, `${r.name} path: ${r.nodes.length} skill boxes from foundations to the role, with capstone and build plan`);
+  EDGES.forEach(([a, b]) => { if (b === "role-" + rid) E.push({ a, b, soft: soft(a, b) }); });
+  drawColumns(cols, E, `${r.name} path: ${r.nodes.length} skill boxes from foundations to the role`);
 }
 
 function buildTransition(sid) {
@@ -1729,7 +1959,7 @@ function renderCaption() {
   const r = R[state.role];
   cap.textContent = state.view === "map"
     ? `${r.name} highlighted on the full map. Faded boxes belong to other paths.`
-    : `${r.name}: ${r.nodes.length} skill boxes, then the capstone and the fewest free projects that cover the path. Click a project to outline the boxes it covers; long links route under the columns they skip.`;
+    : `${r.name}: ${r.nodes.length} skill boxes from foundations to the role. Click a box for its courses, projects, papers and tools; long links route under the columns they skip.`;
 }
 
 // ---------- Panes ----------
@@ -1754,23 +1984,20 @@ const boxChips = ids => h("div", { class: "chips-mini" }, ids.slice().sort(byPat
 const paperItem = p => h("li", { class: "paper" },
   h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
   h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`), p.star ? h("span", { class: "tag star" }, "Must-read") : null));
-const missingNote = m => (m.length ? h("p", { class: "small muted" }, "Nothing listed yet for: " + m.map(id => N[id].title).join(", ") + ".") : null);
 
-function planSections(ids, label) {
-  const scope = new Set(ids);
-  const bp = plan(ids, "project"), cp = plan(ids, "course");
-  const reads = ids.slice().sort(byPath).flatMap(id => N[id].papers.filter(p => p.star));
+// Must-read papers for a set of boxes, grouped by box in path order.
+function readingList(ids, intro) {
+  const groups = ids.slice().sort(byPath).map(id => [id, N[id].papers.filter(p => p.star)]).filter(([, ps]) => ps.length);
+  const count = groups.reduce((s, [, ps]) => s + ps.length, 0);
   return [
-    h("h3", { id: "buildplan" }, "Build plan"),
-    h("p", { class: "small" }, `${plural(bp.picks.length, "free project")} touch ${ids.length - bp.missing.length} of the ${ids.length} ${label}. Several span more than one box, listed under each.`),
-    h("ol", { class: "plan" }, bp.picks.map(x => planItem(x, scope))),
-    missingNote(bp.missing),
-    h("h3", null, "Course plan"),
-    h("p", { class: "small" }, `${plural(cp.picks.length, "course")} cover ${ids.length - cp.missing.length} of the ${ids.length} ${label}.`),
-    h("ol", { class: "plan" }, cp.picks.map(x => planItem(x, scope))),
-    missingNote(cp.missing),
-    h("h3", null, `Must-read papers · ${reads.length}`),
-    h("ol", { class: "papers" }, reads.map(paperItem))
+    h("p", { class: "small" }, `${plural(count, "paper")} across ${plural(groups.length, "box", "boxes")}, ${intro}. Each box's Papers tab has the rest.`),
+    h("div", { class: "readlist" }, groups.map(([id, ps], gi) => h("section", { class: "readgroup" },
+      h("div", { class: "readhead" },
+        h("span", { class: "tierlbl" }, TIERS[N[id].tier]),
+        h("button", { type: "button", class: "readbox", onclick: () => selectNode(id, true) }, N[id].title)),
+      h("ol", { class: "papers", start: String(1 + groups.slice(0, gi).reduce((s, [, q]) => s + q.length, 0)) }, ps.map(p => h("li", { class: "paper" },
+        h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
+        h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`))))))))
   ];
 }
 
@@ -1818,17 +2045,16 @@ function renderRolePane() {
           h("div", { class: "s" }, boxChips(branch(t)),
             h("button", { type: "button", class: "mini", onclick: () => go(t.id) }, `Open the ${t.tag} path →`)))))),
       T.part.size ? [h("h3", null, `Refresh · ${plural(T.part.size, "box", "boxes")}`), boxChips([...T.part])] : null,
-      planSections(T.bridge, "bridge boxes"));
+      h("h3", null, "Must-read papers"),
+      readingList(T.bridge, "for the bridge boxes in path order"));
     return;
   }
   const r = R[state.role];
   rolePane.style.setProperty("--role", roleVar(r.id));
   appendAll(rolePane,
     h("div", { class: "eyebrow" }, h("span", { class: "swatch", "aria-hidden": "true" }), "Plan"),
-    h("h2", null, `How to get to ${r.name}`),
-    planSections(r.nodes, "boxes on this path"),
-    h("h3", { id: "capstone" }, "Capstone to prove it"),
-    h("p", null, r.capstone));
+    h("h2", null, `Must-read papers for ${r.name}`),
+    readingList(r.nodes, "in path order from foundations to the role"));
 }
 
 function linkButtons(ids) {
@@ -1845,6 +2071,8 @@ function resCard(r, nodeId) {
   return h("li", { class: "course" },
     h("a", { href: r.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, resTitle(r)), h("span", { class: "cn" }, r.n)),
     h("div", { class: "m" },
+      hotKeys(nodeId, r.kind).has(r.key) ? h("span", { class: "tag hot", title: isCourse ? "Most widely followed course in this box (audience reach)" : "Most popular project in this box (GitHub stars or audience reach)" }, "🔥 Popular") : null,
+      starTag(r),
       isCourse && r.t ? h("span", { class: "tag" }, r.t) : null,
       h("span", { class: "tag" }, isCourse ? r.f : "Free"),
       !isCourse ? h("span", { class: "tag" }, r.effort) : null,
@@ -1855,11 +2083,25 @@ function resCard(r, nodeId) {
       others.map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, false) }, N[id].title)),
       spotButton(r)) : null);
 }
+function toolGroups(tools) {
+  const groups = [["oss", "Open source / free"], ["ent", "Enterprise / specialized"]];
+  const notes = tools.filter(t => TOOL_NOTE[t]);
+  return h("div", { class: "toolgroups" },
+    groups.map(([k, label]) => {
+      const list = tools.filter(t => (TOOL_LIC[t] || "ent") === k);
+      if (!list.length) return null;
+      return h("div", { class: "toolgroup " + k },
+        h("div", { class: "tg-head" }, h("span", { class: "lic " + k, "aria-hidden": "true" }, k === "oss" ? "OPEN" : "ENT"), `${label} · ${list.length}`),
+        h("ul", { class: "tools" }, list.map(t => h("li", { class: k, title: TOOL_NOTE[t] || null }, t, TOOL_NOTE[t] ? h("span", { class: "nmark", "aria-hidden": "true" }, "*") : null))));
+    }),
+    notes.length ? h("ul", { class: "toolnotes" }, notes.map(t => h("li", null, h("strong", null, t + ": "), TOOL_NOTE[t]))) : null);
+}
 function renderNodePane() {
   const n = N[state.node];
   nodePane.replaceChildren();
   const used = rolesUsing(n.id);
-  const lists = { courses: resFor(n.id, "course"), projects: resFor(n.id, "project"), papers: n.papers };
+  const hotFirst = kind => { const hot = hotKeys(n.id, kind); return resFor(n.id, kind).map((r, i) => [r, i]).sort((a, b) => (hot.has(b[0].key) - hot.has(a[0].key)) || a[1] - b[1]).map(x => x[0]); };
+  const lists = { courses: hotFirst("course"), projects: hotFirst("project"), papers: n.papers };
   const empty = {
     courses: "No university course centers on this box yet; the projects tab covers it.",
     projects: "No free project listed for this box yet; the projects on the boxes it unlocks exercise it.",
@@ -1882,10 +2124,13 @@ function renderNodePane() {
     h("div", { class: "usedby" }, h("span", { style: "color:var(--ink-3)" }, "On the path for:"),
       used.map(r => h("span", { style: `--role:${roleVar(r.id)}` }, h("span", { class: "swatch", "aria-hidden": "true" }), r.name + (r.optional.includes(n.id) ? " (recommended)" : "")))),
     tabs,
-    h("div", { role: "tabpanel", id: "tabpanel", "aria-labelledby": "tab-" + state.tab }, panel),
+    h("div", { role: "tabpanel", id: "tabpanel", "aria-labelledby": "tab-" + state.tab },
+      state.tab !== "papers" && list.length > 1 && hotKeys(n.id, state.tab === "courses" ? "course" : "project").size
+        ? h("p", { class: "hotnote" }, state.tab === "courses" ? "🔥 marks the most widely followed courses in this box, by lecture views and enrollment." : "🔥 marks the most popular projects in this box, mostly by GitHub stars.") : null,
+      panel),
     h("div", { class: "two" },
       h("div", null, h("h3", null, "Skills"), h("ul", { class: "skills" }, n.skills.map(s => h("li", null, s)))),
-      h("div", null, h("h3", null, "Tools"), h("ul", { class: "tools" }, n.tools.map(t => h("li", null, t))))),
+      h("div", null, h("h3", null, "Tools"), toolGroups(n.tools))),
     h("div", { class: "two" },
       h("div", null, h("h3", null, "Requires"), h("div", { class: "links" }, linkButtons(parents(n.id)))),
       h("div", null, h("h3", null, "Unlocks"), h("div", { class: "links" }, linkButtons(children(n.id))))));
@@ -1959,6 +2204,9 @@ state.role = readHash();
 state.node = anchorFor(state.role);
 render();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderGraph());
+// Export hooks: licensing, stars and hot picks for the Obsidian / canvas exports.
+window.DATA.TOOL_LIC = TOOL_LIC; window.DATA.TOOL_NOTE = TOOL_NOTE; window.DATA.STARS = STARS;
+window.DATA.HOT = Object.fromEntries(NODES.filter(n => !n.role).map(n => [n.id, { course: [...hotKeys(n.id, "course")], project: [...hotKeys(n.id, "project")] }]));
 
 </script>
 </body>
