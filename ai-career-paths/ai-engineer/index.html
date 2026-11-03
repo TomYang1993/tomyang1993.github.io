@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI engineer path: skills, free courses and projects | AI Career Path Map</title>
+<meta name="description" content="Step-by-step path to AI engineer: 15 skills from foundations to specialization, with 35 free courses, 42 free projects, 55 papers and a capstone.">
+<link rel="canonical" href="https://tomyang1993.github.io/ai-career-paths/ai-engineer/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Tom Yang">
+<meta property="og:title" content="AI engineer path: skills, free courses and projects">
+<meta property="og:description" content="Step-by-step path to AI engineer: 15 skills from foundations to specialization, with 35 free courses, 42 free projects, 55 papers and a capstone.">
+<meta property="og:url" content="https://tomyang1993.github.io/ai-career-paths/ai-engineer/">
+<meta property="og:image" content="https://tomyang1993.github.io/ai-career-paths/og/ai-engineer.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="AI engineer path on the AI Career Path Map">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI engineer path: skills, free courses and projects">
+<meta name="twitter:description" content="Step-by-step path to AI engineer: 15 skills from foundations to specialization, with 35 free courses, 42 free projects, 55 papers and a capstone.">
+<meta name="twitter:image" content="https://tomyang1993.github.io/ai-career-paths/og/ai-engineer.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,700&display=swap" rel="stylesheet">
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":"LearningResource","name":"AI engineer path: skills, free courses and projects","description":"Step-by-step path to AI engineer: 15 skills from foundations to specialization, with 35 free courses, 42 free projects, 55 papers and a capstone.","url":"https://tomyang1993.github.io/ai-career-paths/ai-engineer/","inLanguage":"en","isAccessibleForFree":true,"learningResourceType":"Learning path","teaches":["Python & engineering craft","Backend & data fundamentals","ML fundamentals","LLM APIs & prompt engineering","Embeddings & chunking","Databases & vector stores","How LLMs work","Orchestration frameworks","Evals & observability","Memory & context engineering","AI-native development","Agent architectures","Information retrieval","Production & self-improving agents","Advanced RAG systems"],"author":{"@type":"Person","name":"Tom Yang","url":"https://tomyang1993.github.io/"},"isPartOf":{"@type":"WebPage","name":"AI Career Path Map","url":"https://tomyang1993.github.io/ai-career-paths/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Tom Yang","item":"https://tomyang1993.github.io/"},{"@type":"ListItem","position":2,"name":"AI Career Path Map","item":"https://tomyang1993.github.io/ai-career-paths/"},{"@type":"ListItem","position":3,"name":"AI engineer","item":"https://tomyang1993.github.io/ai-career-paths/ai-engineer/"}]}]</script>
+<style>
+:root{--bg:#f4f5f7;--surface:#fff;--surface-2:#eef0f3;--ink:#15171b;--ink-2:#4a505a;--ink-3:#6b727d;--line:#d3d8df;--focus:#2a78d6;
+--r-ai:#2a78d6;--r-platform:#1baf7a;--r-devops:#eda100;--r-research:#e87ba4;--hot:#f97316;
+--font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--font-serif:"Source Serif 4",Georgia,"Times New Roman",serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#15171c;--surface:#1b1f26;--surface-2:#252a33;--ink:#e9ebef;--ink-2:#b6bcc6;--ink-3:#8a919c;--line:#333a45;--focus:#3987e5;
+--r-ai:#3987e5;--r-platform:#199e70;--r-devops:#c98500;--r-research:#d55181;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font-body)}
+a{color:inherit;text-decoration-color:color-mix(in srgb,var(--role) 70%,transparent);text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:3px}
+.wrap{max-width:860px;margin:0 auto;padding:28px 16px 64px}
+.crumbs{font:500 12px var(--font-mono);letter-spacing:.04em;color:var(--ink-3);display:flex;flex-wrap:wrap;gap:6px}
+.crumbs a{text-decoration:none}.crumbs a:hover{text-decoration:underline}
+h1{font:700 clamp(34px,6vw,48px)/1.1 var(--font-serif);letter-spacing:-.015em;margin:14px 0 10px;padding-bottom:6px;border-bottom:4px solid var(--role);display:inline-block}
+.story{font-size:18px;color:var(--ink-2);margin:6px 0 16px}
+.stack{font:400 13px var(--font-mono);color:var(--ink-2)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}
+.cta a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);text-decoration:none;font-weight:600;font-size:14px}
+.cta a.primary{border-color:var(--role);box-shadow:inset 0 0 0 1px var(--role)}
+.others{font-size:14px;color:var(--ink-3);margin:10px 0 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:18px 0}
+.toc ol{margin:6px 0 0;padding-left:20px}.toc li{margin:4px 0}
+.toc .sk{color:var(--ink-2);font-size:14px}
+h2{font:700 26px/1.25 var(--font-serif);margin:44px 0 6px}
+h2 .n{font:500 13px var(--font-mono);letter-spacing:.06em;color:var(--ink-3);display:block;text-transform:uppercase;margin-bottom:4px}
+.skill{scroll-margin-top:16px}
+.skill h3{font:600 19px/1.3 var(--font-body);margin:0}
+.tags{display:inline-flex;gap:6px;margin-left:6px;vertical-align:2px}
+.tag{font:500 11px var(--font-mono);letter-spacing:.04em;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);text-transform:uppercase}
+.tag.hot{border-color:color-mix(in srgb,var(--hot) 55%,var(--line));background:color-mix(in srgb,var(--hot) 16%,var(--surface));color:var(--ink)}
+.desc{color:var(--ink-2);margin:6px 0 0}
+.why{margin:8px 0 0}
+h4{font:500 12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:16px 0 6px}
+ul.res{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.res li{padding-left:12px;border-left:3px solid var(--surface-2)}
+ul.res li.hotpick{border-left-color:color-mix(in srgb,var(--hot) 60%,var(--line))}
+.rt{font-weight:600}.rm{font:400 12.5px var(--font-mono);color:var(--ink-3)}
+.rn{display:block;font-size:14.5px;color:var(--ink-2)}
+ul.skills{margin:0;padding-left:20px;font-size:15px}
+ol.papers{margin:0;padding-left:22px;font-size:15px}ol.papers li{margin:4px 0}
+.tools{font-size:14.5px;color:var(--ink-2)}
+.cap{border-color:var(--role);box-shadow:inset 0 0 0 1px var(--role)}
+footer{margin-top:48px;font-size:13px;color:var(--ink-3)}
+</style>
+</head>
+<body style="--role:var(--r-ai)">
+<div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Tom Yang</a><span aria-hidden="true">›</span><a href="../">AI Career Path Map</a><span aria-hidden="true">›</span><span aria-current="page">AI engineer</span></nav>
+<header>
+<h1>AI engineer</h1>
+<p class="story">Builds LLM products that act and answer from an organization's own data. Agents plan, call tools and recover over many steps; retrieval grounds them in documents, tickets, code and records. Most postings ask for both, so this path covers both: one shared trunk that splits into an agent branch and a retrieval branch. The work is engineering reliable loops, context, retrieval quality, evals and guardrails around provider APIs, not training models.</p>
+<p class="stack">Defining stack: Agents · RAG · Prompt engineering · Vector databases · LangChain / LangGraph</p>
+<div class="cta"><a class="primary" href="../#ai">Open this path on the interactive map</a><a href="https://github.com/TomYang1993/AI-career-path-minimal-steps#ai-engineer" rel="noopener">Minimal steps on GitHub</a></div>
+<p class="others">Other paths: <a href="../cloud-ml-platform-engineer/">Cloud / ML platform engineer</a> · <a href="../devops-full-stack-engineer/">DevOps / full-stack engineer</a> · <a href="../ml-trainer-researcher/">ML trainer / researcher</a></p>
+</header>
+<nav class="card toc" aria-labelledby="toc-h"><h4 id="toc-h" style="margin-top:0">The path at a glance</h4><ol>
+<li><a href="#step-1">Step 1 · Foundations</a><div class="sk"><a href="#skill-python">Python &amp; engineering craft</a> · <a href="#skill-web">Backend &amp; data fundamentals</a></div></li>
+<li><a href="#step-2">Step 2 · Core</a><div class="sk"><a href="#skill-llm-apis">LLM APIs &amp; prompt engineering</a> · <a href="#skill-ml">ML fundamentals</a></div></li>
+<li><a href="#step-3">Step 3 · Building blocks</a><div class="sk"><a href="#skill-llm">How LLMs work</a> · <a href="#skill-orchestration">Orchestration frameworks</a> · <a href="#skill-evals">Evals &amp; observability</a> · <a href="#skill-memory">Memory &amp; context engineering</a> · <a href="#skill-coding-agents">AI-native development</a> · <a href="#skill-embeddings">Embeddings &amp; chunking</a></div></li>
+<li><a href="#step-4">Step 4 · Applied</a><div class="sk"><a href="#skill-agents">Agent architectures</a> · <a href="#skill-vectordb">Databases &amp; vector stores</a> · <a href="#skill-retrieval">Information retrieval</a></div></li>
+<li><a href="#step-5">Step 5 · Specialization</a><div class="sk"><a href="#skill-agent-prod">Production &amp; self-improving agents</a> · <a href="#skill-rag">Advanced RAG systems</a></div></li>
+<li><a href="#capstone">Step 6 · Capstone</a></li>
+</ol></nav>
+
+<section aria-labelledby="step-1">
+<h2 id="step-1"><span class="n">Step 1</span>Foundations</h2>
+
+<article class="card skill" id="skill-python">
+<h3>1.1 Python &amp; engineering craft</h3>
+<p class="desc">Async, type hints, tests and Git as daily habits.</p>
+<p class="why">Every archetype ships Python. Async code, type hints, tests and a clean Git workflow are table stakes before anything AI-specific.</p>
+<p class="rm">Also on the path for: <a href="../cloud-ml-platform-engineer/#skill-python">Cloud / ML platform engineer</a>, <a href="../devops-full-stack-engineer/#skill-python">DevOps / full-stack engineer</a>, <a href="../ml-trainer-researcher/#skill-python">ML trainer / researcher</a></p>
+<h4>Skills</h4><ul class="skills"><li>Async/await and concurrency</li><li>Type hints and Pydantic models</li><li>Packaging and virtual environments</li><li>Unit and integration testing</li><li>Git workflow and code review</li><li>Linux shell fluency</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://cs50.harvard.edu/python/" rel="noopener">Harvard CS50P: Introduction to Programming with Python</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">Fast on-ramp if Python is not yet your daily language.</span></li>
+<li><a class="rt" href="https://missing.csail.mit.edu/" rel="noopener">MIT: The Missing Semester of Your CS Education</a>
+<span class="rm">Videos</span><span class="rn">Shell, Git, debugging and profiling: the tooling every later course assumes.</span></li>
+<li><a class="rt" href="https://ocw.mit.edu/courses/6-100l-introduction-to-cs-and-programming-using-python-fall-2022/" rel="noopener">MIT 6.100L: Introduction to CS and Programming using Python</a>
+<span class="rm">Fall 2022 · Videos</span><span class="rn">A full MIT intro with problem sets: algorithms, testing and debugging alongside the language.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/codecrafters-io/build-your-own-x" rel="noopener">Build Your Own X</a> <span class="rm">codecrafters-io · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · A weekend per tool · ★ 558,982</span><span class="rn">Rebuild a tool you use every day (Git, Redis, an HTTP server, a shell) from scratch. Pick the Python tutorials.</span></li>
+<li><a class="rt" href="https://exercism.org/tracks/python" rel="noopener">Exercism Python track</a> <span class="rm">Exercism · free</span>
+<span class="rm">Free · Ongoing</span><span class="rn">Short exercises with tests and free mentor feedback on idiomatic Python.</span></li>
+<li><a class="rt" href="https://adventofcode.com/" rel="noopener">Advent of Code</a> <span class="rm">Eric Wastl · free</span>
+<span class="rm">Free · 25 puzzles a year</span><span class="rn">Daily puzzles that build fluency with parsing, data structures and algorithms; past years stay open.</span></li></ul>
+
+<h4>Tools</h4><p class="tools">Python 3.12+ · uv · pytest · Ruff · mypy / Pyright · Pydantic · httpx / asyncio · Git · Jupyter</p>
+</article>
+<article class="card skill" id="skill-web">
+<h3>1.2 Backend &amp; data fundamentals</h3>
+<p class="desc">HTTP APIs, SQL, auth, queues and caching.</p>
+<p class="why">Agents and RAG apps are web services. They live behind APIs, talk to databases, and need auth, queues and caching like any other product.</p>
+<p class="rm">Also on the path for: <a href="../devops-full-stack-engineer/#skill-web">DevOps / full-stack engineer</a></p>
+<h4>Skills</h4><ul class="skills"><li>HTTP APIs and streaming (SSE, WebSockets)</li><li>SQL and schema design</li><li>Auth: OAuth, API keys, scopes</li><li>Queues and background jobs</li><li>Caching and rate limiting</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://cs50.harvard.edu/web/" rel="noopener">Harvard CS50W: Web Programming with Python and JavaScript</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">Django, SQL, APIs and JavaScript in one project-based course.</span></li>
+<li><a class="rt" href="https://cs50.harvard.edu/sql/" rel="noopener">Harvard CS50 SQL: Introduction to Databases with SQL</a>
+<span class="rm">Videos</span><span class="rn">Schema design, joins, indexes and scaling: the database half of backend work.</span></li>
+<li><a class="rt" href="https://fullstackopen.com/en/" rel="noopener">U. Helsinki Full Stack Open: Deep Dive into Modern Web Development</a>
+<span class="rm">Self-paced · Here: Backend parts</span><span class="rn">Node.js, Express, databases and API testing.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/realworld-apps/realworld" rel="noopener">RealWorld</a> <span class="rm">RealWorld · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 1–2 weeks · ★ 84,362</span><span class="rn">Build a Medium-style app against a shared API spec, then compare with the many reference backends and frontends.</span></li>
+<li><a class="rt" href="https://github.com/fastapi/full-stack-fastapi-template" rel="noopener">Full Stack FastAPI Template</a> <span class="rm">FastAPI · GitHub</span>
+<span class="rm">Free · 1–2 weeks · ★ 46,147</span><span class="rn">FastAPI, Postgres, React, Docker and CI already wired. Deploy it, then add one feature end to end with tests.</span></li>
+<li><a class="rt" href="https://nextjs.org/learn" rel="noopener">Next.js Learn: Dashboard App</a> <span class="rm">Vercel</span>
+<span class="rm">Free · About a week · ★ 4,796 · Here: Data and auth chapters</span><span class="rn">Server-side data fetching, Postgres and authentication.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://ics.uci.edu/~fielding/pubs/dissertation/top.htm" rel="noopener">Architectural Styles and the Design of Network-based Software Architectures (REST)</a> <span class="rm">Fielding, 2000 · must-read</span></li><li><a href="https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf" rel="noopener">Dynamo: Amazon's Highly Available Key-value Store</a> <span class="rm">DeCandia et al., 2007</span></li></ol>
+<h4>Tools</h4><p class="tools">FastAPI · Node.js / TypeScript · PostgreSQL · SQLAlchemy · Redis · Celery / BullMQ · Django · SSE / WebSockets</p>
+</article>
+</section>
+<section aria-labelledby="step-2">
+<h2 id="step-2"><span class="n">Step 2</span>Core</h2>
+
+<article class="card skill" id="skill-llm-apis">
+<h3>2.1 LLM APIs &amp; prompt engineering</h3>
+<p class="desc">Calling models reliably: structured output, tools, cost.</p>
+<p class="why">The entry point for the AI engineer and full-stack paths: call frontier models reliably, get structured output, and keep cost and latency under control.</p>
+<p class="rm">Also on the path for: <a href="../devops-full-stack-engineer/#skill-llm-apis">DevOps / full-stack engineer</a></p>
+<h4>Skills</h4><ul class="skills"><li>Prompt design: system prompts, few-shot, decomposition</li><li>Structured outputs and JSON schemas</li><li>Tool (function) calling</li><li>Streaming, retries and rate limits</li><li>Token budgets, prompt caching, model routing</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" rel="noopener">DeepLearning.AI: ChatGPT Prompt Engineering for Developers</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos + notebooks</span><span class="rn">Prompting through the API: summarize, infer, transform, then build a small chatbot.</span></li>
+<li><a class="rt" href="https://cmu-llms.org/" rel="noopener">CMU 11-766: Large Language Model Applications</a>
+<span class="rm">Spring 2026 · Slides</span><span class="rn">Prompting vs. fine-tuning, retrieval and embeddings, agents, evaluation, and attacks on LLM apps.</span></li>
+<li><a class="rt" href="https://fullstackdeeplearning.com/llm-bootcamp/" rel="noopener">FSDL: Full Stack LLM Bootcamp</a>
+<span class="rm">Spring 2023 · Videos</span><span class="rn">Prompt engineering, LLMOps and augmented models; some APIs are dated, the patterns hold.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/openai/openai-cookbook" rel="noopener">OpenAI Cookbook</a> <span class="rm">OpenAI · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a recipe · ★ 76,928</span><span class="rn">Runnable examples for structured outputs, function calling, embeddings and evals.</span></li>
+<li class="hotpick"><a class="rt" href="https://github.com/anthropics/claude-cookbooks" rel="noopener">Claude Cookbooks</a> <span class="rm">Anthropic · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a recipe · ★ 54,129</span><span class="rn">Notebooks for tool use, RAG, prompt caching, sub-agents and more.</span></li>
+<li><a class="rt" href="https://github.com/anthropics/courses" rel="noopener">Anthropic courses (notebooks, archived)</a> <span class="rm">Anthropic · GitHub</span>
+<span class="rm">Free · Self-paced · ★ 22,968 · Here: Anthropic courses (notebooks)</span><span class="rn">API fundamentals, an interactive prompt-engineering tutorial, real-world prompting and tool use, as runnable notebooks.</span></li>
+<li><a class="rt" href="https://anthropic.skilljar.com/claude-with-the-anthropic-api" rel="noopener">Building with the Claude API</a> <span class="rm">Anthropic Academy</span>
+<span class="rm">Free · A few days</span><span class="rn">Tool calling, RAG pipelines and production patterns. Free certificate.</span></li>
+<li><a class="rt" href="https://github.com/vercel/chatbot" rel="noopener">Vercel Chatbot</a> <span class="rm">Vercel · GitHub</span>
+<span class="rm">Free · 1 week · ★ 21,029 · Here: AI SDK</span><span class="rn">Provider calls, streaming and tool calls through the AI SDK.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: Module 1</span><span class="rn">Agentic RAG with function calling against an LLM API.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2201.11903" rel="noopener">Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a> <span class="rm">Wei et al., 2022 · must-read</span></li><li><a href="https://arxiv.org/abs/2205.11916" rel="noopener">Large Language Models are Zero-Shot Reasoners</a> <span class="rm">Kojima et al., 2022</span></li><li><a href="https://arxiv.org/abs/2203.11171" rel="noopener">Self-Consistency Improves Chain of Thought Reasoning in Language Models</a> <span class="rm">Wang et al., 2022</span></li><li><a href="https://arxiv.org/abs/2307.03172" rel="noopener">Lost in the Middle: How Language Models Use Long Contexts</a> <span class="rm">Liu et al., 2023</span></li></ol>
+<h4>Tools</h4><p class="tools">OpenAI API (enterprise) · Anthropic API (enterprise) · Gemini API (enterprise) · Ollama (local models) · OpenRouter (enterprise) · Groq / Together / Fireworks (hosted open models) (enterprise) · Instructor · LiteLLM · Vercel AI SDK</p>
+</article>
+<article class="card skill" id="skill-ml">
+<h3>2.2 ML fundamentals<span class="tags"><span class="tag">optional</span></span></h3>
+<p class="desc">Generalization, metrics and data splits: the vocabulary.</p>
+<p class="why">Gives every AI role the vocabulary: generalization, overfitting, metrics, data splits. Application builders can stop after the Modern AI course; platform and research paths go deeper.</p>
+<p class="rm">Also on the path for: <a href="../cloud-ml-platform-engineer/#skill-ml">Cloud / ML platform engineer</a>, <a href="../ml-trainer-researcher/#skill-ml">ML trainer / researcher</a></p>
+<h4>Skills</h4><ul class="skills"><li>Supervised learning, loss and gradient descent</li><li>Bias/variance and regularization</li><li>Evaluation metrics and data splits</li><li>Neural network basics</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://cs229.stanford.edu/" rel="noopener">Stanford CS229: Machine Learning</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">The classic, math-forward treatment. The depth platform and research paths need.</span></li>
+<li><a class="rt" href="https://modernaicourse.org/" rel="noopener">CMU 10-202: Introduction to Modern AI (Zico Kolter)</a>
+<span class="rm">Spring 2026 · Free online version</span><span class="rn">ML basics through training your own small LLM. The best single starting point for application builders.</span></li>
+<li><a class="rt" href="https://work.caltech.edu/telecourse" rel="noopener">Caltech CS156: Learning From Data (Abu-Mostafa)</a>
+<span class="rm">Videos</span><span class="rn">Why learning works at all: generalization, overfitting, bias and variance, with homework sets.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://karpathy.ai/zero-to-hero.html" rel="noopener">Neural Networks: Zero to Hero</a> <span class="rm">Karpathy</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 2–4 weeks · ★ 25,248 · Here: micrograd lecture</span><span class="rn">Backpropagation built by hand.</span></li>
+<li class="hotpick"><a class="rt" href="https://course.fast.ai/" rel="noopener">Practical Deep Learning for Coders</a> <span class="rm">fast.ai</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · About 2 months · ★ 25,448 · Here: Early lessons</span><span class="rn">Practical training, validation and error analysis.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/machine-learning-zoomcamp" rel="noopener">Machine Learning Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · Cohort or self-paced · ★ 14,906</span><span class="rn">From regression to deploying models with Docker, serverless and Kubernetes, plus peer-reviewed projects.</span></li>
+<li><a class="rt" href="https://github.com/karpathy/micrograd" rel="noopener">micrograd</a> <span class="rm">Karpathy · GitHub</span>
+<span class="rm">Free · A weekend · ★ 18,635</span><span class="rn">A tiny autograd engine and neural-net library that makes backprop concrete.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf" rel="noopener">A Few Useful Things to Know About Machine Learning</a> <span class="rm">Domingos, 2012 · must-read</span></li><li><a href="https://www.nature.com/articles/nature14539" rel="noopener">Deep Learning (Nature review)</a> <span class="rm">LeCun, Bengio &amp; Hinton, 2015</span></li></ol>
+<h4>Tools</h4><p class="tools">NumPy · pandas · scikit-learn · XGBoost / LightGBM · Polars · matplotlib / seaborn · PyTorch · Kaggle</p>
+</article>
+</section>
+<section aria-labelledby="step-3">
+<h2 id="step-3"><span class="n">Step 3</span>Building blocks</h2>
+
+<article class="card skill" id="skill-llm">
+<h3>3.1 How LLMs work</h3>
+<p class="desc">Tokens, attention, pre- and post-training, decoding.</p>
+<p class="why">Tokenization, attention, pre- and post-training, decoding: enough to predict model behavior, debug failures and pick the right model for a job.</p>
+<p class="rm">Also on the path for: <a href="../cloud-ml-platform-engineer/#skill-llm">Cloud / ML platform engineer</a>, <a href="../ml-trainer-researcher/#skill-llm">ML trainer / researcher</a></p>
+<h4>Skills</h4><ul class="skills"><li>Tokenization and embeddings</li><li>Transformer architecture and attention</li><li>Pretraining vs. instruction tuning vs. RLHF</li><li>Decoding and sampling</li><li>Context windows, KV cache, reasoning models</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://web.stanford.edu/class/cs224n/" rel="noopener">Stanford CS224N: NLP with Deep Learning</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">Word vectors through transformers, pretraining and post-training.</span></li>
+<li class="hotpick"><a class="rt" href="https://cs336.stanford.edu/" rel="noopener">Stanford CS336: Language Modeling from Scratch</a> <span class="tag hot">Popular</span>
+<span class="rm">Spring 2026 · Videos · Here: Lectures 1–4</span><span class="rn">Tokenization, architectures and attention variants, implemented yourself.</span></li>
+<li><a class="rt" href="https://cmu-l3.github.io/anlp-fall2025/" rel="noopener">CMU 11-711: Advanced NLP</a>
+<span class="rm">Fall 2025 · Videos</span><span class="rn">A modern LLM curriculum: decoding, retrieval, RL for LLMs, agents, test-time scaling.</span></li>
+<li><a class="rt" href="https://web.stanford.edu/class/cs25/" rel="noopener">Stanford CS25: Transformers United</a>
+<span class="rm">Videos</span><span class="rn">Seminar talks from frontier labs. Good for staying current once the basics are in place.</span></li>
+<li><a class="rt" href="https://modernaicourse.org/" rel="noopener">CMU 10-202: Introduction to Modern AI (Zico Kolter)</a>
+<span class="rm">Spring 2026 · Free online version · Here: Second half</span><span class="rn">Builds up to training your own small LLM, with KV caching and chat tuning.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/karpathy/nanochat" rel="noopener">nanochat</a> <span class="rm">Karpathy · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · About 2 hours on one 8×H100 node (~$50) · ★ 60,028 · Here: Tokenizer + model</span><span class="rn">Train a BPE tokenizer and read a compact modern transformer.</span></li>
+<li class="hotpick"><a class="rt" href="https://github.com/rasbt/LLMs-from-scratch" rel="noopener">LLMs from Scratch</a> <span class="rm">Sebastian Raschka · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Several weeks · ★ 107,728 · Here: Early chapters</span><span class="rn">Tokenization, embeddings and attention coded from scratch.</span></li>
+<li><a class="rt" href="https://karpathy.ai/zero-to-hero.html" rel="noopener">Neural Networks: Zero to Hero</a> <span class="rm">Karpathy</span>
+<span class="rm">Free · 2–4 weeks · ★ 25,248</span><span class="rn">A video series that ends with you writing a GPT and its tokenizer from scratch.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/llm-course" rel="noopener">Hugging Face LLM Course</a> <span class="rm">Hugging Face</span>
+<span class="rm">Free · Self-paced · ★ 4,344</span><span class="rn">Transformers, tokenizers, datasets and fine-tuning with the libraries teams actually use.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/1706.03762" rel="noopener">Attention Is All You Need</a> <span class="rm">Vaswani et al., 2017 · must-read</span></li><li><a href="https://arxiv.org/abs/2005.14165" rel="noopener">Language Models are Few-Shot Learners (GPT-3)</a> <span class="rm">Brown et al., 2020 · must-read</span></li><li><a href="https://arxiv.org/abs/1810.04805" rel="noopener">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a> <span class="rm">Devlin et al., 2018</span></li><li><a href="https://arxiv.org/abs/1409.0473" rel="noopener">Neural Machine Translation by Jointly Learning to Align and Translate</a> <span class="rm">Bahdanau, Cho &amp; Bengio, 2014</span></li><li><a href="https://arxiv.org/abs/1301.3781" rel="noopener">Efficient Estimation of Word Representations in Vector Space (word2vec)</a> <span class="rm">Mikolov et al., 2013</span></li></ol>
+<h4>Tools</h4><p class="tools">Hugging Face Transformers · tiktoken · PyTorch · Hugging Face Hub · nanoGPT / nanochat · TransformerLens</p>
+</article>
+<article class="card skill" id="skill-orchestration">
+<h3>3.2 Orchestration frameworks</h3>
+<p class="desc">Graphs, state, retries and human-in-the-loop.</p>
+<p class="why">LangChain and LangGraph run both the agent and the retrieval side of AI engineering: state machines, retries, memory and human-in-the-loop around model calls.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Chains vs. graphs: state, branching, cycles</li><li>Memory and checkpointing</li><li>Human-in-the-loop interrupts</li><li>Knowing when to drop the framework and write the loop yourself</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://llmagents-learning.org/f24" rel="noopener">Berkeley CS294/194-196: Large Language Model Agents MOOC</a> <span class="tag hot">Popular</span>
+<span class="rm">Fall 2024 · Videos</span><span class="rn">Agent frameworks, infrastructure, and RAG as an agent building block.</span></li>
+<li><a class="rt" href="https://cs329z.stanford.edu/" rel="noopener">Stanford CS329Z: Engineering AI Agents</a>
+<span class="rm">Fall 2026 · Syllabus</span><span class="rn">HW1 builds an internal assistant without agent frameworks, so you learn what a framework is saving you.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/stanfordnlp/dspy" rel="noopener">DSPy tutorials</a> <span class="rm">Stanford NLP · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 1 week · ★ 38,896</span><span class="rn">Write LM programs as modules and let DSPy's optimizers tune the prompts.</span></li>
+<li class="hotpick"><a class="rt" href="https://huggingface.co/learn/agents-course" rel="noopener">Hugging Face Agents Course</a> <span class="rm">Hugging Face</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 20–30 hours · ★ 34,387 · Here: Framework units</span><span class="rn">LangGraph and LlamaIndex units.</span></li>
+<li><a class="rt" href="https://academy.langchain.com/courses/intro-to-langgraph" rel="noopener">Introduction to LangGraph</a> <span class="rm">LangChain Academy</span>
+<span class="rm">Free · About 6 hours + notebooks</span><span class="rn">State, memory, human-in-the-loop and deployment, building a personal assistant along the way.</span></li>
+<li><a class="rt" href="https://github.com/NirDiamant/GenAI_Agents" rel="noopener">GenAI Agents</a> <span class="rm">Nir Diamant · GitHub</span>
+<span class="rm">Free · Pick a tutorial · ★ 24,806</span><span class="rn">Dozens of agent implementations as runnable notebooks, many in LangGraph.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2310.03714" rel="noopener">DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines</a> <span class="rm">Khattab et al., 2023 · must-read</span></li><li><a href="https://arxiv.org/abs/2305.10601" rel="noopener">Tree of Thoughts: Deliberate Problem Solving with Large Language Models</a> <span class="rm">Yao et al., 2023</span></li><li><a href="https://arxiv.org/abs/2303.17651" rel="noopener">Self-Refine: Iterative Refinement with Self-Feedback</a> <span class="rm">Madaan et al., 2023</span></li></ol>
+<h4>Tools</h4><p class="tools">LangChain · LangGraph · LlamaIndex · DSPy · Pydantic AI · Haystack · Mastra (TypeScript) · n8n (low-code)</p>
+</article>
+<article class="card skill" id="skill-evals">
+<h3>3.3 Evals &amp; observability</h3>
+<p class="desc">Golden sets, LLM-as-judge, tracing, regression tests.</p>
+<p class="why">The skill that separates demos from products. You can only improve what you measure, and every model or prompt change needs a regression check.</p>
+<p class="rm">Also on the path for: <a href="../devops-full-stack-engineer/#skill-evals">DevOps / full-stack engineer</a></p>
+<h4>Skills</h4><ul class="skills"><li>Golden datasets and error analysis</li><li>LLM-as-judge with rubrics</li><li>Regression evals in CI</li><li>Tracing, cost and latency dashboards</li><li>Online feedback loops</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/" rel="noopener">DeepLearning.AI: Building and Evaluating Advanced RAG</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos + notebooks · Here: RAG triad</span><span class="rn">Context relevance, groundedness and answer relevance.</span></li>
+<li><a class="rt" href="https://mlip-cmu.github.io/s2026/" rel="noopener">CMU 17-645: Machine Learning in Production</a>
+<span class="rm">Spring 2026 · Slides</span><span class="rn">Model quality, testing in production and risk, now covering LLMs and agents.</span></li>
+<li><a class="rt" href="https://cs329z.stanford.edu/" rel="noopener">Stanford CS329Z: Engineering AI Agents</a>
+<span class="rm">Fall 2026 · Syllabus</span><span class="rn">HW2 is building an evaluation suite.</span></li>
+<li><a class="rt" href="https://cmu-llms.org/" rel="noopener">CMU 11-766: Large Language Model Applications</a>
+<span class="rm">Spring 2026 · Slides · Here: Evaluation unit</span><span class="rn">Evaluating LLM applications.</span></li>
+<li><a class="rt" href="https://fullstackdeeplearning.com/llm-bootcamp/" rel="noopener">FSDL: Full Stack LLM Bootcamp</a>
+<span class="rm">Spring 2023 · Videos · Here: LLMOps lecture</span><span class="rn">Testing, monitoring and improving LLM apps in production.</span></li>
+<li><a class="rt" href="https://www.cmu-agents.com/" rel="noopener">CMU 11-768: AI Agents (Neubig &amp; Fried)</a>
+<span class="rm">Fall 2026 · Videos · Here: Evaluation lectures</span><span class="rn">How agents are evaluated: benchmarks, harnesses and metrics.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://huggingface.co/learn/agents-course" rel="noopener">Hugging Face Agents Course</a> <span class="rm">Hugging Face</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 20–30 hours · ★ 34,387 · Here: Bonus unit</span><span class="rn">Observability and evaluation for agents.</span></li>
+<li class="hotpick"><a class="rt" href="https://www.kaggle.com/learn-guide/5-day-agents" rel="noopener">5-Day AI Agents Intensive</a> <span class="rm">Google × Kaggle</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 5 days, self-paced · Here: Evaluation day</span><span class="rn">Agent quality and evaluation.</span></li>
+<li><a class="rt" href="https://github.com/anthropics/courses" rel="noopener">Anthropic courses (notebooks, archived)</a> <span class="rm">Anthropic · GitHub</span>
+<span class="rm">Free · Self-paced · ★ 22,968 · Here: Prompt Evaluations course</span><span class="rn">Write code-graded and model-graded evals and run them at scale.</span></li>
+<li><a class="rt" href="https://academy.langchain.com/courses/intro-to-langsmith" rel="noopener">Introduction to LangSmith</a> <span class="rm">LangChain Academy</span>
+<span class="rm">Free · About 3.5 hours</span><span class="rn">Tracing, datasets, experiments and online evaluation.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: Evaluation and monitoring</span><span class="rn">Offline retrieval and answer evaluation, then monitoring in production.</span></li>
+<li><a class="rt" href="https://github.com/SWE-agent/mini-swe-agent" rel="noopener">mini-swe-agent</a> <span class="rm">SWE-agent team · GitHub</span>
+<span class="rm">Free · A weekend + eval runs · ★ 9,044 · Here: SWE-bench runs</span><span class="rn">Evaluate an agent on a real benchmark and read its trajectories.</span></li>
+<li><a class="rt" href="https://github.com/huggingface/smol-course" rel="noopener">smol-course</a> <span class="rm">Hugging Face · GitHub</span>
+<span class="rm">Free · About 7 units · ★ 6,788 · Here: Evaluation unit</span><span class="rn">Benchmarks and custom evals for fine-tuned models.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2306.05685" rel="noopener">Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</a> <span class="rm">Zheng et al., 2023 · must-read</span></li><li><a href="https://arxiv.org/abs/2211.09110" rel="noopener">Holistic Evaluation of Language Models (HELM)</a> <span class="rm">Liang et al., 2022</span></li><li><a href="https://arxiv.org/abs/2005.04118" rel="noopener">Beyond Accuracy: Behavioral Testing of NLP Models with CheckList</a> <span class="rm">Ribeiro et al., 2020</span></li><li><a href="https://arxiv.org/abs/2404.12272" rel="noopener">Who Validates the Validators? Aligning LLM-Assisted Evaluation with Human Preferences</a> <span class="rm">Shankar et al., 2024</span></li></ol>
+<h4>Tools</h4><p class="tools">LangSmith (enterprise) · Langfuse · Braintrust (enterprise) · promptfoo · Ragas · DeepEval · Arize Phoenix · W&amp;B Weave (enterprise) · Inspect AI · OpenTelemetry</p>
+</article>
+<article class="card skill" id="skill-memory">
+<h3>3.4 Memory &amp; context engineering<span class="tags"><span class="tag">agents</span></span></h3>
+<p class="desc">Short and long-term memory, context budgets, compaction.</p>
+<p class="why">Agents fail when the right facts are not in the window at the right step. Context engineering decides what goes in: memory, retrieved notes, skills and tool results, inside a token budget.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Short-term vs. long-term memory stores</li><li>Context budgets, summarization and compaction</li><li>Skills, subagents and progressive disclosure</li><li>Prompt caching and KV reuse</li><li>Long-context failure modes</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.deeplearning.ai/short-courses/llms-as-operating-systems-agent-memory/" rel="noopener">DeepLearning.AI: LLMs as Operating Systems: Agent Memory</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos + notebooks</span><span class="rn">Taught by the MemGPT authors: build self-editing memory, then share memory across agents with Letta.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/long-term-agentic-memory-with-langgraph/" rel="noopener">DeepLearning.AI: Long-Term Agentic Memory with LangGraph</a>
+<span class="rm">Videos + notebooks</span><span class="rn">Semantic, episodic and procedural memory in an email agent built with LangGraph and LangMem.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.kaggle.com/learn-guide/5-day-agents" rel="noopener">5-Day AI Agents Intensive</a> <span class="rm">Google × Kaggle</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 5 days, self-paced · Here: Memory day</span><span class="rn">Sessions, memory and context management for agents.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/context-course" rel="noopener">The Context Course</a> <span class="rm">Hugging Face</span>
+<span class="rm">Free · 5–8 weeks with capstone · ★ 117</span><span class="rn">Skills, MCP, plugins, subagents and hooks for code agents, ending with a minimal agent loop you build yourself. Free certificates.</span></li>
+<li><a class="rt" href="https://anthropic.skilljar.com/introduction-to-agent-skills" rel="noopener">Introduction to Agent Skills</a> <span class="rm">Anthropic Academy</span>
+<span class="rm">Free · A few hours</span><span class="rn">Package instructions and resources as skills that an agent loads only when it needs them.</span></li>
+<li><a class="rt" href="https://academy.langchain.com/courses/intro-to-langgraph" rel="noopener">Introduction to LangGraph</a> <span class="rm">LangChain Academy</span>
+<span class="rm">Free · About 6 hours + notebooks · Here: Long-term memory module</span><span class="rn">Store and recall user facts across threads.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2310.08560" rel="noopener">MemGPT: Towards LLMs as Operating Systems</a> <span class="rm">Packer et al., 2023 · must-read</span></li><li><a href="https://arxiv.org/abs/2307.03172" rel="noopener">Lost in the Middle: How Language Models Use Long Contexts</a> <span class="rm">Liu et al., 2023</span></li><li><a href="https://arxiv.org/abs/2404.06654" rel="noopener">RULER: What's the Real Context Size of Your Long-Context Language Models?</a> <span class="rm">Hsieh et al., 2024</span></li><li><a href="https://arxiv.org/abs/2304.03442" rel="noopener">Generative Agents: Interactive Simulacra of Human Behavior</a> <span class="rm">Park et al., 2023</span></li></ol>
+<h4>Tools</h4><p class="tools">LangGraph memory store · Letta (MemGPT) · Mem0 · Graphiti · Zep (enterprise) · LangMem · Redis · Provider prompt caching (enterprise)</p>
+</article>
+<article class="card skill" id="skill-coding-agents">
+<h3>3.5 AI-native development<span class="tags"><span class="tag">agents</span></span></h3>
+<p class="desc">MCP, hooks and working inside coding agents.</p>
+<p class="why">Working inside coding agents is now a core DevOps/full-stack skill, and the harness patterns it teaches (MCP, hooks, sandboxes) carry straight into agent building.</p>
+<p class="rm">Also on the path for: <a href="../devops-full-stack-engineer/#skill-coding-agents">DevOps / full-stack engineer</a></p>
+<h4>Skills</h4><ul class="skills"><li>Agent-ready repos and context files</li><li>MCP servers and tool design</li><li>Hooks, permissions and background agents</li><li>Reviewing and testing agent-written code</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.deeplearning.ai/short-courses/claude-code-a-highly-agentic-coding-assistant/" rel="noopener">DeepLearning.AI: Claude Code: A Highly Agentic Coding Assistant</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">Explore, refactor, test and debug real codebases with a coding agent, taught by Anthropic.</span></li>
+<li><a class="rt" href="https://themodernsoftware.dev/" rel="noopener">Stanford CS146S: The Modern Software Developer</a>
+<span class="rm">Fall 2026 · Slides</span><span class="rn">MCP, agent skills, context files and hooks, agent-ready repos, background agents. No video; the syllabus and 2025 slides are public.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/mcp-build-rich-context-ai-apps-with-anthropic/" rel="noopener">DeepLearning.AI: MCP: Build Rich-Context AI Apps with Anthropic</a>
+<span class="rm">Videos + notebooks</span><span class="rn">Build an MCP server and client, connect them to Claude Desktop, then deploy the server remotely.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/SWE-agent/mini-swe-agent" rel="noopener">mini-swe-agent</a> <span class="rm">SWE-agent team · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · A weekend + eval runs · ★ 9,044</span><span class="rn">See how a coding agent works inside, in about 100 lines.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/ai-dev-tools-zoomcamp" rel="noopener">AI Dev Tools Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · Several weeks · ★ 1,731</span><span class="rn">Coding assistants, agents, MCP and automation, with a final project. Materials are open for self-paced study.</span></li>
+<li><a class="rt" href="https://anthropic.skilljar.com/claude-code-in-action" rel="noopener">Claude Code in Action</a> <span class="rm">Anthropic Academy</span>
+<span class="rm">Free · A few hours</span><span class="rn">Context, tools, hooks and GitHub workflows with a coding agent. Free certificate.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/mcp-course" rel="noopener">Hugging Face MCP Course</a> <span class="rm">Hugging Face × Anthropic</span>
+<span class="rm">Free · 10–15 hours · ★ 924 · Here: MCP servers</span><span class="rn">Expose your own tools to coding agents over MCP.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/context-course" rel="noopener">The Context Course</a> <span class="rm">Hugging Face</span>
+<span class="rm">Free · 5–8 weeks with capstone · ★ 117 · Here: Skills, MCP and hooks units</span><span class="rn">Structure the context a coding agent works from.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2107.03374" rel="noopener">Evaluating Large Language Models Trained on Code (Codex, HumanEval)</a> <span class="rm">Chen et al., 2021 · must-read</span></li><li><a href="https://arxiv.org/abs/2310.06770" rel="noopener">SWE-bench: Can Language Models Resolve Real-World GitHub Issues?</a> <span class="rm">Jimenez et al., 2023</span></li><li><a href="https://arxiv.org/abs/2405.15793" rel="noopener">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering</a> <span class="rm">Yang et al., 2024</span></li></ol>
+<h4>Tools</h4><p class="tools">Claude Code (enterprise) · OpenAI Codex · Cursor (enterprise) · GitHub Copilot (enterprise) · Gemini CLI · Cline · Aider · MCP SDKs</p>
+</article>
+<article class="card skill" id="skill-embeddings">
+<h3>3.6 Embeddings &amp; chunking<span class="tags"><span class="tag">retrieval</span></span></h3>
+<p class="desc">How text becomes searchable: embedding and chunking.</p>
+<p class="why">How text becomes searchable. Chunk size, overlap and the embedding model decide what retrieval can ever find, long before the vector database matters.</p>
+
+<h4>Skills</h4><ul class="skills"><li>How embedding models are trained</li><li>Chunking: fixed, recursive, semantic, by document structure</li><li>Document parsing for PDFs, tables and HTML</li><li>Choosing models with MTEB: quality, dimension, cost</li><li>Metadata to keep with every chunk</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://web.stanford.edu/class/cs224n/" rel="noopener">Stanford CS224N: NLP with Deep Learning</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos · Here: Word vectors lectures</span><span class="rn">From word2vec to contextual embeddings.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/embedding-models-from-architecture-to-implementation/" rel="noopener">DeepLearning.AI: Embedding Models: from Architecture to Implementation</a>
+<span class="rm">Videos + notebooks</span><span class="rn">From word2vec to BERT to dual encoders trained with contrastive loss.</span></li>
+<li><a class="rt" href="https://cmu-llms.org/" rel="noopener">CMU 11-766: Large Language Model Applications</a>
+<span class="rm">Spring 2026 · Slides · Here: Retrieval and embeddings assignment</span><span class="rn">Hands-on work with embeddings for retrieval.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/" rel="noopener">DeepLearning.AI: Vector Databases: from Embeddings to Applications</a>
+<span class="rm">Videos + notebooks · Here: Embedding lessons</span><span class="rn">Where embeddings come from and how similarity is measured.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/openai/openai-cookbook" rel="noopener">OpenAI Cookbook</a> <span class="rm">OpenAI · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a recipe · ★ 76,928 · Here: Embeddings recipes</span><span class="rn">Search, clustering and classification with embeddings.</span></li>
+<li><a class="rt" href="https://github.com/huggingface/sentence-transformers" rel="noopener">Train an embedding model</a> <span class="rm">Sentence Transformers · GitHub</span>
+<span class="rm">Free · A few days · ★ 19,251</span><span class="rn">Fine-tune an embedding model on your own pairs, then compare it with the base model.</span></li>
+<li><a class="rt" href="https://github.com/embeddings-benchmark/mteb" rel="noopener">MTEB</a> <span class="rm">MTEB · GitHub</span>
+<span class="rm">Free · A day · ★ 3,490</span><span class="rn">Benchmark candidate embedding models on tasks like yours before you pick one.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/llm-course" rel="noopener">Hugging Face LLM Course</a> <span class="rm">Hugging Face</span>
+<span class="rm">Free · Self-paced · ★ 4,344 · Here: Semantic search chapter</span><span class="rn">Embeddings-based search with the Hugging Face stack.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: Vector search module</span><span class="rn">Embed, index and query a real FAQ dataset.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/1908.10084" rel="noopener">Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks</a> <span class="rm">Reimers &amp; Gurevych, 2019 · must-read</span></li><li><a href="https://arxiv.org/abs/2210.07316" rel="noopener">MTEB: Massive Text Embedding Benchmark</a> <span class="rm">Muennighoff et al., 2022</span></li><li><a href="https://arxiv.org/abs/2212.03533" rel="noopener">Text Embeddings by Weakly-Supervised Contrastive Pre-training (E5)</a> <span class="rm">Wang et al., 2022</span></li><li><a href="https://arxiv.org/abs/2205.13147" rel="noopener">Matryoshka Representation Learning</a> <span class="rm">Kusupati et al., 2022</span></li><li><a href="https://arxiv.org/abs/2312.06648" rel="noopener">Dense X Retrieval: What Retrieval Granularity Should We Use?</a> <span class="rm">Chen et al., 2023</span></li><li><a href="https://arxiv.org/abs/2409.04701" rel="noopener">Late Chunking: Contextual Chunk Embeddings Using Long-Context Embedding Models</a> <span class="rm">Günther et al., 2024</span></li></ol>
+<h4>Tools</h4><p class="tools">sentence-transformers · OpenAI / Voyage / Cohere embeddings (enterprise) · Open models (BGE, Nomic, Qwen3-Embedding) · MTEB leaderboard · Unstructured · Docling · Chonkie · LangChain text splitters</p>
+</article>
+</section>
+<section aria-labelledby="step-4">
+<h2 id="step-4"><span class="n">Step 4</span>Applied</h2>
+
+<article class="card skill" id="skill-agents">
+<h3>4.1 Agent architectures<span class="tags"><span class="tag">agents</span></span></h3>
+<p class="desc">Tool-use loops, planning, multi-agent patterns.</p>
+<p class="why">The agent branch of the AI engineer path: loops that plan, call tools and recover from their own errors.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Tool-use loops (ReAct) and planning</li><li>Memory: short-term, long-term, retrieved</li><li>Multi-agent patterns and handoffs</li><li>Agent protocols: MCP, A2A</li><li>Agent benchmarks: SWE-bench, web and GUI tasks</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://llmagents-learning.org/f24" rel="noopener">Berkeley CS294/194-196: Large Language Model Agents MOOC</a> <span class="tag hot">Popular</span>
+<span class="rm">Fall 2024 · Videos</span><span class="rn">The original LLM-agents lecture series: reasoning, planning and tool use.</span></li>
+<li><a class="rt" href="https://cs329z.stanford.edu/" rel="noopener">Stanford CS329Z: Engineering AI Agents</a>
+<span class="rm">Fall 2026 · Syllabus</span><span class="rn">Build agents from scratch with evaluation discipline. Recordings are Stanford-only; the schedule and homework specs are public.</span></li>
+<li><a class="rt" href="https://www.cmu-agents.com/" rel="noopener">CMU 11-768: AI Agents (Neubig &amp; Fried)</a>
+<span class="rm">Fall 2026 · Videos</span><span class="rn">Harness design, evaluation, RL training, sandboxing and OpenHands. Lectures are being posted to YouTube.</span></li>
+<li><a class="rt" href="https://agenticai-learning.org/f25" rel="noopener">Berkeley CS294/194-196: Agentic AI MOOC (Dawn Song)</a>
+<span class="rm">Fall 2025 · Videos</span><span class="rn">Guest lectures from OpenAI, Google DeepMind, NVIDIA and Microsoft on reasoning, multi-agent systems and agent safety.</span></li>
+<li><a class="rt" href="https://cmu-llms.org/" rel="noopener">CMU 11-766: Large Language Model Applications</a>
+<span class="rm">Spring 2026 · Slides · Here: Agents unit</span><span class="rn">Multi-agent systems and code-writing assistants.</span></li>
+<li><a class="rt" href="https://cmu-l3.github.io/anlp-fall2025/" rel="noopener">CMU 11-711: Advanced NLP</a>
+<span class="rm">Fall 2025 · Videos · Here: Agents lecture</span><span class="rn">Agents and RL, seen from the model side.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/mcp-build-rich-context-ai-apps-with-anthropic/" rel="noopener">DeepLearning.AI: MCP: Build Rich-Context AI Apps with Anthropic</a>
+<span class="rm">Videos + notebooks · Here: MCP clients and servers</span><span class="rn">Give an agent tools and resources over MCP.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/llms-as-operating-systems-agent-memory/" rel="noopener">DeepLearning.AI: LLMs as Operating Systems: Agent Memory</a>
+<span class="rm">Videos + notebooks · Here: Multi-agent memory</span><span class="rn">Agents that share memory blocks to collaborate.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/microsoft/ai-agents-for-beginners" rel="noopener">AI Agents for Beginners</a> <span class="rm">Microsoft · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Self-paced · ★ 78,748</span><span class="rn">Lessons with runnable code on agent design patterns, tool use, planning and multi-agent systems.</span></li>
+<li class="hotpick"><a class="rt" href="https://github.com/anthropics/claude-cookbooks" rel="noopener">Claude Cookbooks</a> <span class="rm">Anthropic · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a recipe · ★ 54,129 · Here: Tool use and agents</span><span class="rn">Tool use, sub-agents and agent patterns.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/agents-course" rel="noopener">Hugging Face Agents Course</a> <span class="rm">Hugging Face</span>
+<span class="rm">Free · 20–30 hours · ★ 34,387</span><span class="rn">smolagents, LlamaIndex and LangGraph units, ending in a benchmarked final agent. Free certificate.</span></li>
+<li><a class="rt" href="https://www.kaggle.com/learn-guide/5-day-agents" rel="noopener">5-Day AI Agents Intensive</a> <span class="rm">Google × Kaggle</span>
+<span class="rm">Free · 5 days, self-paced</span><span class="rn">Tools and MCP, memory, evaluation and deployment, with codelabs and a capstone.</span></li>
+<li><a class="rt" href="https://github.com/NirDiamant/GenAI_Agents" rel="noopener">GenAI Agents</a> <span class="rm">Nir Diamant · GitHub</span>
+<span class="rm">Free · Pick a tutorial · ★ 24,806</span><span class="rn">Agent patterns from simple tool use to multi-agent systems.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: Agentic RAG module</span><span class="rn">Turn the RAG pipeline into an agent that decides when and what to search.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2210.03629" rel="noopener">ReAct: Synergizing Reasoning and Acting in Language Models</a> <span class="rm">Yao et al., 2022 · must-read</span></li><li><a href="https://arxiv.org/abs/2302.04761" rel="noopener">Toolformer: Language Models Can Teach Themselves to Use Tools</a> <span class="rm">Schick et al., 2023</span></li><li><a href="https://arxiv.org/abs/2303.11366" rel="noopener">Reflexion: Language Agents with Verbal Reinforcement Learning</a> <span class="rm">Shinn et al., 2023</span></li><li><a href="https://arxiv.org/abs/2304.03442" rel="noopener">Generative Agents: Interactive Simulacra of Human Behavior</a> <span class="rm">Park et al., 2023</span></li><li><a href="https://arxiv.org/abs/2305.16291" rel="noopener">Voyager: An Open-Ended Embodied Agent with Large Language Models</a> <span class="rm">Wang et al., 2023</span></li></ol>
+<h4>Tools</h4><p class="tools">OpenAI Agents SDK · Claude Agent SDK (enterprise) · LangGraph · Google ADK · Microsoft Agent Framework · CrewAI · smolagents · MCP · A2A protocol · browser-use / Playwright MCP · OpenHands</p>
+</article>
+<article class="card skill" id="skill-vectordb">
+<h3>4.2 Databases &amp; vector stores<span class="tags"><span class="tag">retrieval</span></span></h3>
+<p class="desc">ANN indexes, hybrid queries, keeping embeddings fresh.</p>
+<p class="why">RAG lives or dies on storage: approximate-nearest-neighbor indexes, filtered and hybrid queries, and keeping embeddings in sync with the source data.</p>
+
+<h4>Skills</h4><ul class="skills"><li>ANN indexes: HNSW, IVF, product quantization</li><li>Metadata filters and hybrid keyword + vector queries</li><li>Embedding versioning and re-indexing</li><li>Database internals: storage, indexes, query plans</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://15445.courses.cs.cmu.edu/" rel="noopener">CMU 15-445/645: Intro to Database Systems</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos</span><span class="rn">Storage, indexes, query execution and concurrency. All 26 lectures are on YouTube.</span></li>
+<li><a class="rt" href="https://www.deeplearning.ai/short-courses/vector-databases-embeddings-applications/" rel="noopener">DeepLearning.AI: Vector Databases: from Embeddings to Applications</a>
+<span class="rm">Videos + notebooks</span><span class="rn">ANN search, HNSW, and sparse, dense and hybrid search in a real vector database.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: Vector search module</span><span class="rn">Index and query embeddings, then compare with keyword search.</span></li>
+<li><a class="rt" href="https://skyzh.github.io/vector-db-from-scratch/" rel="noopener">Vector Database from Scratch</a> <span class="rm">skyzh · tutorial</span>
+<span class="rm">Free · 1–2 weeks</span><span class="rn">Implement vector indexes, including HNSW, inside CMU's BusTub teaching database (C++).</span></li>
+<li><a class="rt" href="https://github.com/zilliztech/VectorDBBench" rel="noopener">VectorDBBench</a> <span class="rm">Zilliz · GitHub</span>
+<span class="rm">Free · A few days · ★ 1,199</span><span class="rn">Benchmark pgvector, Qdrant, Milvus and others on recall, throughput and cost.</span></li>
+<li><a class="rt" href="https://github.com/erikbern/ann-benchmarks" rel="noopener">ANN-Benchmarks</a> <span class="rm">Erik Bernhardsson · GitHub</span>
+<span class="rm">Free · A day · ★ 5,748</span><span class="rn">Plot recall against queries per second for HNSW, IVF and other index types.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/1603.09320" rel="noopener">Efficient and Robust Approximate Nearest Neighbor Search Using Hierarchical Navigable Small World Graphs (HNSW)</a> <span class="rm">Malkov &amp; Yashunin, 2016 · must-read</span></li><li><a href="https://arxiv.org/abs/1702.08734" rel="noopener">Billion-scale Similarity Search with GPUs (FAISS)</a> <span class="rm">Johnson, Douze &amp; Jégou, 2017</span></li></ol>
+<h4>Tools</h4><p class="tools">pgvector · Pinecone (enterprise) · Qdrant · Weaviate · Milvus · Chroma · LanceDB · turbopuffer (enterprise) · MongoDB Atlas Vector Search (enterprise) · FAISS</p>
+</article>
+<article class="card skill" id="skill-retrieval">
+<h3>4.3 Information retrieval<span class="tags"><span class="tag">retrieval</span></span></h3>
+<p class="desc">Hybrid BM25 + dense search, rerankers, ranking metrics.</p>
+<p class="why">RAG quality is a search problem first: lexical and dense retrieval, rerankers, and ranking metrics that tell you which one is failing.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Inverted indexes and BM25</li><li>Dense and sparse embeddings; bi- vs. cross-encoders</li><li>Reranking</li><li>Ranking metrics: recall@k, MRR, nDCG</li><li>Query understanding and rewriting</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://web.stanford.edu/class/cs276/" rel="noopener">Stanford CS276: Information Retrieval and Web Search</a> <span class="tag hot">Popular</span>
+<span class="rm">Slides</span><span class="rn">Indexing, scoring, evaluation and learning to rank, with the free IIR textbook.</span></li>
+<li><a class="rt" href="https://cmu-l3.github.io/anlp-fall2025/" rel="noopener">CMU 11-711: Advanced NLP</a>
+<span class="rm">Fall 2025 · Videos · Here: lecture 10</span><span class="rn">One recorded lecture covering the modern retrieval stack.</span></li>
+<li><a class="rt" href="https://boston.lti.cs.cmu.edu/classes/11-642/" rel="noopener">CMU 11-442/642: Search Engines</a>
+<span class="rm">Fall 2025 · Slides</span><span class="rn">Ranking, learning to rank, neural ranking and retrieval-augmented generation.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/NirDiamant/RAG_Techniques" rel="noopener">RAG Techniques</a> <span class="rm">Nir Diamant · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a technique · ★ 30,201 · Here: Retrieval techniques</span><span class="rn">Hybrid search, reranking and query transformations.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: search modules</span><span class="rn">Keyword search, vector search, hybrid search and reranking, each with graded homework.</span></li>
+<li><a class="rt" href="https://github.com/castorini/pyserini" rel="noopener">Pyserini</a> <span class="rm">Castorini · GitHub</span>
+<span class="rm">Free · A few days · ★ 2,177</span><span class="rn">Reproduce BM25 and dense-retrieval baselines on MS MARCO, then try to beat them.</span></li>
+<li><a class="rt" href="https://github.com/beir-cellar/beir" rel="noopener">BEIR</a> <span class="rm">BEIR · GitHub</span>
+<span class="rm">Free · A few days · ★ 2,328</span><span class="rn">Evaluate your retriever zero-shot across a suite of datasets with nDCG@10.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2004.04906" rel="noopener">Dense Passage Retrieval for Open-Domain Question Answering</a> <span class="rm">Karpukhin et al., 2020 · must-read</span></li><li><a href="https://arxiv.org/abs/2004.12832" rel="noopener">ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT</a> <span class="rm">Khattab &amp; Zaharia, 2020</span></li><li><a href="https://arxiv.org/abs/1908.10084" rel="noopener">Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks</a> <span class="rm">Reimers &amp; Gurevych, 2019</span></li><li><a href="https://arxiv.org/abs/2104.08663" rel="noopener">BEIR: A Heterogeneous Benchmark for Zero-shot Evaluation of Information Retrieval Models</a> <span class="rm">Thakur et al., 2021</span></li><li><a href="https://doi.org/10.1561/1500000019" rel="noopener">The Probabilistic Relevance Framework: BM25 and Beyond</a> <span class="rm">Robertson &amp; Zaragoza, 2009</span></li></ol>
+<h4>Tools</h4><p class="tools">Elasticsearch / OpenSearch · sentence-transformers · Cohere Rerank (enterprise) · BGE / Jina rerankers (open) · bm25s / Tantivy · ColBERT (PyLate) · Vespa · Voyage / OpenAI embeddings (enterprise)</p>
+</article>
+</section>
+<section aria-labelledby="step-5">
+<h2 id="step-5"><span class="n">Step 5</span>Specialization</h2>
+
+<article class="card skill" id="skill-agent-prod">
+<h3>5.1 Production &amp; self-improving agents<span class="tags"><span class="tag">agents</span></span></h3>
+<p class="desc">Sandboxes, guardrails, approvals, RL for agents.</p>
+<p class="why">Shipping agents safely, then making them better: sandboxes, credentials, guardrails and observability, with RL and test-time compute as the stretch goal.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Sandboxing and credential management</li><li>Prompt-injection and tool-misuse defenses</li><li>Human approval gates</li><li>Long-running and background agents</li><li>RL and test-time compute for agents (stretch)</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://agenticai-learning.org/f25" rel="noopener">Berkeley CS294/194-196: Agentic AI MOOC (Dawn Song)</a> <span class="tag hot">Popular</span>
+<span class="rm">Fall 2025 · Videos · Here: Safety lecture</span><span class="rn">Agentic AI safety and security.</span></li>
+<li><a class="rt" href="https://www.cmu-agents.com/" rel="noopener">CMU 11-768: AI Agents (Neubig &amp; Fried)</a>
+<span class="rm">Fall 2026 · Videos</span><span class="rn">Sandboxing, credential management, observability, and four lectures on RL training for agents.</span></li>
+<li><a class="rt" href="https://rdi.berkeley.edu/adv-llm-agents/" rel="noopener">Berkeley CS294/194-280: Advanced LLM Agents MOOC</a>
+<span class="rm">Spring 2025 · Videos</span><span class="rn">Reasoning, code agents, and a closing unit on safe and secure agentic AI.</span></li>
+<li><a class="rt" href="https://cs329a.stanford.edu/" rel="noopener">Stanford CS329A: Self-Improving AI Agents</a>
+<span class="rm">Autumn 2025 · Videos</span><span class="rn">Test-time compute, verifiers and RL for agents that improve through interaction.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.kaggle.com/learn-guide/5-day-agents" rel="noopener">5-Day AI Agents Intensive</a> <span class="rm">Google × Kaggle</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · 5 days, self-paced · Here: Day 5</span><span class="rn">From prototype to production deployment.</span></li>
+<li><a class="rt" href="https://huggingface.co/learn/mcp-course" rel="noopener">Hugging Face MCP Course</a> <span class="rm">Hugging Face × Anthropic</span>
+<span class="rm">Free · 10–15 hours · ★ 924</span><span class="rn">Build and deploy MCP servers and clients end to end. Free certificate.</span></li>
+<li><a class="rt" href="https://github.com/SWE-agent/mini-swe-agent" rel="noopener">mini-swe-agent</a> <span class="rm">SWE-agent team · GitHub</span>
+<span class="rm">Free · A weekend + eval runs · ★ 9,044</span><span class="rn">Read a roughly 100-line coding agent, run it on SWE-bench, then change one thing and measure the effect.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2302.12173" rel="noopener">Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection</a> <span class="rm">Greshake et al., 2023 · must-read</span></li><li><a href="https://arxiv.org/abs/2406.13352" rel="noopener">AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents</a> <span class="rm">Debenedetti et al., 2024</span></li><li><a href="https://arxiv.org/abs/2406.12045" rel="noopener">τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</a> <span class="rm">Yao et al., 2024</span></li><li><a href="https://arxiv.org/abs/2305.20050" rel="noopener">Let's Verify Step by Step</a> <span class="rm">Lightman et al., 2023</span></li><li><a href="https://arxiv.org/abs/2408.03314" rel="noopener">Scaling LLM Test-Time Compute Optimally Can Be More Effective than Scaling Model Parameters</a> <span class="rm">Snell et al., 2024</span></li></ol>
+<h4>Tools</h4><p class="tools">E2B / Daytona / Docker sandboxes · Llama Guard · NeMo Guardrails / Guardrails AI · Langfuse · LangSmith (enterprise) · MCP auth (OAuth) · Temporal</p>
+</article>
+<article class="card skill" id="skill-rag">
+<h3>5.2 Advanced RAG systems<span class="tags"><span class="tag">retrieval</span></span></h3>
+<p class="desc">Grounded, cited answers over messy enterprise data.</p>
+<p class="why">The retrieval branch of the AI engineer path: grounded, cited answers over messy enterprise data, and the evals that prove they are grounded.</p>
+
+<h4>Skills</h4><ul class="skills"><li>Document parsing and chunking strategies</li><li>Hybrid search plus reranking pipelines</li><li>Query rewriting, routing and agentic RAG</li><li>Structured data: text-to-SQL, knowledge graphs</li><li>Faithfulness and citation evaluation</li></ul>
+<h4>Courses</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://www.deeplearning.ai/short-courses/building-evaluating-advanced-rag/" rel="noopener">DeepLearning.AI: Building and Evaluating Advanced RAG</a> <span class="tag hot">Popular</span>
+<span class="rm">Videos + notebooks</span><span class="rn">Sentence-window and auto-merging retrieval, scored with the RAG triad.</span></li>
+<li><a class="rt" href="https://cmu-llms.org/" rel="noopener">CMU 11-766: Large Language Model Applications</a>
+<span class="rm">Spring 2026 · Slides</span><span class="rn">Units on retrieval-augmented generation and deep-research systems.</span></li>
+<li><a class="rt" href="https://web.stanford.edu/class/cs224v/" rel="noopener">Stanford CS224V: Conversational Virtual Assistants with Deep Learning</a>
+<span class="rm">Fall 2025 · Slides</span><span class="rn">RAG without hallucination; grounding on free text, databases and knowledge graphs.</span></li>
+<li><a class="rt" href="https://fullstackdeeplearning.com/llm-bootcamp/" rel="noopener">FSDL: Full Stack LLM Bootcamp</a>
+<span class="rm">Spring 2023 · Videos · Here: Augmented language models</span><span class="rn">Retrieval augmentation and its failure modes.</span></li>
+<li><a class="rt" href="https://boston.lti.cs.cmu.edu/classes/11-642/" rel="noopener">CMU 11-442/642: Search Engines</a>
+<span class="rm">Fall 2025 · Slides · Here: RAG lecture</span><span class="rn">Neural ranking applied to retrieval-augmented generation.</span></li></ul>
+<h4>Free projects</h4><ul class="res"><li class="hotpick"><a class="rt" href="https://github.com/NirDiamant/RAG_Techniques" rel="noopener">RAG Techniques</a> <span class="rm">Nir Diamant · GitHub</span> <span class="tag hot">Popular</span>
+<span class="rm">Free · Pick a technique · ★ 30,201</span><span class="rn">Runnable notebooks for chunking, reranking, query rewriting, graph RAG and more.</span></li>
+<li><a class="rt" href="https://github.com/DataTalksClub/llm-zoomcamp" rel="noopener">LLM Zoomcamp</a> <span class="rm">DataTalks.Club</span>
+<span class="rm">Free · About 10 weeks, cohort or self-paced · ★ 7,561 · Here: capstone</span><span class="rn">Ship an original RAG app with a knowledge base, retrieval, evaluation, a UI and monitoring; peer-reviewed for a certificate.</span></li>
+<li><a class="rt" href="https://github.com/langchain-ai/rag-from-scratch" rel="noopener">RAG from Scratch</a> <span class="rm">LangChain · GitHub</span>
+<span class="rm">Free · A weekend · ★ 9,589</span><span class="rn">Short videos and notebooks that build indexing, retrieval and generation step by step.</span></li>
+<li><a class="rt" href="https://github.com/beir-cellar/beir" rel="noopener">BEIR</a> <span class="rm">BEIR · GitHub</span>
+<span class="rm">Free · A few days · ★ 2,328 · Here: Retriever evaluation</span><span class="rn">Measure the retrieval half of a RAG system on its own.</span></li></ul>
+<h4>Papers</h4><ol class="papers"><li><a href="https://arxiv.org/abs/2005.11401" rel="noopener">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a> <span class="rm">Lewis et al., 2020 · must-read</span></li><li><a href="https://arxiv.org/abs/2002.08909" rel="noopener">REALM: Retrieval-Augmented Language Model Pre-Training</a> <span class="rm">Guu et al., 2020</span></li><li><a href="https://arxiv.org/abs/2310.11511" rel="noopener">Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</a> <span class="rm">Asai et al., 2023</span></li><li><a href="https://arxiv.org/abs/2404.16130" rel="noopener">From Local to Global: A Graph RAG Approach to Query-Focused Summarization</a> <span class="rm">Edge et al., 2024</span></li><li><a href="https://arxiv.org/abs/2309.15217" rel="noopener">RAGAS: Automated Evaluation of Retrieval Augmented Generation</a> <span class="rm">Es et al., 2023</span></li></ol>
+<h4>Tools</h4><p class="tools">LlamaIndex · LangChain / LangGraph · Unstructured / Docling · LlamaParse (enterprise) · Cohere Rerank (enterprise) · Ragas · pgvector / Qdrant · GraphRAG / LightRAG · ColPali · Haystack · Managed RAG (Bedrock, Azure AI Search, Vertex) (enterprise)</p>
+</article>
+</section>
+<section aria-labelledby="capstone">
+<h2 id="capstone"><span class="n">Step 6</span>Capstone</h2>
+<div class="card cap"><h3>Grounded ops agent capstone</h3><p class="why">Build an operations agent over three or more real tools (tickets, docs, chat) using MCP and a sandbox, plus a hybrid-search retrieval tool with a reranker over a messy real corpus. Back it with a 50-case eval suite covering task success, recall@k and citation accuracy, and report which change moved each number.</p>
+<h4>Follow along</h4><ul class="res"><li><a class="rt" href="https://github.com/decodingml/second-brain-ai-assistant-course" rel="noopener">Second Brain AI Assistant course</a><span class="rn">Decoding AI, free and open source. Six modules that build an agentic RAG assistant end to end: crawl and clean documents, chunk and embed them into a vector store, put a smolagents agent on top, evaluate it with Opik, and deploy it. Running the code costs about $1–5 in API fees.</span></li></ul>
+</div>
+</section>
+<footer>
+<p>Popular marks the most followed courses and projects in each skill: GitHub stars for projects, lecture views and enrollment for courses. Courses and projects were checked against their live pages in November 2026. Every project is free; a few need paid GPU time to run.</p>
+<p>Role archetypes start from the job-posting clusters in the <a href="https://github.com/alexeygrigorev/ai-engineering-field-guide" rel="noopener">AI Engineering Field Guide</a>. Built by <a href="/">Tom Yang</a>.</p>
+</footer>
+</div>
+</body>
+</html>

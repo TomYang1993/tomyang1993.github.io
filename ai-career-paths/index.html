@@ -3,8 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Career Path Map</title>
+<title>AI Career Path Map: skills, free courses and projects for four AI roles</title>
 <meta name="description" content="Four AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
+<link rel="canonical" href="https://tomyang1993.github.io/ai-career-paths/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tom Yang">
+<meta property="og:title" content="AI Career Path Map">
+<meta property="og:description" content="Four AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
+<meta property="og:url" content="https://tomyang1993.github.io/ai-career-paths/">
+<meta property="og:image" content="https://tomyang1993.github.io/ai-career-paths/og/map.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The AI Career Path Map: four AI roles as a skill graph">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Career Path Map">
+<meta name="twitter:description" content="Four AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
+<meta name="twitter:image" content="https://tomyang1993.github.io/ai-career-paths/og/map.png">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebPage", "name": "AI Career Path Map: skills, free courses and projects for four AI roles", "description": "Four AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.", "url": "https://tomyang1993.github.io/ai-career-paths/", "inLanguage": "en", "isAccessibleForFree": true, "author": {"@type": "Person", "name": "Tom Yang", "url": "https://tomyang1993.github.io/"}, "hasPart": [{"@type": "WebPage", "name": "AI engineer path", "url": "https://tomyang1993.github.io/ai-career-paths/ai-engineer/"}, {"@type": "WebPage", "name": "Cloud / ML platform engineer path", "url": "https://tomyang1993.github.io/ai-career-paths/cloud-ml-platform-engineer/"}, {"@type": "WebPage", "name": "DevOps / full-stack engineer path", "url": "https://tomyang1993.github.io/ai-career-paths/devops-full-stack-engineer/"}, {"@type": "WebPage", "name": "ML trainer / researcher path", "url": "https://tomyang1993.github.io/ai-career-paths/ml-trainer-researcher/"}]}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Tom Yang", "item": "https://tomyang1993.github.io/"}, {"@type": "ListItem", "position": 2, "name": "AI Career Path Map", "item": "https://tomyang1993.github.io/ai-career-paths/"}]}]</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,6 +258,7 @@ figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-si
 .small.muted { color: var(--ink-3); }
 
 footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
+.noscript { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--surface); border: 1px solid var(--line); }
 
 @media (prefers-reduced-motion: reduce) {
   .edge, .node { transition: none; }
@@ -360,6 +376,7 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
     </div>
     <button id="themeBtn" class="themebtn" type="button">Dark mode</button>
   </header>
+  <noscript><p class="noscript">The interactive map needs JavaScript. Each path is also a plain page: <a href="ai-engineer/">AI engineer</a> · <a href="cloud-ml-platform-engineer/">Cloud / ML platform engineer</a> · <a href="devops-full-stack-engineer/">DevOps / full-stack engineer</a> · <a href="ml-trainer-researcher/">ML trainer / researcher</a>.</p></noscript>
 
   <nav class="pills" id="roles" aria-label="Choose a role path"></nav>
 
@@ -381,7 +398,7 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
-  <footer>The minimal steps for each role, as plain text and links with a changelog, live in <a href="https://github.com/TomYang1993/AI-career-path-minimal-steps" target="_blank" rel="noopener">AI-career-path-minimal-steps</a>. Role archetypes and their defining stacks start from the job-posting clusters in the <a href="https://github.com/alexeygrigorev/ai-engineering-field-guide" target="_blank" rel="noopener">AI Engineering Field Guide</a>. Its agent-builder and RAG-builder clusters are merged here into one AI engineer role, because most postings that ask for one also ask for the other. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
+  <footer>Each path is also a plain page: <a href="ai-engineer/">AI engineer</a> · <a href="cloud-ml-platform-engineer/">Cloud / ML platform engineer</a> · <a href="devops-full-stack-engineer/">DevOps / full-stack engineer</a> · <a href="ml-trainer-researcher/">ML trainer / researcher</a>. The minimal steps for each role, as plain text and links with a changelog, live in <a href="https://github.com/TomYang1993/AI-career-path-minimal-steps" target="_blank" rel="noopener">AI-career-path-minimal-steps</a>. Role archetypes and their defining stacks start from the job-posting clusters in the <a href="https://github.com/alexeygrigorev/ai-engineering-field-guide" target="_blank" rel="noopener">AI Engineering Field Guide</a>. Its agent-builder and RAG-builder clusters are merged here into one AI engineer role, because most postings that ask for one also ask for the other. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
 </div>
 <script>
 const TIERS = ["Foundations", "Core", "Building blocks", "Applied", "Specialization", "Role"];
