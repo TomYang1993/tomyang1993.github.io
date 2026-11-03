@@ -146,8 +146,16 @@ figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-si
 .pip.off { fill: none; stroke: var(--line); stroke-width: 1.2; }
 
 /* detail area */
-.detail { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 16px; align-items: start; }
-@media (max-width: 960px) { .detail { grid-template-columns: 1fr; } }
+.detail { display: grid; gap: 16px; }
+.pathmore { border-top: 1px solid var(--line); padding-top: 12px; }
+.pathmore > summary { display: flex; align-items: baseline; gap: 10px; cursor: pointer; list-style: none; font-weight: 600; font-size: 15px; color: var(--ink); }
+.pathmore > summary::-webkit-details-marker { display: none; }
+.pathmore > summary::before { content: "▸"; flex: none; width: 1em; font-size: 12px; color: var(--ink-3); transition: transform .15s; }
+.pathmore[open] > summary::before { transform: rotate(90deg); }
+.pathmore > summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pathmore > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+.pathmore > summary .k { font: 400 12px var(--font-mono); color: var(--ink-3); }
+.pathmore .pathbody { display: grid; gap: 14px; padding: 12px 0 0 calc(1em + 10px); }
 .pane { padding: 18px 20px 22px; display: grid; gap: 14px; align-content: start; scroll-margin-top: 16px; }
 .eyebrow { display: flex; align-items: center; gap: 8px; font: 500 12px var(--font-mono); letter-spacing: 0.04em; color: var(--ink-3); text-transform: uppercase; }
 .pane h2 { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
@@ -373,7 +381,6 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
   </section>
 
   <div class="detail">
-    <section class="card pane" id="rolePane" aria-live="polite"></section>
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
@@ -1444,7 +1451,7 @@ const starTag = r => {
 
 // ---------- State ----------
 const VALID = new Set(["all", ...ROLES.map(r => r.id)]);
-const state = { role: "agent", node: "agents", tab: "projects", spot: null, view: "focus" };
+const state = { role: "agent", node: "agents", tab: "projects", spot: null, view: "focus", pathOpen: false };
 const readHash = () => { const x = (location.hash || "").slice(1); return VALID.has(x) ? x : "agent"; };
 const anchorFor = v => {
   if (v === "all") return "llm";
@@ -1782,7 +1789,6 @@ function renderCaption() {
 }
 
 // ---------- Panes ----------
-const rolePane = document.getElementById("rolePane");
 const nodePane = document.getElementById("nodePane");
 
 function spotButton(r) {
@@ -1797,7 +1803,7 @@ function planItem(r, scope) {
     h("div", { class: "planhead" },
       h("a", { href: r.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, resTitle(r)), " ", h("span", { class: "cn" }, r.n)),
       spotButton(r)),
-    h("div", { class: "chips-mini" }, ids.map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, true) }, N[id].title))));
+    h("div", { class: "chips-mini" }, ids.map(id => h("button", { type: "button", class: "mini", onclick: () => openBox(id) }, N[id].title))));
 }
 const paperItem = p => h("li", { class: "paper" },
   h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
@@ -1812,39 +1818,43 @@ function readingList(ids, intro) {
     h("div", { class: "readlist" }, groups.map(([id, ps], gi) => h("section", { class: "readgroup" },
       h("div", { class: "readhead" },
         h("span", { class: "tierlbl" }, TIERS[N[id].tier]),
-        h("button", { type: "button", class: "readbox", onclick: () => selectNode(id, true) }, N[id].title)),
+        h("button", { type: "button", class: "readbox", onclick: () => openBox(id) }, N[id].title)),
       h("ol", { class: "papers", start: String(1 + groups.slice(0, gi).reduce((s, [, q]) => s + q.length, 0)) }, ps.map(p => h("li", { class: "paper" },
         h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
         h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`))))))))
   ];
 }
 
-function renderRolePane() {
-  rolePane.replaceChildren();
-  rolePane.style.removeProperty("--role");
+// Path-level extras, folded into the bottom of the box card.
+function pathSection() {
   const all = Object.values(RES);
+  let title, count, body;
   if (state.role === "all") {
     const counts = NODES.filter(n => !n.role).map(n => [n, rolesUsing(n.id).length]).filter(([, c]) => c >= 4).sort((a, b) => b[1] - a[1]);
     const span = kind => all.filter(r => r.kind === kind).sort((a, b) => b.covers.length - a.covers.length || a.order - b.order).slice(0, 6);
     const nPapers = NODES.reduce((s, n) => s + (n.papers ? n.papers.length : 0), 0);
-    appendAll(rolePane,
-      h("div", { class: "eyebrow" }, "All roles"),
-      h("h2", null, "Where the paths meet"),
-      h("p", { class: "lead" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers across ${NODES.length - ROLES.length} boxes.`),
+    title = "Where the paths meet"; count = null;
+    body = [
+      h("p", { class: "small" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers across ${NODES.length - ROLES.length} boxes.`),
       h("h3", null, "Projects that span the most boxes"),
       h("ol", { class: "plan" }, span("project").map(r => planItem(r, null))),
       h("h3", null, "Courses that span the most boxes"),
       h("ol", { class: "plan" }, span("course").map(r => planItem(r, null))),
       h("h3", null, "Shared by four or more paths"),
-      h("p", null, counts.map(([n, c]) => `${n.title} (${c} of 5)`).join("; ") + ". Start here if you have not picked a direction yet."));
-    return;
+      h("p", null, counts.map(([n, c]) => `${n.title} (${c} of 5)`).join("; ") + ". Start here if you have not picked a direction yet.")
+    ];
+  } else {
+    const r = R[state.role];
+    title = `Must-read papers for the ${r.name} path`;
+    count = r.nodes.reduce((s, id) => s + N[id].papers.filter(p => p.star).length, 0);
+    body = readingList(r.nodes, "in path order from foundations to the role");
   }
-  const r = R[state.role];
-  rolePane.style.setProperty("--role", roleVar(r.id));
-  appendAll(rolePane,
-    h("div", { class: "eyebrow" }, h("span", { class: "swatch", "aria-hidden": "true" }), "Plan"),
-    h("h2", null, `Must-read papers for ${r.name}`),
-    readingList(r.nodes, "in path order from foundations to the role"));
+  const d = h("details", { class: "pathmore", style: R[state.role] ? `--role:${roleVar(state.role)}` : null },
+    h("summary", null, title, count != null ? h("span", { class: "k" }, String(count)) : null),
+    h("div", { class: "pathbody" }, body));
+  d.open = state.pathOpen;
+  d.addEventListener("toggle", () => { state.pathOpen = d.open; });
+  return d;
 }
 
 function linkButtons(ids) {
@@ -1923,7 +1933,8 @@ function renderNodePane() {
       h("div", null, h("h3", null, "Tools"), toolGroups(n.tools))),
     h("div", { class: "two" },
       h("div", null, h("h3", null, "Requires"), h("div", { class: "links" }, linkButtons(parents(n.id)))),
-      h("div", null, h("h3", null, "Unlocks"), h("div", { class: "links" }, linkButtons(children(n.id))))));
+      h("div", null, h("h3", null, "Unlocks"), h("div", { class: "links" }, linkButtons(children(n.id))))),
+    pathSection());
 }
 
 function scrollIntoViewIfNeeded(node, margin) {
@@ -1932,7 +1943,7 @@ function scrollIntoViewIfNeeded(node, margin) {
 }
 function spotlight(key) {
   state.spot = state.spot === key ? null : key;
-  paint(); renderNodePane(); renderRolePane();
+  paint(); renderNodePane();
   if (state.spot) scrollIntoViewIfNeeded(document.querySelector(".graph-card"), 160);
 }
 function updateSpotBanner() {
@@ -1948,12 +1959,16 @@ function updateSpotBanner() {
 
 // ---------- Actions ----------
 function render() {
-  updatePills(); renderHero(); renderGraphHead(); renderGraph(); renderCaption(); renderRolePane(); renderNodePane();
+  updatePills(); renderHero(); renderGraphHead(); renderGraph(); renderCaption(); renderNodePane();
 }
 function selectNode(id, scroll) {
   state.node = id;
   paint(); renderNodePane();
   if (scroll) scrollIntoViewIfNeeded(nodePane, 140);
+}
+function openBox(id) {
+  selectNode(id, false);
+  nodePane.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
 }
 function setView(v) {
   state.view = v;
