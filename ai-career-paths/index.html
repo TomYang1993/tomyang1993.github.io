@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Career Path Map</title>
-<meta name="description" content="Five AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
+<meta name="description" content="Four AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,7 @@
   --line: #d3d8df;
   --edge: #9ea5af;
   --focus: #2a78d6;
-  --r-agent: #2a78d6;
-  --r-rag: #eb6834;
+  --r-ai: #2a78d6;
   --r-platform: #1baf7a;
   --r-devops: #eda100;
   --r-research: #e87ba4;
@@ -47,8 +46,7 @@
     --line: #333a45;
     --edge: #5e6673;
     --focus: #3987e5;
-    --r-agent: #3987e5;
-    --r-rag: #d95926;
+    --r-ai: #3987e5;
     --r-platform: #199e70;
     --r-devops: #c98500;
     --r-research: #d55181;
@@ -67,8 +65,7 @@
   --line: #333a45;
   --edge: #5e6673;
   --focus: #3987e5;
-  --r-agent: #3987e5;
-  --r-rag: #d95926;
+  --r-ai: #3987e5;
   --r-platform: #199e70;
   --r-devops: #c98500;
   --r-research: #d55181;
@@ -359,7 +356,7 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
   <header class="top">
     <div>
       <h1>AI Career Path Map</h1>
-      <p>Five 2026 AI role archetypes and the skills each one needs. Every skill box carries three layers: university courses, free hands-on projects, and the foundational papers behind it.</p>
+      <p>Four 2026 AI role archetypes and the skills each one needs. Every skill box carries three layers: university courses, free hands-on projects, and the foundational papers behind it.</p>
     </div>
     <button id="themeBtn" class="themebtn" type="button">Dark mode</button>
   </header>
@@ -384,35 +381,23 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
-  <footer>Role archetypes and their defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
+  <footer>Role archetypes and their defining stacks start from the job-posting clusters in the <a href="https://github.com/alexeygrigorev/ai-engineering-field-guide" target="_blank" rel="noopener">AI Engineering Field Guide</a>. Its agent-builder and RAG-builder clusters are merged here into one AI engineer role, because most postings that ask for one also ask for the other. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
 </div>
 <script>
 const TIERS = ["Foundations", "Core", "Building blocks", "Applied", "Specialization", "Role"];
 
 const ROLES = [
   {
-    id: "agent", tag: "Agent", name: "Agent builder", short: ["Agent builder"],
-    stack: ["Agents", "Prompt engineering", "Provider APIs"],
-    story: "Ships LLM systems that act: an agent plans, calls tools, remembers and recovers over many steps. The work is less about training models and more about engineering reliable loops, context, evals and guardrails around provider APIs.",
+    id: "ai", tag: "AI eng", name: "AI engineer", short: ["AI engineer"],
+    stack: ["Agents", "RAG", "Prompt engineering", "Vector databases", "LangChain / LangGraph"],
+    story: "Builds LLM products that act and answer from an organization's own data. Agents plan, call tools and recover over many steps; retrieval grounds them in documents, tickets, code and records. Most postings ask for both, so this path covers both: one shared trunk that splits into an agent branch and a retrieval branch. The work is engineering reliable loops, context, retrieval quality, evals and guardrails around provider APIs, not training models.",
     note: "",
-    job: "Ships LLM systems that take actions: tool-calling loops, multi-step workflows, and coding or research agents wired to real APIs and data.",
-    capTitle: "Ops agent capstone", capLine: "An agent over three or more real tools, with MCP, a sandbox and a 50-case eval suite.",
-    capstone: "Build an operations agent over three or more real tools (tickets, docs, chat) using MCP and a sandbox. Back it with a 50-case eval suite and traces, and report the pass rate before and after one architecture change.",
+    job: "Ships LLM systems that take actions and answer from real data: tool-calling agents, retrieval pipelines with citations, and the evals that keep both honest.",
+    capTitle: "Grounded ops agent capstone", capLine: "An agent over real tools plus a cited retrieval tool, measured end to end.",
+    capstone: "Build an operations agent over three or more real tools (tickets, docs, chat) using MCP and a sandbox, plus a hybrid-search retrieval tool with a reranker over a messy real corpus. Back it with a 50-case eval suite covering task success, recall@k and citation accuracy, and report which change moved each number.",
     anchor: "agents",
-    nodes: ["python", "web", "ml", "llm-apis", "llm", "orchestration", "evals", "memory", "coding-agents", "agents", "agent-prod"],
-    optional: ["ml"], soft: [["coding-agents", "agents"]]
-  },
-  {
-    id: "rag", tag: "RAG", name: "RAG app builder", short: ["RAG app builder"],
-    stack: ["RAG", "Vector databases", "LangChain", "LangGraph"],
-    story: "Makes models answer from an organization's own data: documents, tickets, code and records. The craft is the retrieval layer: chunking, embedding, indexing, reranking, and proving that the right context actually reached the model.",
-    note: "",
-    job: "Grounds LLMs in an organization's documents and data: ingestion, chunking, hybrid retrieval, reranking, and answers with citations.",
-    capTitle: "Cited RAG capstone", capLine: "Hybrid search and a reranker over a messy real corpus, measured end to end.",
-    capstone: "Q&A over a messy real corpus (PDFs plus tables) with hybrid search and a reranker. Measure recall@k, faithfulness and citation accuracy on a hand-labeled set, then show which change moved each number.",
-    anchor: "rag",
-    nodes: ["python", "web", "ml", "llm-apis", "embeddings", "vectordb", "llm", "orchestration", "evals", "retrieval", "rag"],
-    optional: [], soft: [["ml", "llm"]]
+    nodes: ["python", "web", "ml", "llm-apis", "embeddings", "vectordb", "llm", "orchestration", "evals", "memory", "coding-agents", "agents", "retrieval", "agent-prod", "rag"],
+    optional: ["ml"], soft: [["coding-agents", "agents"], ["ml", "llm"]]
   },
   {
     id: "platform", tag: "Platform", name: "Cloud / ML platform engineer", short: ["Cloud / ML platform", "engineer"],
@@ -451,7 +436,7 @@ const ROLES = [
     optional: ["serving"], soft: []
   }
 ];
-const LANE = { agent: 0, rag: 1, devops: 2, platform: 3, research: 4 };
+const LANE = { ai: 0.5, devops: 2, platform: 3, research: 4 };
 
 const NODES = [
   // ---------- Tier 0: Foundations ----------
@@ -487,7 +472,7 @@ const NODES = [
 
   // ---------- Tier 1: Core ----------
   { id: "llm-apis", tier: 1, lane: 0.2, label: ["LLM APIs &", "prompt engineering"], title: "LLM APIs & prompt engineering",
-    why: "The entry point for the agent, RAG and full-stack paths: call frontier models reliably, get structured output, and keep cost and latency under control.",
+    why: "The entry point for the AI engineer and full-stack paths: call frontier models reliably, get structured output, and keep cost and latency under control.",
     skills: ["Prompt design: system prompts, few-shot, decomposition", "Structured outputs and JSON schemas", "Tool (function) calling", "Streaming, retries and rate limits", "Token budgets, prompt caching, model routing"],
     tools: ["OpenAI API", "Anthropic API", "Gemini API", "Ollama (local models)", "OpenRouter", "Groq / Together / Fireworks (hosted open models)", "Instructor", "LiteLLM", "Vercel AI SDK"],
     courses: [
@@ -527,7 +512,7 @@ const NODES = [
 
   // ---------- Tier 2: Building blocks ----------
   { id: "orchestration", tier: 2, lane: 0, label: ["Orchestration", "frameworks"], title: "Orchestration frameworks",
-    why: "LangChain and LangGraph show up in both the agent and RAG clusters: state machines, retries, memory and human-in-the-loop around model calls.",
+    why: "LangChain and LangGraph run both the agent and the retrieval side of AI engineering: state machines, retries, memory and human-in-the-loop around model calls.",
     skills: ["Chains vs. graphs: state, branching, cycles", "Memory and checkpointing", "Human-in-the-loop interrupts", "Knowing when to drop the framework and write the loop yourself"],
     tools: ["LangChain", "LangGraph", "LlamaIndex", "DSPy", "Pydantic AI", "Haystack", "Mastra (TypeScript)", "n8n (low-code)"],
     courses: [
@@ -578,7 +563,7 @@ const NODES = [
 
   // ---------- Tier 3: Applied ----------
   { id: "agents", tier: 3, lane: 0, label: ["Agent", "architectures"], title: "Agent architectures",
-    why: "The defining skill of the agent-builder path: loops that plan, call tools and recover from their own errors.",
+    why: "The agent branch of the AI engineer path: loops that plan, call tools and recover from their own errors.",
     skills: ["Tool-use loops (ReAct) and planning", "Memory: short-term, long-term, retrieved", "Multi-agent patterns and handoffs", "Agent protocols: MCP, A2A", "Agent benchmarks: SWE-bench, web and GUI tasks"],
     tools: ["OpenAI Agents SDK", "Claude Agent SDK", "LangGraph", "Google ADK", "Microsoft Agent Framework", "CrewAI", "smolagents", "MCP", "A2A protocol", "browser-use / Playwright MCP", "OpenHands"],
     courses: [
@@ -629,7 +614,7 @@ const NODES = [
       { s: "Stanford", c: "CS329A", n: "Self-Improving AI Agents", t: "Autumn 2025", u: "https://cs329a.stanford.edu/", f: "Videos", note: "Test-time compute, verifiers and RL for agents that improve through interaction." }
     ] },
   { id: "rag", tier: 4, lane: 1, label: ["Advanced RAG", "systems"], title: "Advanced RAG systems",
-    why: "The RAG cluster's specialty: grounded, cited answers over messy enterprise data, and the evals that prove they are grounded.",
+    why: "The retrieval branch of the AI engineer path: grounded, cited answers over messy enterprise data, and the evals that prove they are grounded.",
     skills: ["Document parsing and chunking strategies", "Hybrid search plus reranking pipelines", "Query rewriting, routing and agentic RAG", "Structured data: text-to-SQL, knowledge graphs", "Faithfulness and citation evaluation"],
     tools: ["LlamaIndex", "LangChain / LangGraph", "Unstructured / Docling", "LlamaParse", "Cohere Rerank", "Ragas", "pgvector / Qdrant", "GraphRAG / LightRAG", "ColPali", "Haystack", "Managed RAG (Bedrock, Azure AI Search, Vertex)"],
     courses: [
@@ -997,8 +982,7 @@ const EDGES = [
   ["gpu", "serving"], ["k8s", "serving"], ["llm", "serving"],
   ["gpu", "dlsys"],
   ["pretrain", "posttrain"],
-  ["agent-prod", "role-agent"],
-  ["rag", "role-rag"],
+  ["agent-prod", "role-ai"], ["rag", "role-ai"],
   ["frontend", "role-devops"], ["coding-agents", "role-devops"], ["mlops", "role-devops"], ["testing", "role-devops"],
   ["serving", "role-platform"], ["dlsys", "role-platform"], ["mlops", "role-platform"], ["observability", "role-platform"],
   ["posttrain", "role-research"], ["serving", "role-research"], ["dlsys", "role-research"]
@@ -1451,8 +1435,14 @@ const starTag = r => {
 
 // ---------- State ----------
 const VALID = new Set(["all", ...ROLES.map(r => r.id)]);
-const state = { role: "agent", node: "agents", tab: "projects", spot: null, view: "focus", pathOpen: false };
-const readHash = () => { const x = (location.hash || "").slice(1); return VALID.has(x) ? x : "agent"; };
+const state = { role: "ai", node: "agents", tab: "projects", spot: null, view: "focus", pathOpen: false };
+// #agent and #rag were separate roles before they merged into AI engineer.
+const ALIAS = { agent: "ai", rag: "ai" };
+const readHash = () => {
+  const x = (location.hash || "").slice(1);
+  if (ALIAS[x]) { history.replaceState(null, "", "#" + ALIAS[x]); return ALIAS[x]; }
+  return VALID.has(x) ? x : "ai";
+};
 const anchorFor = v => {
   if (v === "all") return "llm";
   return R[v].anchor;
@@ -1479,7 +1469,7 @@ function renderHero() {
   hero.style.removeProperty("--role");
   if (state.role === "all") {
     appendAll(hero,
-      h("div", { class: "hero-head" }, h("h2", { class: "serif" }, "Five archetypes, one shared trunk")),
+      h("div", { class: "hero-head" }, h("h2", { class: "serif" }, "Four archetypes, one shared trunk")),
       h("p", { class: "story" }, `Every path starts from the same few foundations and splits as it specializes. The map below shows all ${NODES.length - ROLES.length} skill boxes at once. Pick a role to see its own path.`),
       h("ul", { class: "rolelist" }, ROLES.map(r =>
         h("li", null, h("button", { class: "rolerow", type: "button", style: `--role:${roleVar(r.id)}`, onclick: () => go(r.id) },
@@ -1536,7 +1526,7 @@ function bindCard(g, id, activate) {
 
 function buildOverview() {
   svg.setAttribute("viewBox", `0 0 ${OV_W} ${OV_H}`);
-  svg.setAttribute("aria-label", "All skill boxes and five roles as a directed graph, prerequisites on the left");
+  svg.setAttribute("aria-label", `All skill boxes and ${ROLES.length} roles as a directed graph, prerequisites on the left`);
   svg.style.minWidth = "1100px";
   defs(); canvasBg(OV_W, OV_H);
   TIERS.forEach((t, i) => colHead(i, t, G.padX + i * (G.colW + G.gap), G.colW));
@@ -1830,7 +1820,7 @@ function pathSection() {
   const all = Object.values(RES);
   let title, count, body;
   if (state.role === "all") {
-    const counts = NODES.filter(n => !n.role).map(n => [n, rolesUsing(n.id).length]).filter(([, c]) => c >= 4).sort((a, b) => b[1] - a[1]);
+    const counts = NODES.filter(n => !n.role).map(n => [n, rolesUsing(n.id).length]).filter(([, c]) => c >= 3).sort((a, b) => b[1] - a[1]);
     const span = kind => all.filter(r => r.kind === kind).sort((a, b) => b.covers.length - a.covers.length || a.order - b.order).slice(0, 6);
     const nPapers = NODES.reduce((s, n) => s + (n.papers ? n.papers.length : 0), 0);
     title = "Where the paths meet"; count = null;
@@ -1840,8 +1830,8 @@ function pathSection() {
       h("ol", { class: "plan" }, span("project").map(r => planItem(r, null))),
       h("h3", null, "Courses that span the most boxes"),
       h("ol", { class: "plan" }, span("course").map(r => planItem(r, null))),
-      h("h3", null, "Shared by four or more paths"),
-      h("p", null, counts.map(([n, c]) => `${n.title} (${c} of 5)`).join("; ") + ". Start here if you have not picked a direction yet.")
+      h("h3", null, "Shared by three or more paths"),
+      h("p", null, counts.map(([n, c]) => `${n.title} (${c} of ${ROLES.length})`).join("; ") + ". Start here if you have not picked a direction yet.")
     ];
   } else {
     const r = R[state.role];
