@@ -133,6 +133,47 @@ header p { margin: 0; color: var(--ink-2); max-width: 72ch; }
 .scroller { overflow-x: auto; }
 figure { margin: 0; }
 figure svg { display: block; width: 100%; min-width: 1100px; height: auto; }
+/* ---------- vertical graph (narrow screens): steps top to bottom ---------- */
+.vgraph { display: none; padding: 16px 14px 4px; background: var(--canvas); }
+.graph-card.vertical .scroller { display: none; }
+.graph-card.vertical .vgraph { display: block; }
+.vtier { position: relative; padding: 0 0 20px 32px; }
+.vtier::before { content: ""; position: absolute; left: 10px; top: 24px; bottom: 2px; border-left: 1.5px dashed var(--edge); }
+.vtier:last-child::before { display: none; }
+.vtier-h { display: flex; align-items: center; gap: 10px; margin: 0 0 10px -32px; font: 500 11px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.vtier-h .num { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: var(--surface); font: 600 11px var(--font-mono); color: var(--ink-2); }
+.vcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.vgraph.ov .vcards { grid-template-columns: repeat(auto-fill, minmax(136px, 1fr)); gap: 8px; }
+.vcard { --rc: var(--ink-3); display: grid; gap: 4px; align-content: start; padding: 10px 12px; border-radius: 10px; border: 1.3px solid var(--line); background: var(--surface); cursor: pointer; transition: opacity .15s; -webkit-tap-highlight-color: transparent; }
+.vcard[role="group"] { cursor: default; }
+.vcard .eb { font: 500 10px var(--font-mono); letter-spacing: 0.06em; color: var(--ink-3); }
+.vcard .t { font: 600 15px/1.3 var(--font-body); color: var(--ink); }
+.vcard .d { font-size: 13.5px; line-height: 1.4; color: var(--ink-2); }
+.vcard .tl { font: 400 11px var(--font-mono); color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vcard .after { font-size: 12px; line-height: 1.4; color: var(--ink-3); }
+.vcard .after b { font-weight: 500; color: var(--ink-2); }
+.vcard.shared { border-style: dashed; border-color: var(--ink-3); }
+.vcard.unique { border-color: var(--rc); border-width: 1.8px; }
+.vcard.unique .eb { color: var(--ink-2); }
+.vcard.role { background: color-mix(in srgb, var(--rc) 18%, var(--surface)); border: 2px solid var(--rc); }
+.vcard.role .t { font: 600 18px/1.25 var(--font-serif); }
+.vgraph.ov .vcard { padding: 8px 10px; gap: 6px; }
+.vgraph.ov .vcard .t { font-size: 13.5px; }
+.vgraph.ov .vcard.role { border-width: 1.5px; box-shadow: inset 4px 0 0 var(--rc); }
+.vgraph.ov .vcard.role .t { font-size: 15px; }
+.vcard .meta { display: flex; align-items: center; gap: 8px; }
+.vcard .pips { display: inline-flex; gap: 4px; }
+.vcard .pipd { width: 8px; height: 8px; border-radius: 50%; background: var(--role); }
+.vcard .pipd.off { background: none; box-shadow: inset 0 0 0 1.2px var(--line); }
+.vcard .nums { margin-left: auto; font: 400 11px var(--font-mono); color: var(--ink-3); }
+.vcard.on { border-color: var(--active); border-width: 1.8px; border-style: solid; }
+.vcard.selected { border: 2.4px solid var(--ink); }
+.vcard.spot { border: 2.6px solid var(--ink); background: color-mix(in srgb, var(--ink) 7%, var(--surface)); }
+.vcard.dim { opacity: 0.3; }
+.vcard:focus { outline: none; }
+.vcard:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (hover: hover) { .vcard[role="button"]:hover { border-color: var(--ink-3); } }
+@media (prefers-reduced-motion: reduce) { .vcard { transition: none; } }
 figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
 
 /* SVG parts, styled from page tokens */
@@ -390,6 +431,7 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
     </div>
     <figure>
       <div class="scroller"><svg id="graph" role="group"></svg></div>
+      <div class="vgraph" id="vgraph" role="group"></div>
       <figcaption id="caption"></figcaption>
     </figure>
   </section>
@@ -1592,6 +1634,7 @@ function nodeCard(id, o) {
     title: wrap(n.title, F.t, INNER, 2),
     desc: wrap(n.desc, F.d, INNER, 3),
     tools: wrap(n.tools.slice(0, 3).join(" · "), F.tl, INNER, 1),
+    raw: { t: n.title, d: n.desc, tl: n.tools.slice(0, 3).join(" · ") },
     aria: `${n.title}. ${n.desc}. ${o.eb.toLowerCase()}.`,
     act: () => selectNode(id, true)
   };
@@ -1686,12 +1729,55 @@ function buildFocus(rid) {
   const set = new Set(r.nodes);
   cols.push({ label: "The role", cards: [{ id: "role-" + rid, kind: "role", cls: [], rc: roleVar(rid), eb: "THE ROLE", lh: 21,
     title: wrap(r.name, F.rt, INNER, 3), desc: wrap(`${r.nodes.length} skill boxes`, F.d, INNER, 2), tools: [],
+    raw: { t: r.name, d: `${r.nodes.length} skill boxes` },
     aria: `${r.name}, ${r.nodes.length} skill boxes.`, act: null }] });
   const soft = (a, b) => r.soft.some(([x, y]) => x === a && y === b) || r.optional.includes(a) || r.optional.includes(b);
   const E = [];
   EDGES.forEach(([a, b]) => { if (set.has(a) && set.has(b)) E.push({ a, b, soft: soft(a, b) }); });
   EDGES.forEach(([a, b]) => { if (b === "role-" + rid) E.push({ a, b, soft: soft(a, b) }); });
-  drawColumns(cols, E, `${r.name} path: ${r.nodes.length} skill boxes from foundations to the role`);
+  (isVertical() ? drawVertical : drawColumns)(cols, E, `${r.name} path: ${r.nodes.length} skill boxes from foundations to the role`);
+}
+
+// ---------- Vertical graph (narrow screens): steps top to bottom, prerequisites as text ----------
+const vgraph = document.getElementById("vgraph");
+const graphCard = document.querySelector(".graph-card");
+const narrowMQ = window.matchMedia("(max-width: 860px)");
+const isVertical = () => narrowMQ.matches;
+function vCard(c, after) {
+  const el = h("div", { class: ["vcard", c.kind, ...c.cls].join(" "), role: c.act ? "button" : "group", tabindex: c.act ? "0" : null,
+      "data-id": c.id, "aria-label": c.aria, style: c.rc ? `--rc:${c.rc}` : null },
+    c.eb ? h("span", { class: "eb" }, c.eb) : null,
+    h("span", { class: "t" }, c.raw.t),
+    c.raw.d ? h("span", { class: "d" }, c.raw.d) : null,
+    c.raw.tl ? h("span", { class: "tl" }, c.raw.tl) : null,
+    after && after.length ? h("span", { class: "after" }, "Builds on: ", h("b", null, after.join(" · "))) : null);
+  nodeEls[c.id] = el;
+  bindCard(el, c.id, c.act);
+  return el;
+}
+const tierSection = (i, label, cards) => h("section", { class: "vtier" },
+  h("h3", { class: "vtier-h" }, h("span", { class: "num", "aria-hidden": "true" }, String(i + 1)), label),
+  h("div", { class: "vcards" }, cards));
+function drawVertical(cols, edges, aria) {
+  const name = id => (N[id] && !N[id].role ? N[id].title : id);
+  vgraph.classList.remove("ov");
+  vgraph.replaceChildren(...cols.map((col, i) => tierSection(i, col.label, col.cards.map(c =>
+    vCard(c, [...new Set(edges.filter(e => e.b === c.id).sort((x, y) => byPath(x.a, y.a)).map(e => name(e.a)))])))));
+  vgraph.setAttribute("aria-label", aria);
+}
+function buildVerticalOverview() {
+  vgraph.classList.add("ov");
+  vgraph.replaceChildren(...TIERS.map((label, ti) => tierSection(ti, label, NODES.filter(n => n.tier === ti).sort((a, b) => a.y - b.y).map(n => {
+    if (n.role) return vCard({ id: n.id, kind: "role", cls: [], rc: roleVar(n.role), raw: { t: R[n.role].name, d: `${R[n.role].nodes.length} boxes` },
+      aria: `${R[n.role].name} role. Open its path.`, act: () => go(n.role) });
+    const el = vCard({ id: n.id, kind: "node", cls: [], raw: { t: n.title },
+      aria: `${n.title}. ${TIERS[n.tier]}. On the path for ${rolesUsing(n.id).map(r => r.name).join(", ")}.`, act: () => selectNode(n.id, true) });
+    el.append(h("span", { class: "meta" },
+      h("span", { class: "pips", "aria-hidden": "true" }, ROLES.map(r => h("span", { class: "pipd" + (r.nodes.includes(n.id) ? "" : " off"), style: `--role:${roleVar(r.id)}` }))),
+      h("span", { class: "nums" }, `${resFor(n.id, "course").length} · ${resFor(n.id, "project").length} · ${n.papers.length}`)));
+    return el;
+  }))));
+  vgraph.setAttribute("aria-label", "All skill boxes and the four roles, tier by tier from foundations to the roles");
 }
 
 function graphModeFor() {
@@ -1699,10 +1785,11 @@ function graphModeFor() {
   return state.view === "focus" ? "columns" : "overview";
 }
 function renderGraph() {
-  svg.replaceChildren();
+  svg.replaceChildren(); vgraph.replaceChildren();
   nodeEls = {}; edgeEls = [];
   graphMode = graphModeFor();
-  if (graphMode === "overview") buildOverview();
+  graphCard.classList.toggle("vertical", isVertical());
+  if (graphMode === "overview") (isVertical() ? buildVerticalOverview : buildOverview)();
   else buildFocus(state.role);
   paint();
 }
@@ -1712,6 +1799,7 @@ function paint() {
   const spotCard = state.spot ? "p|" + state.spot : null;
   const accent = R[state.role] ? roleVar(state.role) : "var(--ink)";
   svg.style.setProperty("--active", accent);
+  vgraph.style.setProperty("--active", accent);
   const arrow = R[state.role] ? `url(#arr-${state.role})` : "url(#arr-hl)";
   if (graphMode === "columns") {
     Object.entries(nodeEls).forEach(([id, g]) => {
@@ -1767,15 +1855,16 @@ function renderGraphHead() {
   legend.replaceChildren(); toggle.replaceChildren();
   legend.style.setProperty("--role", R[state.role] ? roleVar(state.role) : "var(--ink-2)");
   const mode = graphModeFor();
+  const v = isVertical();
   if (mode === "columns") {
     appendAll(legend,
-      h("span", { class: "item" }, legendIcon("line"), "prerequisite"),
-      h("span", { class: "item" }, legendIcon("dash"), "recommended / either path works"),
+      v ? null : h("span", { class: "item" }, legendIcon("line"), "prerequisite"),
+      v ? null : h("span", { class: "item" }, legendIcon("dash"), "recommended / either path works"),
       h("span", { class: "item" }, legendIcon("shared"), "shared with other paths"),
       h("span", { class: "item" }, legendIcon("unique"), "this path only"));
   } else {
     appendAll(legend,
-      h("span", { class: "item" }, legendIcon("line"), "prerequisite → unlocks"),
+      v ? null : h("span", { class: "item" }, legendIcon("line"), "prerequisite → unlocks"),
       h("span", null, "Dots: paths that use the box"),
       ROLES.map(r => h("span", { class: "item", style: `--role:${roleVar(r.id)}` }, h("span", { class: "dot", "aria-hidden": "true" }), r.tag)),
       h("span", { class: "item counts" }, "Numbers: courses · projects · papers"));
@@ -1792,7 +1881,9 @@ function renderCaption() {
   const r = R[state.role];
   cap.textContent = state.view === "map"
     ? `${r.name} highlighted on the full map. Faded boxes belong to other paths.`
-    : `${r.name}: ${r.nodes.length} skill boxes from foundations to the role. Click a box for its courses, projects, papers and tools; long links route under the columns they skip.`;
+    : isVertical()
+      ? `${r.name}: ${r.nodes.length} skill boxes, top to bottom from foundations to the role. Tap a box for its courses, projects, papers and tools.`
+      : `${r.name}: ${r.nodes.length} skill boxes from foundations to the role. Click a box for its courses, projects, papers and tools; long links route under the columns they skip.`;
 }
 
 // ---------- Panes ----------
@@ -2016,6 +2107,7 @@ state.role = readHash();
 state.node = anchorFor(state.role);
 render();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => renderGraph());
+narrowMQ.addEventListener("change", () => { renderGraphHead(); renderGraph(); renderCaption(); });
 // Export hooks: licensing, stars and hot picks for the Obsidian / canvas exports.
 window.DATA.TOOL_LIC = TOOL_LIC; window.DATA.TOOL_NOTE = TOOL_NOTE; window.DATA.STARS = STARS;
 window.DATA.HOT = Object.fromEntries(NODES.filter(n => !n.role).map(n => [n.id, { course: [...hotKeys(n.id, "course")], project: [...hotKeys(n.id, "project")] }]));
