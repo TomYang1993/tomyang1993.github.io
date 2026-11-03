@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Career Path Map</title>
-<meta name="description" content="Five AI role archetypes mapped as a skill graph, plus transition paths from full-stack, frontend, data engineering and data science, with courses, free projects, papers and tools for every step.">
+<meta name="description" content="Five AI role archetypes mapped as a skill graph, with courses, free projects, papers and tools for every step.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -174,14 +174,11 @@ figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-si
 
 .rolelist { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
 .rolerow {
-  width: 100%; display: grid; grid-template-columns: 150px 1fr; gap: 4px 12px; align-items: center;
+  width: 100%; display: grid; grid-template-columns: 1fr; gap: 4px 12px; align-items: center;
   padding: 9px 10px; border-radius: 8px; border: 1px solid transparent; background: var(--surface-2); text-align: left; cursor: pointer;
 }
 .rolerow:hover { border-color: var(--line); }
 .rolerow .n { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
-.rolerow .barline { display: flex; align-items: center; gap: 8px; }
-.rolerow .bar { height: 8px; border-radius: 0 4px 4px 0; background: var(--role); }
-.rolerow .val { font: 400 12px var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .rolerow .s { grid-column: 1 / -1; font-size: 13px; color: var(--ink-2); }
 
 .courses { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -237,7 +234,6 @@ figcaption { padding: 10px 16px 12px; border-top: 1px solid var(--line); font-si
 .planhead a:hover .cn { text-decoration: underline; }
 .planhead .cc { font: 500 12.5px var(--font-mono); }
 .planhead .cn { font-weight: 600; font-size: 14px; }
-.chips { display: flex; flex-wrap: wrap; gap: 5px; }
 .small { font-size: 13.5px; color: var(--ink-2); }
 .small.muted { color: var(--ink-3); }
 
@@ -256,29 +252,16 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 .themebtn:hover { border-color: var(--ink-3); color: var(--ink); }
 
 .pills { display: grid; gap: 10px; }
-.navgroup { display: grid; grid-template-columns: 96px 1fr; align-items: start; gap: 6px 8px; }
 .navpills { display: flex; flex-wrap: wrap; gap: 8px; }
-.navlabel { padding-top: 11px; font: 500 11px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-.pill.start { border-style: dashed; }
-.pill.start .arrow { font-family: var(--font-mono); color: var(--ink-3); }
-.pill.start[aria-pressed="true"] { --role: var(--ink-2); border-style: solid; }
-@media (max-width: 640px) { .navgroup { grid-template-columns: 1fr; } .navlabel { padding-top: 0; } }
 .pill { --role: var(--ink-3); display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-size: 14px; font-weight: 500; }
 .pill:hover { border-color: var(--ink-3); }
-.pill .pshare { font: 400 12px var(--font-mono); color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .pill[aria-pressed="true"] { border-color: var(--role); background: color-mix(in srgb, var(--role) 18%, var(--surface)); font-weight: 600; box-shadow: inset 0 0 0 1px var(--role); }
-.pill[aria-pressed="true"] .pshare { color: var(--ink-2); }
 .pill.all[aria-pressed="true"] { --role: var(--ink-2); }
 
 .hero { display: grid; gap: 12px; }
 .hero-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
 .hero h2.serif { margin: 0; font-family: var(--font-serif); font-size: clamp(30px, 4vw, 44px); line-height: 1.1; font-weight: 700; letter-spacing: -0.015em; text-wrap: balance; }
-.hero .share { font: 400 18px var(--font-mono); color: var(--ink-2); padding-bottom: 2px; border-bottom: 4px solid var(--role); }
-.hero .share b { font-weight: 600; color: var(--ink); font-size: 24px; font-variant-numeric: tabular-nums; }
 .hero .story { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 78ch; }
-.hero .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.hero .chips li { padding: 5px 12px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font: 400 13px var(--font-mono); color: var(--ink-2); }
-.hero .chips strong { color: var(--ink); font-weight: 600; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--role) 55%, transparent); }
 .hero .rolelist { max-width: 760px; }
 
 /* ---------- graph head ---------- */
@@ -289,9 +272,6 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 .lg-box { fill: var(--surface); stroke: var(--ink-3); stroke-width: 1.3; }
 .lg-box.shared { stroke-dasharray: 4 3; }
 .lg-box.unique { stroke: var(--role); stroke-width: 1.8; }
-.lg-box.known { fill: var(--surface-2); stroke: var(--line); }
-.lg-box.refresh { fill: var(--surface); stroke: var(--ink-3); stroke-dasharray: 1.5 2.5; stroke-width: 1.6; }
-.lg-box.unique-any { stroke: var(--r-agent); stroke-width: 1.8; }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { padding: 6px 12px; border: 0; background: var(--surface); cursor: pointer; font-size: 13px; color: var(--ink-2); }
 .seg button + button { border-left: 1px solid var(--line); }
@@ -315,13 +295,6 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 .fcard .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.3; }
 .fcard.shared .box { stroke: var(--ink-3); stroke-dasharray: 6 4; }
 .fcard.unique .box { stroke: var(--rc); stroke-width: 1.8; }
-.fcard.known .box { fill: var(--surface-2); stroke: var(--line); }
-.fcard.known .t, .fcard.known .d { fill: var(--ink-3); }
-.fcard.refresh .box { stroke: var(--ink-3); stroke-width: 1.6; stroke-dasharray: 1.5 3; }
-.fcard.start { cursor: default; }
-.fcard.start .box { fill: var(--surface-2); stroke: var(--ink-2); stroke-width: 2.2; }
-.fcard.start .t { font: 600 17px var(--font-serif); }
-.fcard.start .eb { fill: var(--ink-2); }
 .fcard.cap .box { fill: color-mix(in srgb, var(--rc) 10%, var(--surface)); stroke: var(--rc); stroke-width: 1.8; }
 .fcard.role .box { fill: color-mix(in srgb, var(--rc) 24%, var(--surface)); stroke: var(--rc); stroke-width: 2.2; }
 .fcard.proj .box { fill: var(--surface); stroke: var(--line); }
@@ -340,16 +313,6 @@ footer { font-size: 13px; color: var(--ink-3); max-width: 90ch; }
 .planlabel { font: 500 9.5px var(--font-mono); letter-spacing: 0.06em; fill: var(--ink-3); }
 
 /* ---------- plan pane extras ---------- */
-.hoplist { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
-.hoprow { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 8px 10px; border-radius: 8px; border: 1px solid transparent; background: var(--surface-2); text-align: left; cursor: pointer; }
-.hoprow:hover { border-color: var(--line); }
-.hoprow.static { cursor: default; }
-.hoprow.static:hover { border-color: transparent; }
-.hoprow .s .chips-mini { margin-bottom: 6px; }
-.hoprow .swatch { background: var(--role); }
-.hoprow .n { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
-.hoprow .val { font: 500 13px var(--font-mono); font-variant-numeric: tabular-nums; }
-.hoprow .s { grid-column: 1 / -1; font-size: 13px; color: var(--ink-2); }
 .chips-mini { display: flex; flex-wrap: wrap; gap: 5px; }
 .detail .pane h2 { font-family: var(--font-serif); }
 .morelink { font: 500 11px var(--font-mono); fill: var(--ink-2); cursor: pointer; text-decoration: underline; }
@@ -414,18 +377,17 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
     <section class="card pane" id="nodePane" aria-live="polite"></section>
   </div>
 
-  <footer>Role shares and defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Transition graphs assume a typical skill set for each starting job; if you lack a box marked as covered, treat it as part of the bridge. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
+  <footer>Role archetypes and their defining stacks come from the archetype breakdown this map starts from. Courses and projects were checked against their live pages in November 2026; whether lecture videos are public changes from term to term, so each course is tagged with what is open right now. Every project listed is free (some cost GPU time to run). Many courses and projects span several boxes: each card lists the others it covers. Tools are the common choices in postings, not endorsements; each is tagged open source / free (open source wins when a paid cloud also exists) or enterprise / specialized. 🔥 marks the one or two most popular courses and projects in each box: GitHub stars as of November 2026 for projects, lecture views and enrollment for courses.</footer>
 </div>
 <script>
 const TIERS = ["Foundations", "Core", "Building blocks", "Applied", "Specialization", "Role"];
 
 const ROLES = [
   {
-    id: "agent", tag: "Agent", name: "Agent builder", short: ["Agent builder"], share: 28.6,
-    stack: ["Agents (88%)", "Prompt engineering (51%)", "Provider APIs"],
-    chips: ["Agents in **88%** of postings", "Prompt engineering **51%**", "Provider APIs: OpenAI, Anthropic, Gemini", "Now the **largest** archetype"],
+    id: "agent", tag: "Agent", name: "Agent builder", short: ["Agent builder"],
+    stack: ["Agents", "Prompt engineering", "Provider APIs"],
     story: "Ships LLM systems that act: an agent plans, calls tools, remembers and recovers over many steps. The work is less about training models and more about engineering reliable loops, context, evals and guardrails around provider APIs.",
-    note: "Now the largest archetype.",
+    note: "",
     job: "Ships LLM systems that take actions: tool-calling loops, multi-step workflows, and coding or research agents wired to real APIs and data.",
     capTitle: "Ops agent capstone", capLine: "An agent over three or more real tools, with MCP, a sandbox and a 50-case eval suite.",
     capstone: "Build an operations agent over three or more real tools (tickets, docs, chat) using MCP and a sandbox. Back it with a 50-case eval suite and traces, and report the pass rate before and after one architecture change.",
@@ -434,9 +396,8 @@ const ROLES = [
     optional: ["ml"], soft: [["coding-agents", "agents"]]
   },
   {
-    id: "rag", tag: "RAG", name: "RAG app builder", short: ["RAG app builder"], share: 25.3,
+    id: "rag", tag: "RAG", name: "RAG app builder", short: ["RAG app builder"],
     stack: ["RAG", "Vector databases", "LangChain", "LangGraph"],
-    chips: ["**RAG** is the defining skill", "Vector databases", "LangChain + LangGraph", "Retrieval quality is product quality"],
     story: "Makes models answer from an organization's own data: documents, tickets, code and records. The craft is the retrieval layer: chunking, embedding, indexing, reranking, and proving that the right context actually reached the model.",
     note: "",
     job: "Grounds LLMs in an organization's documents and data: ingestion, chunking, hybrid retrieval, reranking, and answers with citations.",
@@ -447,9 +408,8 @@ const ROLES = [
     optional: [], soft: [["ml", "llm"]]
   },
   {
-    id: "platform", tag: "Platform", name: "Cloud / ML platform engineer", short: ["Cloud / ML platform", "engineer"], share: 18.0,
+    id: "platform", tag: "Platform", name: "Cloud / ML platform engineer", short: ["Cloud / ML platform", "engineer"],
     stack: ["Multi-cloud", "PyTorch / TensorFlow", "Kubernetes", "Inference / serving"],
-    chips: ["**Multi-cloud**: AWS, GCP, Azure", "PyTorch / TensorFlow", "Kubernetes", "Inference & serving"],
     story: "Makes models fast, cheap and reliable in production: GPU clusters on any cloud, Kubernetes, inference serving, pipelines and cost control. Every other role's work ends up running on this layer.",
     note: "",
     job: "Runs the infrastructure that models train and serve on: GPU clusters, model gateways, autoscaling inference, pipelines and cost controls.",
@@ -460,11 +420,10 @@ const ROLES = [
     optional: ["math"], soft: [["llm", "serving"]]
   },
   {
-    id: "devops", tag: "DevOps", name: "DevOps / full-stack engineer", short: ["DevOps / full-stack", "engineer"], share: 13.3,
+    id: "devops", tag: "DevOps", name: "DevOps / full-stack engineer", short: ["DevOps / full-stack", "engineer"],
     stack: ["CI/CD", "Kubernetes", "React / frontend"],
-    chips: ["CI/CD + Kubernetes", "React / frontend", "Only **33%** AI-first: the least AI-native cluster"],
-    story: "Builds and ships the product around the model: React frontends, APIs, CI/CD and Kubernetes. Only a third of these postings are AI-first, but AI features and coding agents are a growing part of the job, and the hop into agent building is short.",
-    note: "Only 33% AI-first: the least AI-native cluster. The AI skills on this path are the ones that move it closer.",
+    story: "Builds and ships the product around the model: React frontends, APIs, CI/CD and Kubernetes. Not every posting is AI-first, but AI features and coding agents are a growing part of the job, and the hop into agent building is short.",
+    note: "The AI skills on this path are the ones that move it closer to AI-native work.",
     job: "Builds and ships the product around the model: frontends, APIs, pipelines and deploys, increasingly with coding agents in the loop.",
     capTitle: "Full product capstone", capLine: "A streaming AI feature with evals as a CI gate, preview deploys and a rollback path.",
     capstone: "Ship a streaming AI feature end to end (Next.js UI, API, model provider) with evals as a CI merge gate, preview deploys and a tested rollback path.",
@@ -473,11 +432,10 @@ const ROLES = [
     optional: ["evals"], soft: [["llm-apis", "coding-agents"]]
   },
   {
-    id: "research", tag: "Research", name: "ML trainer / researcher", short: ["ML trainer /", "researcher"], share: 8.2,
+    id: "research", tag: "Research", name: "ML trainer / researcher", short: ["ML trainer /", "researcher"],
     stack: ["PyTorch / TensorFlow", "Inference / serving"],
-    chips: ["PyTorch / TensorFlow", "Inference & serving literacy", "Fewest postings (**8.2%**)", "Deepest math prerequisites"],
-    story: "Improves the models themselves: pretraining, fine-tuning, alignment, and the systems work that makes training fast. The fewest postings, and the longest prerequisite chain on the map.",
-    note: "Still the smallest archetype.",
+    story: "Improves the models themselves: pretraining, fine-tuning, alignment, and the systems work that makes training fast. The longest prerequisite chain on the map.",
+    note: "",
     job: "Trains, fine-tunes and evaluates models: pretraining runs, post-training with SFT and RL, and the systems work that makes them fast.",
     capTitle: "Train-and-tune capstone", capLine: "Pretrain a small LM, then SFT and RL-tune it, and report the deltas.",
     capstone: "Pretrain a small language model from scratch in the CS336 style, then SFT and RL-tune it on one narrow task. Report scaling curves and eval deltas against the base model.",
@@ -487,39 +445,6 @@ const ROLES = [
   }
 ];
 const LANE = { agent: 0, rag: 1, devops: 2, platform: 3, research: 4 };
-
-// ---------- Starting backgrounds: transitions into the AI roles ----------
-// have = assumed already covered; partial = partly there, needs a refresh. Targets are ordered as natural next moves.
-const STARTS = [
-  {
-    id: "fullstack", tag: "Full-stack", name: "Full-stack engineer",
-    keep: "APIs, databases, React, CI/CD and tests",
-    story: "You already ship web products end to end: APIs, databases, UIs, CI and deploys. What is missing is the model layer: calling LLMs reliably, measuring them, and the agent and retrieval patterns built on top. Most of that bridge is shared, so the first few boxes pay off whichever AI role you aim for.",
-    have: ["web", "containers", "testing"], partial: ["python", "frontend", "systems", "k8s"],
-    targets: ["devops", "agent", "rag"]
-  },
-  {
-    id: "frontend", tag: "Frontend", name: "Frontend engineer",
-    keep: "React, TypeScript, UI state and frontend tests",
-    story: "You own the part users touch, and AI products live or die on it: streaming responses, partial results, latency you cannot hide. The gap is the backend and model side: Python, APIs, LLM calls and evals. AI-first full-stack keeps your strengths in play; agent building is the next step from there.",
-    have: ["frontend"], partial: ["web", "testing", "containers"],
-    targets: ["devops", "agent"]
-  },
-  {
-    id: "dataeng", tag: "Data eng", name: "Data engineer",
-    keep: "Python, SQL, pipelines, orchestration and storage",
-    story: "Pipelines, storage and orchestration are most of what makes RAG hard in production: ingestion, freshness, and keeping indexes in sync with their sources. Add embeddings, retrieval and LLM calls and you are a RAG builder; add GPUs, serving and cost control and you are a platform engineer.",
-    have: ["python", "containers"], partial: ["web", "systems", "k8s", "mlops", "vectordb"],
-    targets: ["rag", "platform"]
-  },
-  {
-    id: "datasci", tag: "Data sci", name: "Data scientist",
-    keep: "Python, statistics, classic ML and experiment design",
-    story: "You already think in metrics, baselines and error analysis, which is what LLM evaluation needs and most teams lack. Training and fine-tuning (the research path) is the shorter hop; applied RAG is the larger market, and your evaluation skills set you apart there.",
-    have: ["python", "math", "ml"], partial: ["dl", "evals"],
-    targets: ["rag", "research"]
-  }
-];
 
 const NODES = [
   // ---------- Tier 0: Foundations ----------
@@ -646,7 +571,7 @@ const NODES = [
 
   // ---------- Tier 3: Applied ----------
   { id: "agents", tier: 3, lane: 0, label: ["Agent", "architectures"], title: "Agent architectures",
-    why: "The defining skill of the largest cluster, where 88% of postings list agents: loops that plan, call tools and recover from their own errors.",
+    why: "The defining skill of the agent-builder path: loops that plan, call tools and recover from their own errors.",
     skills: ["Tool-use loops (ReAct) and planning", "Memory: short-term, long-term, retrieved", "Multi-agent patterns and handoffs", "Agent protocols: MCP, A2A", "Agent benchmarks: SWE-bench, web and GUI tasks"],
     tools: ["OpenAI Agents SDK", "Claude Agent SDK", "LangGraph", "Google ADK", "Microsoft Agent Framework", "CrewAI", "smolagents", "MCP", "A2A protocol", "browser-use / Playwright MCP", "OpenHands"],
     courses: [
@@ -1375,26 +1300,11 @@ NODES.forEach(n => (n.tools || []).forEach(t => { if (!TOOL_LIC[t]) console.erro
 // ---------- Lookups ----------
 const N = Object.fromEntries(NODES.map(n => [n.id, n]));
 const R = Object.fromEntries(ROLES.map(r => [r.id, r]));
-const S = Object.fromEntries(STARTS.map(s => [s.id, s]));
 const roleSet = id => new Set([...R[id].nodes, "role-" + id]);
 const rolesUsing = nodeId => ROLES.filter(r => r.nodes.includes(nodeId));
 const parents = id => EDGES.filter(e => e[1] === id).map(e => e[0]);
 const children = id => EDGES.filter(e => e[0] === id).map(e => e[1]);
-window.DATA = { TIERS, ROLES, STARTS, NODES, EDGES, RES: Object.values(RES) };
-
-// Transition math: what a background still needs for each target role.
-function transition(sid) {
-  const s = S[sid];
-  const have = new Set(s.have), part = new Set(s.partial);
-  const targets = s.targets.map(id => R[id]);
-  const newFor = t => t.nodes.filter(id => !have.has(id) && !part.has(id));
-  const bridge = [...new Set(targets.flatMap(newFor))];
-  const needs = id => targets.filter(t => newFor(t).includes(id));
-  const shared = targets.length > 1 ? bridge.filter(id => needs(id).length === targets.length) : [];
-  const minNew = Math.min(...targets.map(t => newFor(t).length));
-  const maxShare = Math.max(...targets.map(t => t.share));
-  return { s, have, part, targets, newFor, bridge, needs, shared, minNew, maxShare };
-}
+window.DATA = { TIERS, ROLES, NODES, EDGES, RES: Object.values(RES) };
 
 // ---------- Overview layout (all boxes, tiers as columns) ----------
 const G = { padX: 24, top: 60, colW: 178, gap: 54, nodeH: 58, minGap: 70 };
@@ -1443,16 +1353,12 @@ function h(tag, attrs, ...kids) {
   return e;
 }
 const appendAll = (node, ...kids) => kids.flat().forEach(k => { if (k != null && k !== false) node.append(k); });
-const rich = s => String(s).split(/\*\*(.+?)\*\*/).map((p, i) => (i % 2 ? h("strong", null, p) : p));
 const roleVar = id => `var(--r-${id})`;
 const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const tierLabel = t => `${String(t + 1).padStart(2, "0")} · ${TIERS[t]}`;
 const byPath = (a, b) => N[a].tier - N[b].tier || N[a].y - N[b].y;
 const resTitle = r => (r.kind === "course" ? `${r.s} ${r.code}` : r.by);
 const plural = (n, w, ws) => `${n} ${n === 1 ? w : (ws || w + "s")}`;
-const maxShareAll = Math.max(...ROLES.map(r => r.share));
-const isStart = v => typeof v === "string" && v.startsWith("from-");
-const startId = v => v.slice(5);
 
 const measure = (() => {
   const ctx = document.createElement("canvas").getContext("2d");
@@ -1537,31 +1443,25 @@ const starTag = r => {
 };
 
 // ---------- State ----------
-const VALID = new Set(["all", ...ROLES.map(r => r.id), ...STARTS.map(s => "from-" + s.id)]);
+const VALID = new Set(["all", ...ROLES.map(r => r.id)]);
 const state = { role: "agent", node: "agents", tab: "projects", spot: null, view: "focus" };
 const readHash = () => { const x = (location.hash || "").slice(1); return VALID.has(x) ? x : "agent"; };
 const anchorFor = v => {
   if (v === "all") return "llm";
-  if (isStart(v)) { const t = transition(startId(v)); return (t.shared.length ? t.shared : t.bridge).slice().sort(byPath)[0]; }
   return R[v].anchor;
 };
 const nodesInView = v => {
   if (v === "all") return NODES.filter(n => !n.role).map(n => n.id);
-  if (isStart(v)) { const t = transition(startId(v)); return [...t.have, ...t.part, ...t.bridge]; }
   return R[v].nodes;
 };
 
 // ---------- Navigation pills ----------
 const rolesNav = document.getElementById("roles");
 function buildPills() {
-  const goals = h("div", { class: "navgroup", role: "group", "aria-label": "End-goal roles" }, h("span", { class: "navlabel" }, "End goals"), h("div", { class: "navpills" },
+  rolesNav.append(h("div", { class: "navpills" },
     h("button", { class: "pill all", type: "button", "data-role": "all", "aria-pressed": "false", onclick: () => go("all") }, "All roles"),
     ROLES.map(r => h("button", { class: "pill", type: "button", "data-role": r.id, "aria-pressed": "false", style: `--role:${roleVar(r.id)}`, onclick: () => go(r.id) },
-      h("span", { class: "swatch", "aria-hidden": "true" }), r.name, h("span", { class: "pshare" }, `${r.share.toFixed(1)}%`)))));
-  const trans = h("div", { class: "navgroup", role: "group", "aria-label": "Transitions into AI roles" }, h("span", { class: "navlabel" }, "Transitions"), h("div", { class: "navpills" },
-    STARTS.map(s => h("button", { class: "pill start", type: "button", "data-role": "from-" + s.id, "aria-pressed": "false", onclick: () => go("from-" + s.id) },
-      `From ${s.name.toLowerCase()}`, h("span", { class: "arrow", "aria-hidden": "true" }, "→")))));
-  rolesNav.append(goals, trans);
+      h("span", { class: "swatch", "aria-hidden": "true" }), r.name))));
 }
 const updatePills = () => rolesNav.querySelectorAll(".pill").forEach(b => b.setAttribute("aria-pressed", b.dataset.role === state.role ? "true" : "false"));
 
@@ -1573,41 +1473,18 @@ function renderHero() {
   if (state.role === "all") {
     appendAll(hero,
       h("div", { class: "hero-head" }, h("h2", { class: "serif" }, "Five archetypes, one shared trunk")),
-      h("p", { class: "story" }, `Every path starts from the same few foundations and splits as it specializes. The map below shows all ${NODES.length - ROLES.length} skill boxes at once. Pick an end-goal role to see its own path, or a transition to see how a background gets there.`),
+      h("p", { class: "story" }, `Every path starts from the same few foundations and splits as it specializes. The map below shows all ${NODES.length - ROLES.length} skill boxes at once. Pick a role to see its own path.`),
       h("ul", { class: "rolelist" }, ROLES.map(r =>
         h("li", null, h("button", { class: "rolerow", type: "button", style: `--role:${roleVar(r.id)}`, onclick: () => go(r.id) },
           h("span", { class: "n" }, h("span", { class: "swatch", "aria-hidden": "true" }), r.name),
-          h("span", { class: "barline" }, h("span", { class: "bar", style: `width:${(r.share / maxShareAll) * 80}%` }), h("span", { class: "val" }, `${r.share.toFixed(1)}%`)),
           h("span", { class: "s" }, r.stack.join(" · ")))))));
-    return;
-  }
-  if (isStart(state.role)) {
-    const T = transition(startId(state.role));
-    const chips = [`Already have **${plural(T.have.size, "box", "boxes")}**, refresh **${T.part.size}**`,
-      ...T.targets.map(t => {
-        const n = T.newFor(t).length;
-        const tags = [n === T.minNew ? "shortest hop" : null, t.share === T.maxShare ? "most demand" : null].filter(Boolean);
-        return `To ${t.name}: **+${n}** new boxes` + (tags.length ? ` (${tags.join(", ")})` : "");
-      }),
-      T.targets.length > 1 ? `**${plural(T.shared.length, "bridge box", "bridge boxes")}** serve${T.shared.length === 1 ? "s" : ""} every target` : null].filter(Boolean);
-    appendAll(hero,
-      h("div", { class: "hero-head" },
-        h("h2", { class: "serif" }, `From ${T.s.name.toLowerCase()}`),
-        h("span", { class: "share" }, "into ", h("b", null, String(T.targets.length)), ` AI role${T.targets.length === 1 ? "" : "s"}`)),
-      h("p", { class: "story" }, T.s.story),
-      h("ul", { class: "chips" }, chips.map(c => h("li", null, rich(c)))));
     return;
   }
   const r = R[state.role];
   hero.style.setProperty("--role", roleVar(r.id));
-  const shared = r.nodes.filter(id => rolesUsing(id).length > 1).length;
-  const chips = [...r.chips, `**${r.nodes.length}** boxes, **${shared}** shared with other paths`];
   appendAll(hero,
-    h("div", { class: "hero-head" },
-      h("h2", { class: "serif" }, r.name),
-      h("span", { class: "share" }, h("b", null, `${r.share.toFixed(1)}%`), " share")),
-    h("p", { class: "story" }, r.story),
-    h("ul", { class: "chips" }, chips.map(c => h("li", null, rich(c)))));
+    h("div", { class: "hero-head" }, h("h2", { class: "serif" }, r.name)),
+    h("p", { class: "story" }, r.story));
 }
 
 // ---------- Graph ----------
@@ -1669,14 +1546,14 @@ function buildOverview() {
     const isRole = !!n.role;
     const g = el("g", { class: "node" + (isRole ? " role" : ""), tabindex: "0", role: "button", "data-id": n.id }, gN);
     if (isRole) g.style.setProperty("--rc", roleVar(n.role));
-    g.setAttribute("aria-label", isRole ? `${n.title} role, ${R[n.role].share}% share. Open its path.` : `${n.title}. ${TIERS[n.tier]}. On the path for ${rolesUsing(n.id).map(r => r.name).join(", ")}.`);
+    g.setAttribute("aria-label", isRole ? `${n.title} role. Open its path.` : `${n.title}. ${TIERS[n.tier]}. On the path for ${rolesUsing(n.id).map(r => r.name).join(", ")}.`);
     el("rect", { class: "box", x: n.x, y: n.y, width: G.colW, height: G.nodeH, rx: 8 }, g);
     const tx = n.x + (isRole ? 18 : 11);
     if (isRole) { const st = el("rect", { x: n.x + 7, y: n.y + 10, width: 4, height: G.nodeH - 20, rx: 2 }, g); st.style.fill = roleVar(n.role); }
     const base = n.label.length === 1 ? n.y + 23 : n.y + 18;
     n.label.forEach((ln, i) => { const t = el("text", { x: tx, y: base + i * 15, class: "label" }, g); t.textContent = ln; });
     if (isRole) {
-      const t = el("text", { x: tx, y: n.y + G.nodeH - 9, class: "sub" }, g); t.textContent = `${R[n.role].share.toFixed(1)}% share`;
+      const t = el("text", { x: tx, y: n.y + G.nodeH - 9, class: "sub" }, g); t.textContent = `${R[n.role].nodes.length} boxes`;
     } else {
       ROLES.forEach((r, i) => {
         const on = r.nodes.includes(n.id);
@@ -1691,17 +1568,16 @@ function buildOverview() {
   });
 }
 
-// ---------- Column graphs (role focus and transitions) ----------
+// ---------- Column graph (role focus) ----------
 const FC = { padX: 16, top: 54, w: 178, gapX: 30, gapY: 14, inX: 12 };
 const INNER = FC.w - FC.inX * 2;
 function nodeCard(id, o) {
   const n = N[id];
-  const compact = !!o.compact;
   return {
     id, kind: "node", cls: o.cls || [], rc: o.rc, eb: o.eb,
     title: wrap(n.title, F.t, INNER, 2),
-    desc: compact ? [] : wrap(n.desc, F.d, INNER, 3),
-    tools: compact ? [] : wrap(n.tools.slice(0, 3).join(" · "), F.tl, INNER, 1),
+    desc: wrap(n.desc, F.d, INNER, 3),
+    tools: wrap(n.tools.slice(0, 3).join(" · "), F.tl, INNER, 1),
     aria: `${n.title}. ${n.desc}. ${o.eb.toLowerCase()}.`,
     act: () => selectNode(id, true)
   };
@@ -1795,8 +1671,8 @@ function buildFocus(rid) {
   }));
   const set = new Set(r.nodes);
   cols.push({ label: "The role", cards: [{ id: "role-" + rid, kind: "role", cls: [], rc: roleVar(rid), eb: "THE ROLE", lh: 21,
-    title: wrap(r.name, F.rt, INNER, 3), desc: wrap(`${r.share.toFixed(1)}% share · ${r.nodes.length} boxes`, F.d, INNER, 2), tools: [],
-    aria: `${r.name}, ${r.share}% share.`, act: null }] });
+    title: wrap(r.name, F.rt, INNER, 3), desc: wrap(`${r.nodes.length} skill boxes`, F.d, INNER, 2), tools: [],
+    aria: `${r.name}, ${r.nodes.length} skill boxes.`, act: null }] });
   const soft = (a, b) => r.soft.some(([x, y]) => x === a && y === b) || r.optional.includes(a) || r.optional.includes(b);
   const E = [];
   EDGES.forEach(([a, b]) => { if (set.has(a) && set.has(b)) E.push({ a, b, soft: soft(a, b) }); });
@@ -1804,51 +1680,8 @@ function buildFocus(rid) {
   drawColumns(cols, E, `${r.name} path: ${r.nodes.length} skill boxes from foundations to the role`);
 }
 
-function buildTransition(sid) {
-  const T = transition(sid);
-  const s = T.s;
-  const shown = new Set([...T.have, ...T.part, ...T.bridge]);
-  const col0 = new Set([...T.have, ...T.part]);
-  const optionalAll = id => { const ts = T.needs(id); return ts.length > 0 && ts.every(t => t.optional.includes(id)); };
-  const cols = [{
-    label: "You are here",
-    cards: [
-      { id: "start", kind: "start", cls: [], eb: "YOU ARE HERE", lh: 21, title: wrap(s.name, F.rt, INNER, 2), desc: wrap(`Already: ${s.keep}`, F.d, INNER, 3), tools: [], aria: `${s.name}. Already: ${s.keep}.`, act: null },
-      ...s.have.map(id => nodeCard(id, { compact: true, cls: ["known"], eb: "✓ YOU HAVE THIS" })),
-      ...s.partial.map(id => nodeCard(id, { compact: true, cls: ["refresh"], eb: "REFRESH" }))
-    ]
-  }];
-  const tiers = [...new Set(T.bridge.map(id => N[id].tier))].sort((a, b) => a - b);
-  tiers.forEach(t => cols.push({
-    label: TIERS[t],
-    cards: T.bridge.filter(id => N[id].tier === t).sort(byPath).map(id => {
-      const ts = T.needs(id);
-      const all = ts.length === T.targets.length && T.targets.length > 1;
-      const eb = [optionalAll(id) ? "RECOMMENDED" : null, all ? "SHARED BRIDGE" : "FOR " + ts.map(x => x.tag.toUpperCase()).join(" · ")].filter(Boolean).join(" · ");
-      return nodeCard(id, { eb, cls: [ts.length > 1 ? "shared" : "unique"], rc: ts.length === 1 ? roleVar(ts[0].id) : null });
-    })
-  }));
-  cols.push({
-    label: "Target roles",
-    cards: T.targets.map(t => {
-      const n = T.newFor(t).length;
-      const tags = [n === T.minNew ? "shortest hop" : null, t.share === T.maxShare ? "most demand" : null].filter(Boolean);
-      return { id: "tgt-" + t.id, kind: "role", cls: [], rc: roleVar(t.id), eb: `TARGET · +${n} NEW BOXES`, lh: 21,
-        title: wrap(t.name, F.rt, INNER, 3), desc: wrap(`${t.share.toFixed(1)}% share` + (tags.length ? ` · ${tags.join(" · ")}` : ""), F.d, INNER, 2), tools: [],
-        aria: `${t.name}: ${n} new boxes from here. Open its full path.`, act: () => go(t.id) };
-    })
-  });
-  const soft = (a, b) => optionalAll(a) || optionalAll(b);
-  const E = [];
-  // Only edges into bridge boxes: links into boxes you already have add nothing here.
-  EDGES.forEach(([a, b]) => { if (shown.has(a) && T.bridge.includes(b)) E.push({ a, b, soft: soft(a, b) }); });
-  T.targets.forEach(t => EDGES.forEach(([a, b]) => { if (b === "role-" + t.id && shown.has(a)) E.push({ a, b: "tgt-" + t.id, soft: soft(a, a) }); }));
-  drawColumns(cols, E, `From ${s.name}: ${plural(T.have.size, "box", "boxes")} already covered, ${T.part.size} to refresh, ${T.bridge.length} bridge boxes, into ${T.targets.map(t => t.name).join(" and ")}`);
-}
-
 function graphModeFor() {
   if (state.role === "all") return "overview";
-  if (isStart(state.role)) return "columns";
   return state.view === "focus" ? "columns" : "overview";
 }
 function renderGraph() {
@@ -1856,7 +1689,6 @@ function renderGraph() {
   nodeEls = {}; edgeEls = [];
   graphMode = graphModeFor();
   if (graphMode === "overview") buildOverview();
-  else if (isStart(state.role)) buildTransition(startId(state.role));
   else buildFocus(state.role);
   paint();
 }
@@ -1921,15 +1753,7 @@ function renderGraphHead() {
   legend.replaceChildren(); toggle.replaceChildren();
   legend.style.setProperty("--role", R[state.role] ? roleVar(state.role) : "var(--ink-2)");
   const mode = graphModeFor();
-  if (mode === "columns" && isStart(state.role)) {
-    appendAll(legend,
-      h("span", { class: "item" }, legendIcon("line"), "prerequisite"),
-      h("span", { class: "item" }, legendIcon("dash"), "recommended"),
-      h("span", { class: "item" }, legendIcon("known"), "you have this"),
-      h("span", { class: "item" }, legendIcon("refresh"), "refresh"),
-      h("span", { class: "item" }, legendIcon("shared"), "bridge for several targets"),
-      h("span", { class: "item" }, legendIcon("unique-any"), "bridge for one target (its color)"));
-  } else if (mode === "columns") {
+  if (mode === "columns") {
     appendAll(legend,
       h("span", { class: "item" }, legendIcon("line"), "prerequisite"),
       h("span", { class: "item" }, legendIcon("dash"), "recommended / either path works"),
@@ -1950,12 +1774,7 @@ function renderGraphHead() {
 }
 function renderCaption() {
   const cap = document.getElementById("caption");
-  if (state.role === "all") { cap.textContent = `${NODES.length - ROLES.length} skill boxes and ${EDGES.length} prerequisite links across six tiers. Pick an end-goal role or a transition.`; return; }
-  if (isStart(state.role)) {
-    const T = transition(startId(state.role));
-    cap.textContent = `From ${T.s.name.toLowerCase()}: ${plural(T.have.size, "box", "boxes")} assumed covered, ${T.part.size} to refresh, ${T.bridge.length} bridge boxes to learn, and ${T.targets.length} target roles. Click a target to open its full path; links into boxes you already have are left out.`;
-    return;
-  }
+  if (state.role === "all") { cap.textContent = `${NODES.length - ROLES.length} skill boxes and ${EDGES.length} prerequisite links across six tiers. Pick a role to see its path.`; return; }
   const r = R[state.role];
   cap.textContent = state.view === "map"
     ? `${r.name} highlighted on the full map. Faded boxes belong to other paths.`
@@ -1980,7 +1799,6 @@ function planItem(r, scope) {
       spotButton(r)),
     h("div", { class: "chips-mini" }, ids.map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, true) }, N[id].title))));
 }
-const boxChips = ids => h("div", { class: "chips-mini" }, ids.slice().sort(byPath).map(id => h("button", { type: "button", class: "mini", onclick: () => selectNode(id, true) }, N[id].title)));
 const paperItem = p => h("li", { class: "paper" },
   h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
   h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`), p.star ? h("span", { class: "tag star" }, "Must-read") : null));
@@ -2013,40 +1831,12 @@ function renderRolePane() {
       h("div", { class: "eyebrow" }, "All roles"),
       h("h2", null, "Where the paths meet"),
       h("p", { class: "lead" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers across ${NODES.length - ROLES.length} boxes.`),
-      h("h3", null, "Transitions into AI roles"),
-      h("ul", { class: "hoplist" }, STARTS.map(s => {
-        const T = transition(s.id);
-        return h("li", null, h("button", { type: "button", class: "hoprow", onclick: () => go("from-" + s.id) },
-          h("span", { class: "n" }, `From ${s.name.toLowerCase()}`),
-          h("span", { class: "val" }, `${T.bridge.length} bridge boxes`),
-          h("span", { class: "s" }, "Into " + T.targets.map(t => `${t.name} (+${T.newFor(t).length})`).join(", "))));
-      })),
       h("h3", null, "Projects that span the most boxes"),
       h("ol", { class: "plan" }, span("project").map(r => planItem(r, null))),
       h("h3", null, "Courses that span the most boxes"),
       h("ol", { class: "plan" }, span("course").map(r => planItem(r, null))),
       h("h3", null, "Shared by four or more paths"),
       h("p", null, counts.map(([n, c]) => `${n.title} (${c} of 5)`).join("; ") + ". Start here if you have not picked a direction yet."));
-    return;
-  }
-  if (isStart(state.role)) {
-    const T = transition(startId(state.role));
-    const branch = t => T.newFor(t).filter(id => !T.shared.includes(id));
-    appendAll(rolePane,
-      h("div", { class: "eyebrow" }, "Bridge plan"),
-      h("h2", null, `${T.s.name} into AI roles`),
-      h("p", { class: "small muted" }, `Assumes a typical ${T.s.name.toLowerCase()} skill set: ${T.s.keep}. Boxes marked “you have this” or “refresh” are assumptions; treat any you are unsure of as bridge.`),
-      T.shared.length ? [h("h3", null, `Step 1 · Shared bridge · ${plural(T.shared.length, "box", "boxes")}`), h("p", { class: "small" }, "Every target needs these, so start here."), boxChips(T.shared)] : null,
-      h("h3", null, T.shared.length ? "Step 2 · Branch toward a target" : "Bridge per target"),
-      h("ul", { class: "hoplist" }, T.targets.map(t => h("li", null,
-        h("div", { class: "hoprow static", style: `--role:${roleVar(t.id)}` },
-          h("span", { class: "n" }, h("span", { class: "swatch", "aria-hidden": "true" }), t.name),
-          h("span", { class: "val" }, `+${branch(t).length} more`),
-          h("div", { class: "s" }, boxChips(branch(t)),
-            h("button", { type: "button", class: "mini", onclick: () => go(t.id) }, `Open the ${t.tag} path →`)))))),
-      T.part.size ? [h("h3", null, `Refresh · ${plural(T.part.size, "box", "boxes")}`), boxChips([...T.part])] : null,
-      h("h3", null, "Must-read papers"),
-      readingList(T.bridge, "for the bridge boxes in path order"));
     return;
   }
   const r = R[state.role];
