@@ -413,7 +413,7 @@ ul.tools li .nmark { margin-left: 2px; color: var(--ink-3); }
   <header class="top">
     <div>
       <h1>AI Career Path Map</h1>
-      <p>Four 2026 AI role archetypes and the skills each one needs. Every skill box carries three layers: university courses, free hands-on projects, and the foundational papers behind it.</p>
+      <p>Four 2026 AI role archetypes and the skills each one needs. Every skill box carries three layers: university courses, free hands-on projects, and the papers and guides behind it.</p>
     </div>
     <button id="themeBtn" class="themebtn" type="button">Dark mode</button>
   </header>
@@ -623,7 +623,7 @@ const NODES = [
   // ---------- Tier 3: Applied ----------
   { id: "agents", tier: 3, lane: 0, label: ["Agent", "architectures"], title: "Agent architectures",
     why: "The agent branch of the AI engineer path: loops that plan, call tools and recover from their own errors.",
-    skills: ["Tool-use loops (ReAct) and planning", "Memory: short-term, long-term, retrieved", "Multi-agent patterns and handoffs", "Agent protocols: MCP, A2A", "Agent benchmarks: SWE-bench, web and GUI tasks"],
+    skills: ["Workflows vs. agents: when a fixed pipeline is enough", "Tool-use loops (ReAct) and planning", "Memory: short-term, long-term, retrieved", "Multi-agent patterns and handoffs", "Agent protocols: MCP, A2A", "Agent benchmarks: SWE-bench, web and GUI tasks"],
     tools: ["OpenAI Agents SDK", "Claude Agent SDK", "LangGraph", "Google ADK", "Microsoft Agent Framework", "CrewAI", "smolagents", "MCP", "A2A protocol", "browser-use / Playwright MCP", "OpenHands"],
     courses: [
       { s: "CMU", c: "11-768", n: "AI Agents (Neubig & Fried)", t: "Fall 2026", u: "https://www.cmu-agents.com/", f: "Videos", note: "Harness design, evaluation, RL training, sandboxing and OpenHands. Lectures are being posted to YouTube." },
@@ -663,10 +663,10 @@ const NODES = [
     ] },
 
   // ---------- Tier 4: Specialization ----------
-  { id: "agent-prod", tier: 4, lane: 0, label: ["Production &", "self-improving agents"], title: "Production & self-improving agents",
-    why: "Shipping agents safely, then making them better: sandboxes, credentials, guardrails and observability, with RL and test-time compute as the stretch goal.",
-    skills: ["Sandboxing and credential management", "Prompt-injection and tool-misuse defenses", "Human approval gates", "Long-running and background agents", "RL and test-time compute for agents (stretch)"],
-    tools: ["E2B / Daytona / Docker sandboxes", "Llama Guard", "NeMo Guardrails / Guardrails AI", "Langfuse", "LangSmith", "MCP auth (OAuth)", "Temporal"],
+  { id: "agent-prod", tier: 4, lane: 0, label: ["Harnesses &", "production agents"], title: "Harnesses & production agents",
+    why: "Turning a model into an agent you can trust with real work: the harness around it (loop, context assembly, tools, memory and approval gates), then sandboxes, credentials, prompt-injection defenses and observability, with RL and test-time compute as the stretch goal.",
+    skills: ["Harness design: loop, context assembly, tools, memory, gates", "Long-running agents: checkpoints, resumption, compaction", "Sandboxing and credential management", "Prompt-injection and tool-misuse defenses", "Human approval gates", "RL and test-time compute for agents (stretch)"],
+    tools: ["E2B / Daytona / Docker sandboxes", "Deep Agents (LangChain)", "Llama Guard", "NeMo Guardrails / Guardrails AI", "Langfuse", "LangSmith", "MCP auth (OAuth)", "Temporal"],
     courses: [
       { s: "CMU", c: "11-768", n: "AI Agents: safety and training units", t: "Fall 2026", u: "https://www.cmu-agents.com/", f: "Videos", note: "Sandboxing, credential management, observability, and four lectures on RL training for agents." },
       { s: "Berkeley", c: "CS294/194-280", n: "Advanced LLM Agents MOOC", t: "Spring 2025", u: "https://rdi.berkeley.edu/adv-llm-agents/", f: "Videos", note: "Reasoning, code agents, and a closing unit on safe and secure agentic AI." },
@@ -713,6 +713,7 @@ const NODES = [
 const ax = id => "https://arxiv.org/abs/" + id;
 const P = (n, by, u, effort, ship) => ({ n, by, u, effort, ship });
 const RP = (t, a, y, u, star) => ({ t, a, y, u, star: !!star });
+const RG = (t, a, u, star) => ({ t, a, y: null, u, star: !!star, guide: true }); // engineering guides and blog posts
 const EXTRA = {
   "python": {
     projects: [P("Build Your Own X", "codecrafters-io · GitHub", "https://github.com/codecrafters-io/build-your-own-x", "A weekend per tool", "Rebuild a tool you use every day (Git, Redis, an HTTP server, a shell) from scratch. Pick the Python tutorials.")],
@@ -962,7 +963,7 @@ const DESC = {
   "observability": "Traces, GPU utilization, tail latency and FinOps",
   "gpu": "Memory hierarchy, CUDA, Triton kernels, profiling",
   "pretrain": "From tokenizer to training run: build and scale an LM",
-  "agent-prod": "Sandboxes, guardrails, approvals, RL for agents",
+  "agent-prod": "Harnesses, sandboxes, guardrails, approvals",
   "rag": "Grounded, cited answers over messy enterprise data",
   "serving": "vLLM, batching, KV cache, quantization",
   "dlsys": "Parallelism, FSDP / ZeRO and mixed precision at scale",
@@ -1176,6 +1177,35 @@ const REACH_COURSE = {
 const ARCHIVED = new Set(["https://github.com/anthropics/courses"]);
 
 // Merge layers 2-3 into skill nodes
+// ---------- v6: harness engineering, essential guides, agent security ----------
+(function v6() {
+  const extra = id => (EXTRA[id] = EXTRA[id] || { projects: [], papers: [] });
+  const reads = (id, ...items) => extra(id).papers.splice(1, 0, ...items); // right after the box's first must-read
+  // Harnesses & production agents
+  extra("agent-prod").projects.unshift(
+    P("Learn Claude Code", "shareAI-lab · GitHub", "https://github.com/shareAI-lab/learn-claude-code", "Self-paced", "Build a coding agent's harness step by step: the tool loop, planning, subagents, skills, context compaction and permissions."),
+    P("Deep Agents", "LangChain · GitHub", "https://github.com/langchain-ai/deepagents", "Self-paced", "Study and extend an open harness for long-running agents with planning, subagents and a file system."));
+  reads("agent-prod",
+    RG("Effective harnesses for long-running agents", "Anthropic", "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents", true),
+    RP("Design Patterns for Securing LLM Agents against Prompt Injections", "Beurer-Kellner et al.", 2025, ax("2506.08837"), true),
+    RG("Harness Engineering 101", "LevelUp Labs", "https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/harness_engineering.md"),
+    RG("Securing Agentic AI Systems", "LevelUp Labs", "https://github.com/aishwaryanr/awesome-generative-ai-guide/blob/main/resources/securing_agentic_ai_systems.md"));
+  // Essential guides on the boxes they belong to
+  reads("agents",
+    RG("Building effective agents", "Anthropic", "https://www.anthropic.com/engineering/building-effective-agents", true),
+    RG("A practical guide to building agents", "OpenAI", "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf"));
+  reads("memory",
+    RG("Effective context engineering for AI agents", "Anthropic", "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents", true),
+    RG("Context Rot", "Chroma", "https://research.trychroma.com/context-rot"),
+    RG("How Long Contexts Fail", "Drew Breunig", "https://www.dbreunig.com/2025/06/22/how-contexts-fail-and-how-to-fix-them.html"));
+  reads("evals",
+    RG("Demystifying evals for AI agents", "Anthropic", "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents", true));
+  reads("llm-apis",
+    RG("OWASP Top 10 for LLM Applications", "OWASP", "https://genai.owasp.org/llm-top-10/", true));
+  // Security practice inside the evals box
+  NODES.find(n => n.id === "evals").courses.push({ s: "DeepLearning.AI", c: "Red Teaming", n: "Red Teaming LLM Applications", u: "https://www.deeplearning.ai/short-courses/red-teaming-llm-applications/", f: "Videos + notebooks", note: "Probe an LLM app for prompt injection, data leaks and harmful output, by hand and with automated scans." });
+})();
+
 NODES.forEach(n => { if (!n.role) { const x = EXTRA[n.id] || {}; n.projects = x.projects || []; n.papers = x.papers || []; } });
 
 // ---------- One catalog entry per course / project, listing every box it covers ----------
@@ -1292,7 +1322,7 @@ const TOOL_ENT = [
 const TOOL_OSS = [
   "A2A protocol", "Aider", "Airflow / Dagster / Prefect", "Argo CD", "Arize Phoenix", "Axolotl", "BGE / Jina rerankers (open)", "BentoML",
   "CUDA", "CUTLASS", "Celery / BullMQ", "Chonkie", "Chroma", "Cline", "ColBERT (PyLate)", "ColPali", "CrewAI", "DSPy", "DVC", "DeepEval",
-  "DeepSpeed", "Django", "Docker", "Docker Compose", "Docling", "E2B / Daytona / Docker sandboxes", "Elasticsearch / OpenSearch", "FAISS",
+  "Deep Agents (LangChain)", "DeepSpeed", "Django", "Docker", "Docker Compose", "Docling", "E2B / Daytona / Docker sandboxes", "Elasticsearch / OpenSearch", "FAISS",
   "FastAPI", "Feast", "Gemini CLI", "Git", "GitHub Actions", "GitLab CI", "Google ADK", "Google Colab / Kaggle (free GPUs)", "Grafana",
   "GraphRAG / LightRAG", "Graphiti", "Haystack", "Helm", "Hugging Face", "Hugging Face Accelerate", "Hugging Face Datasets",
   "Hugging Face Hub", "Hugging Face Transformers", "Hypothesis", "Inspect AI", "Instructor", "JAX", "JAX / MaxText", "Jupyter", "KEDA",
@@ -1867,7 +1897,7 @@ function renderGraphHead() {
       v ? null : h("span", { class: "item" }, legendIcon("line"), "prerequisite → unlocks"),
       h("span", null, "Dots: paths that use the box"),
       ROLES.map(r => h("span", { class: "item", style: `--role:${roleVar(r.id)}` }, h("span", { class: "dot", "aria-hidden": "true" }), r.tag)),
-      h("span", { class: "item counts" }, "Numbers: courses · projects · papers"));
+      h("span", { class: "item counts" }, "Numbers: courses · projects · reading"));
   }
   if (R[state.role]) {
     toggle.append(h("div", { class: "seg", role: "group", "aria-label": "Graph view" },
@@ -1882,8 +1912,8 @@ function renderCaption() {
   cap.textContent = state.view === "map"
     ? `${r.name} highlighted on the full map. Faded boxes belong to other paths.`
     : isVertical()
-      ? `${r.name}: ${r.nodes.length} skill boxes, top to bottom from foundations to the role. Tap a box for its courses, projects, papers and tools.`
-      : `${r.name}: ${r.nodes.length} skill boxes from foundations to the role. Click a box for its courses, projects, papers and tools; long links route under the columns they skip.`;
+      ? `${r.name}: ${r.nodes.length} skill boxes, top to bottom from foundations to the role. Tap a box for its courses, projects, reading and tools.`
+      : `${r.name}: ${r.nodes.length} skill boxes from foundations to the role. Click a box for its courses, projects, reading and tools; long links route under the columns they skip.`;
 }
 
 // ---------- Panes ----------
@@ -1905,21 +1935,21 @@ function planItem(r, scope) {
 }
 const paperItem = p => h("li", { class: "paper" },
   h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
-  h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`), p.star ? h("span", { class: "tag star" }, "Must-read") : null));
+  h("div", { class: "pm" }, h("span", null, p.y ? `${p.a} · ${p.y}` : p.a), p.guide ? h("span", { class: "tag" }, "Guide") : null, p.star ? h("span", { class: "tag star" }, "Must-read") : null));
 
-// Must-read papers for a set of boxes, grouped by box in path order.
+// Must-read papers and guides for a set of boxes, grouped by box in path order.
 function readingList(ids, intro) {
   const groups = ids.slice().sort(byPath).map(id => [id, N[id].papers.filter(p => p.star)]).filter(([, ps]) => ps.length);
   const count = groups.reduce((s, [, ps]) => s + ps.length, 0);
   return [
-    h("p", { class: "small" }, `${plural(count, "paper")} across ${plural(groups.length, "box", "boxes")}, ${intro}. Each box's Papers tab has the rest.`),
+    h("p", { class: "small" }, `${plural(count, "must-read")} across ${plural(groups.length, "box", "boxes")}, ${intro}. Each box's Reading tab has the rest.`),
     h("div", { class: "readlist" }, groups.map(([id, ps], gi) => h("section", { class: "readgroup" },
       h("div", { class: "readhead" },
         h("span", { class: "tierlbl" }, TIERS[N[id].tier]),
         h("button", { type: "button", class: "readbox", onclick: () => openBox(id) }, N[id].title)),
       h("ol", { class: "papers", start: String(1 + groups.slice(0, gi).reduce((s, [, q]) => s + q.length, 0)) }, ps.map(p => h("li", { class: "paper" },
         h("a", { href: p.u, target: "_blank", rel: "noopener" }, p.t),
-        h("div", { class: "pm" }, h("span", null, `${p.a} · ${p.y}`))))))))
+        h("div", { class: "pm" }, h("span", null, p.y ? `${p.a} · ${p.y}` : p.a), p.guide ? h("span", { class: "tag" }, "Guide") : null)))))))
   ];
 }
 
@@ -1933,7 +1963,7 @@ function pathSection() {
     const nPapers = NODES.reduce((s, n) => s + (n.papers ? n.papers.length : 0), 0);
     title = "Where the paths meet"; count = null;
     body = [
-      h("p", { class: "small" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers across ${NODES.length - ROLES.length} boxes.`),
+      h("p", { class: "small" }, `${all.filter(r => r.kind === "course").length} courses, ${all.filter(r => r.kind === "project").length} free projects and ${nPapers} papers and guides across ${NODES.length - ROLES.length} boxes.`),
       h("h3", null, "Projects that span the most boxes"),
       h("ol", { class: "plan" }, span("project").map(r => planItem(r, null))),
       h("h3", null, "Courses that span the most boxes"),
@@ -1943,7 +1973,7 @@ function pathSection() {
     ];
   } else {
     const r = R[state.role];
-    title = `Must-read papers for the ${r.name} path`;
+    title = `Must-read papers and guides for the ${r.name} path`;
     count = r.nodes.reduce((s, id) => s + N[id].papers.filter(p => p.star).length, 0);
     body = readingList(r.nodes, "in path order from foundations to the role");
   }
@@ -2003,10 +2033,10 @@ function renderNodePane() {
   const empty = {
     courses: "No university course centers on this box yet; the projects tab covers it.",
     projects: "No free project listed for this box yet; the projects on the boxes it unlocks exercise it.",
-    papers: "No landmark paper for this box; it is learned by building."
+    papers: "No landmark paper or guide for this box; it is learned by building."
   };
   const tabs = h("div", { class: "tabs", role: "tablist", "aria-label": "Resources for this box" },
-    [["courses", "Courses"], ["projects", "Projects"], ["papers", "Papers"]].map(([k, label]) =>
+    [["courses", "Courses"], ["projects", "Projects"], ["papers", "Reading"]].map(([k, label]) =>
       h("button", {
         type: "button", role: "tab", class: "tab", id: "tab-" + k, "aria-selected": state.tab === k ? "true" : "false", "aria-controls": "tabpanel",
         onclick: () => { state.tab = k; renderNodePane(); const t = document.getElementById("tab-" + k); if (t) t.focus(); }
