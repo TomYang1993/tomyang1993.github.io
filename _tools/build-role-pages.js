@@ -30,6 +30,35 @@ const FOLLOW = {
   ],
 };
 
+// After the capstone: interview prep and what to publish. Kept in step with the minimal-steps README.
+const SRE = ['Site Reliability Engineering', 'https://sre.google/sre-book/introduction/', 'Google, free book. SLOs, on-call and incident response: the operations side that platform and DevOps interviews probe.'];
+const MLIB = ['Machine Learning Interviews', 'https://huyenchip.com/ml-interviews-book/', 'Chip Huyen, free book. How ML hiring works, what each interview round tests, and practice questions.'];
+const GET_HIRED = {
+  ai: { links: [
+    ['AI Engineer interview prep', 'https://github.com/aishwaryanr/awesome-generative-ai-guide/tree/main/interview_prep/roles/ai-engineer', 'LevelUp Labs, free. What each interview round tests, a 60+ question bank with model answers, and a 3-week prep plan.'],
+    ['AI system design case studies', 'https://github.com/aishwaryanr/awesome-generative-ai-guide/tree/main/interview_prep/system-design', 'LevelUp Labs, free. Ten worked system design interviews, each with the follow-up questions interviewers ask.']],
+    portfolio: 'Publish the capstone with a README that states the problem, the architecture and the eval results, plus a two-minute demo video. AI-first startups weigh a working portfolio heavily.' },
+  platform: { links: [
+    ['ML and LLM system design case studies', 'https://www.evidentlyai.com/ml-system-design', 'Evidently, free. How real companies built and run ML and LLM systems.'], SRE, MLIB],
+    portfolio: 'Publish the capstone benchmark as a short write-up: latency, throughput and cost per million tokens, before and after autoscaling.' },
+  devops: { links: [
+    ['System Design Primer', 'https://github.com/donnemartin/system-design-primer', 'Free. The standard prep for system design rounds: scaling, caching, queues and trade-offs, with practice questions.'], SRE],
+    portfolio: 'Keep the capstone live at a public URL with its pipeline visible: the eval gate on pull requests, preview deploys and a tested rollback.' },
+  research: { links: [MLIB,
+    ['Harvard CS197: AI Research Experiences', 'https://www.cs197.seas.harvard.edu/', 'Free course notes. Reading papers, running experiments and writing them up: the habits a research portfolio shows.']],
+    portfolio: 'Write the capstone up like a short paper (setup, scaling curves, ablations) and release the code and weights on Hugging Face.' },
+};
+// Free ways to run the projects.
+const FREE = [
+  ['Google AI Studio', 'https://aistudio.google.com/', 'a free Gemini API key'],
+  ['GroqCloud', 'https://console.groq.com/', 'fast open models on a free tier'],
+  ['OpenRouter', 'https://openrouter.ai/', 'one API key, including some free models'],
+  ['Ollama', 'https://ollama.com/', 'run open models on your own machine'],
+  ['llama.cpp', 'https://github.com/ggml-org/llama.cpp', 'efficient local inference, even on a laptop CPU'],
+  ['Google Colab', 'https://colab.research.google.com/', 'notebooks with free GPU time'],
+  ['Kaggle Notebooks', 'https://www.kaggle.com/code', 'notebooks with a weekly free GPU quota'],
+];
+
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const lc = s => s.charAt(0).toLowerCase() + s.slice(1);
 
@@ -51,7 +80,7 @@ async function extract() {
       nodes: Object.fromEntries(NODES.filter(n => !n.role).map(n => [n.id, {
         id: n.id, tier: n.tier, title: n.title, desc: n.desc, why: n.why, skills: n.skills,
         tools: n.tools.map(t => ({ name: t, lic: TOOL_LIC[t] || 'ent' })),
-        papers: n.papers.map(x => ({ t: x.t, a: x.a, y: x.y, u: x.u, star: !!x.star })),
+        papers: n.papers.map(x => ({ t: x.t, a: x.a, y: x.y, u: x.u, star: !!x.star, guide: !!x.guide })),
         courses: resFor(n.id, 'course').map(r => res(r, n.id)).sort((a, b) => b.hot - a.hot),
         projects: resFor(n.id, 'project').map(r => res(r, n.id)).sort((a, b) => b.hot - a.hot),
         roles: ROLES.filter(r => r.nodes.includes(n.id)).map(r => r.id),
@@ -97,6 +126,7 @@ h2 .n{font:500 13px var(--font-mono);letter-spacing:.06em;color:var(--ink-3);dis
 .why{margin:8px 0 0}
 h4{font:500 12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:16px 0 6px}
 ul.res{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.card p + ul.res{margin-top:14px}
 ul.res li{padding-left:12px;border-left:3px solid var(--surface-2)}
 ul.res li.hotpick{border-left-color:color-mix(in srgb,var(--hot) 60%,var(--line))}
 .rt{font-weight:600}.rm{font:400 12.5px var(--font-mono);color:var(--ink-3)}
@@ -129,7 +159,7 @@ function rolePage(role, data, all) {
   const nCourses = new Set(role.nodes.flatMap(id => N[id].courses.map(c => c.u))).size;
   const nProjects = new Set(role.nodes.flatMap(id => N[id].projects.map(c => c.u))).size;
   const nPapers = role.nodes.reduce((s, id) => s + N[id].papers.length, 0);
-  const desc = `Step-by-step path to ${role.name}: ${role.nodes.length} skills from foundations to specialization, with ${nCourses} free courses, ${nProjects} free projects, ${nPapers} papers and a capstone.`;
+  const desc = `Step-by-step path to ${role.name}: ${role.nodes.length} skills from foundations to specialization, with ${nCourses} free courses, ${nProjects} free projects, ${nPapers} ${role.nodes.some(id => N[id].papers.some(x => x.guide)) ? 'papers and guides' : 'papers'}, a capstone and interview prep.`;
   const title = `${role.name} path: skills, free courses and projects`;
   const tagsFor = id => [role.optional.includes(id) ? 'optional' : '', BRANCH[role.id]?.[id] || ''].filter(Boolean);
   const anchor = id => `skill-${id}`;
@@ -154,7 +184,7 @@ ${n.roles.length > 1 ? `<p class="rm">Also on the path for: ${n.roles.filter(r =
 <h4>Skills</h4><ul class="skills">${n.skills.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
 ${n.courses.length ? `<h4>Courses</h4><ul class="res">${n.courses.map(resItem).join('\n')}</ul>` : ''}
 ${n.projects.length ? `<h4>Free projects</h4><ul class="res">${n.projects.map(resItem).join('\n')}</ul>` : ''}
-${n.papers.length ? `<h4>Papers</h4><ol class="papers">${n.papers.map(p => `<li><a href="${esc(p.u)}" rel="noopener">${esc(p.t)}</a> <span class="rm">${esc(p.a)}, ${p.y}${p.star ? ' · must-read' : ''}</span></li>`).join('')}</ol>` : ''}
+${n.papers.length ? `<h4>Reading</h4><ol class="papers">${n.papers.map(p => `<li><a href="${esc(p.u)}" rel="noopener">${esc(p.t)}</a> <span class="rm">${esc(p.a)}${p.y ? `, ${p.y}` : ''}${p.guide ? ' · guide' : ''}${p.star ? ' · must-read' : ''}</span></li>`).join('')}</ol>` : ''}
 <h4>Tools</h4><p class="tools">${n.tools.map(t => esc(t.name) + (t.lic === 'oss' ? '' : ' (enterprise)')).join(' · ')}</p>
 </article>`; }).join('')}
 </section>`).join('');
@@ -201,6 +231,7 @@ ${n.papers.length ? `<h4>Papers</h4><ol class="papers">${n.papers.map(p => `<li>
 <nav class="card toc" aria-labelledby="toc-h"><h4 id="toc-h" style="margin-top:0">The path at a glance</h4><ol>
 ${steps.map(st => `<li><a href="#step-${st.n}">Step ${st.n} · ${esc(st.tier)}</a><div class="sk">${st.ids.map(id => `<a href="#${anchor(id)}">${esc(N[id].title)}</a>`).join(' · ')}</div></li>`).join('\n')}
 <li><a href="#capstone">Step ${steps.length + 1} · Capstone</a></li>
+<li><a href="#hired">Step ${steps.length + 2} · Get hired</a></li>
 </ol></nav>
 ${body}
 <section aria-labelledby="capstone">
@@ -208,6 +239,16 @@ ${body}
 <div class="card cap"><h3>${esc(role.capTitle)}</h3><p class="why">${esc(role.capstone)}</p>
 ${follow.length ? `<h4>Follow along</h4><ul class="res">${follow.map(([n, u, d]) => `<li><a class="rt" href="${esc(u)}" rel="noopener">${esc(n)}</a><span class="rn">${esc(d)}</span></li>`).join('')}</ul>` : ''}
 </div>
+</section>
+<section aria-labelledby="hired">
+<h2 id="hired"><span class="n">Step ${steps.length + 2}</span>Get hired</h2>
+<div class="card"><h4 style="margin-top:0">Interview prep</h4><ul class="res">${GET_HIRED[role.id].links.map(([n, u, d]) => `<li><a class="rt" href="${esc(u)}" rel="noopener">${esc(n)}</a><span class="rn">${esc(d)}</span></li>`).join('')}</ul>
+<h4>Portfolio</h4><p class="why">${esc(GET_HIRED[role.id].portfolio)}</p></div>
+</section>
+<section aria-labelledby="free">
+<h2 id="free">Do the projects for $0</h2>
+<div class="card"><p class="why" style="margin-top:0">Most projects call an LLM API, and free tiers cover the coursework (their limits change, so check each). For training and fine-tuning, free notebook GPUs go a long way. The capstones that need bigger GPUs say so, with a rough cost.</p>
+<ul class="res">${FREE.map(([n, u, d]) => `<li><a class="rt" href="${esc(u)}" rel="noopener">${esc(n)}</a><span class="rn">${esc(d.charAt(0).toUpperCase() + d.slice(1))}.</span></li>`).join('')}</ul></div>
 </section>
 <footer>
 <p>Popular marks the most followed courses and projects in each skill: GitHub stars for projects, lecture views and enrollment for courses. Courses and projects were checked against their live pages in November 2026. Every project is free; a few need paid GPU time to run.</p>
