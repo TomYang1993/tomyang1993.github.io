@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phone Anatomy</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="app">
+  <aside id="left">
+    <h1>Phone<br>Anatomy</h1>
+    <input id="q" type="search" placeholder="Search phones…" aria-label="Search phones">
+    <div id="list"></div>
+    <p class="fine">Body size, weight, battery, screen and cameras checked against GSMArena, carrier and maker spec pages (Nov 2026); where sources differ, the most widely cited value is used. Internal layouts are schematic, modelled on public teardowns, not CAD.</p>
+  </aside>
+
+  <main id="stage">
+    <div id="view">
+      <canvas id="c"></canvas>
+      <svg id="leaders" aria-hidden="true"></svg>
+      <div id="labels"></div>
+      <header id="title"><b id="t-name"></b><span id="t-meta"></span></header>
+    </div>
+    <div id="bar">
+      <button id="toggle" class="primary">Explode</button>
+      <label class="rng">Explode <input id="explode" type="range" min="0" max="1" step="0.001" value="0"></label>
+      <label class="rng" id="foldwrap" hidden>Fold <input id="fold" type="range" min="0" max="1" step="0.001" value="0"></label>
+      <button id="move" aria-pressed="true" title="Drag parts to move them. Off: drag always orbits.">Move parts</button>
+      <button id="spin" aria-pressed="true">Spin</button>
+      <button id="xray" aria-pressed="false">X-ray</button>
+      <button id="lab" aria-pressed="true">Labels</button>
+      <button id="reset">Reset</button>
+    </div>
+    <p id="hint">drag part = move · drag empty = orbit · scroll = zoom · double-click part = put back</p>
+  </main>
+
+  <aside id="right">
+    <dl id="specs"></dl>
+    <h2>Components <span id="count"></span></h2>
+    <ul id="parts"></ul>
+    <div id="detail" hidden></div>
+  </aside>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
