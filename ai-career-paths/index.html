@@ -1206,7 +1206,13 @@ const ARCHIVED = new Set(["https://github.com/anthropics/courses"]);
   NODES.find(n => n.id === "evals").courses.push({ s: "DeepLearning.AI", c: "Red Teaming", n: "Red Teaming LLM Applications", u: "https://www.deeplearning.ai/short-courses/red-teaming-llm-applications/", f: "Videos + notebooks", note: "Probe an LLM app for prompt injection, data leaks and harmful output, by hand and with automated scans." });
 })();
 
-NODES.forEach(n => { if (!n.role) { const x = EXTRA[n.id] || {}; n.projects = x.projects || []; n.papers = x.papers || []; } });
+// ---------- Videos: YouTube lectures and tutorials per box (listed even when a course also links them) ----------
+const V = (n, by, u, note) => ({ n, by, u, note });
+const VIDEOS = {
+  "python": [V("Python asyncio tutorial", "YouTube", "https://www.youtube.com/watch?v=Qb9s3UiMSTA", "Async from the ground up: what asyncio is, when to use it, the event loop and coroutines.")],
+};
+
+NODES.forEach(n => { if (!n.role) { const x = EXTRA[n.id] || {}; n.projects = x.projects || []; n.papers = x.papers || []; n.videos = VIDEOS[n.id] || []; } });
 
 // ---------- One catalog entry per course / project, listing every box it covers ----------
 const RES = {};
@@ -2029,14 +2035,15 @@ function renderNodePane() {
   nodePane.replaceChildren();
   const used = rolesUsing(n.id);
   const hotFirst = kind => { const hot = hotKeys(n.id, kind); return resFor(n.id, kind).map((r, i) => [r, i]).sort((a, b) => (hot.has(b[0].key) - hot.has(a[0].key)) || a[1] - b[1]).map(x => x[0]); };
-  const lists = { courses: hotFirst("course"), projects: hotFirst("project"), papers: n.papers };
+  const lists = { courses: hotFirst("course"), videos: n.videos, projects: hotFirst("project"), papers: n.papers };
   const empty = {
     courses: "No university course centers on this box yet; the projects tab covers it.",
+    videos: "No video picked for this box yet.",
     projects: "No free project listed for this box yet; the projects on the boxes it unlocks exercise it.",
     papers: "No landmark paper or guide for this box; it is learned by building."
   };
   const tabs = h("div", { class: "tabs", role: "tablist", "aria-label": "Resources for this box" },
-    [["courses", "Courses"], ["projects", "Projects"], ["papers", "Reading"]].map(([k, label]) =>
+    [["courses", "Courses"], ["videos", "Videos"], ["projects", "Projects"], ["papers", "Reading"]].map(([k, label]) =>
       h("button", {
         type: "button", role: "tab", class: "tab", id: "tab-" + k, "aria-selected": state.tab === k ? "true" : "false", "aria-controls": "tabpanel",
         onclick: () => { state.tab = k; renderNodePane(); const t = document.getElementById("tab-" + k); if (t) t.focus(); }
@@ -2044,6 +2051,9 @@ function renderNodePane() {
   const list = lists[state.tab];
   const panel = !list.length ? h("p", { class: "empty" }, empty[state.tab])
     : state.tab === "papers" ? h("ol", { class: "papers" }, list.map(paperItem))
+    : state.tab === "videos" ? h("ul", { class: "courses" }, list.map(v => h("li", { class: "course" },
+        h("a", { href: v.u, target: "_blank", rel: "noopener" }, h("span", { class: "cc" }, v.by), h("span", { class: "cn" }, v.n)),
+        v.note ? h("p", null, v.note) : null)))
       : h("ul", { class: "courses" }, list.map(r => resCard(r, n.id)));
   appendAll(nodePane,
     h("div", { class: "eyebrow" }, tierLabel(n.tier)),
@@ -2053,7 +2063,7 @@ function renderNodePane() {
       used.map(r => h("span", { style: `--role:${roleVar(r.id)}` }, h("span", { class: "swatch", "aria-hidden": "true" }), r.name + (r.optional.includes(n.id) ? " (recommended)" : "")))),
     tabs,
     h("div", { role: "tabpanel", id: "tabpanel", "aria-labelledby": "tab-" + state.tab },
-      state.tab !== "papers" && list.length > 1 && hotKeys(n.id, state.tab === "courses" ? "course" : "project").size
+      state.tab !== "papers" && state.tab !== "videos" && list.length > 1 && hotKeys(n.id, state.tab === "courses" ? "course" : "project").size
         ? h("p", { class: "hotnote" }, state.tab === "courses" ? "🔥 marks the most widely followed courses in this box, by lecture views and enrollment." : "🔥 marks the most popular projects in this box, mostly by GitHub stars.") : null,
       panel),
     h("div", { class: "two" },

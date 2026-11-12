@@ -80,6 +80,7 @@ async function extract() {
       nodes: Object.fromEntries(NODES.filter(n => !n.role).map(n => [n.id, {
         id: n.id, tier: n.tier, title: n.title, desc: n.desc, why: n.why, skills: n.skills,
         tools: n.tools.map(t => ({ name: t, lic: TOOL_LIC[t] || 'ent' })),
+        videos: (n.videos || []).map(v => ({ n: v.n, by: v.by, u: v.u, note: v.note || '' })),
         papers: n.papers.map(x => ({ t: x.t, a: x.a, y: x.y, u: x.u, star: !!x.star, guide: !!x.guide })),
         courses: resFor(n.id, 'course').map(r => res(r, n.id)).sort((a, b) => b.hot - a.hot),
         projects: resFor(n.id, 'project').map(r => res(r, n.id)).sort((a, b) => b.hot - a.hot),
@@ -183,6 +184,7 @@ ${st.ids.map((id, i) => { const n = N[id], tg = tagsFor(id); return `
 ${n.roles.length > 1 ? `<p class="rm">Also on the path for: ${n.roles.filter(r => r !== role.id).map(r => `<a href="../${SLUG[r]}/#${anchor(id)}">${esc(all.find(x => x.id === r).name)}</a>`).join(', ')}</p>` : ''}
 <h4>Skills</h4><ul class="skills">${n.skills.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
 ${n.courses.length ? `<h4>Courses</h4><ul class="res">${n.courses.map(resItem).join('\n')}</ul>` : ''}
+${n.videos.length ? `<h4>Videos</h4><ul class="res">${n.videos.map(v => `<li><a class="rt" href="${esc(v.u)}" rel="noopener">${esc(v.n)}</a> <span class="rm">${esc(v.by)}</span>${v.note ? `<span class="rn">${esc(v.note)}</span>` : ''}</li>`).join('')}</ul>` : ''}
 ${n.projects.length ? `<h4>Free projects</h4><ul class="res">${n.projects.map(resItem).join('\n')}</ul>` : ''}
 ${n.papers.length ? `<h4>Reading</h4><ol class="papers">${n.papers.map(p => `<li><a href="${esc(p.u)}" rel="noopener">${esc(p.t)}</a> <span class="rm">${esc(p.a)}${p.y ? `, ${p.y}` : ''}${p.guide ? ' · guide' : ''}${p.star ? ' · must-read' : ''}</span></li>`).join('')}</ol>` : ''}
 <h4>Tools</h4><p class="tools">${n.tools.map(t => esc(t.name) + (t.lic === 'oss' ? '' : ' (enterprise)')).join(' · ')}</p>
